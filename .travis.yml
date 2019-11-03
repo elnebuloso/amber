@@ -1,0 +1,23 @@
+language: minimal
+
+branches:
+  only:
+    - master
+
+services:
+  - docker
+
+script:
+  - export VERSION=$(cat ./VERSION)
+  - export MAJOR=$(cat ./VERSION | cut -d. -f1)
+  - export MINOR=$(cat ./VERSION | cut -d. -f2)
+  - export PATCH=$(cat ./VERSION | cut -d. -f3)
+  - docker build --tag elnebuloso/placehold-website --pull --rm --no-cache --file Dockerfile .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker tag  elnebuloso/placehold-website elnebuloso/placehold-website:${MAJOR}.${MINOR}.${PATCH}
+  - docker push elnebuloso/placehold-website:${MAJOR}.${MINOR}.${PATCH}
+  - docker tag  elnebuloso/placehold-website elnebuloso/placehold-website:${MAJOR}.${MINOR}
+  - docker push elnebuloso/placehold-website:${MAJOR}.${MINOR}
+  - docker tag  elnebuloso/placehold-website elnebuloso/placehold-website:${MAJOR}
+  - docker push elnebuloso/placehold-website:${MAJOR}
+  - docker push elnebuloso/placehold-website
