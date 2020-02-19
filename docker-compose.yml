@@ -12,8 +12,8 @@ services:
     build:
       context: .
     volumes:
-      - ./main:/var/www/main
+      - ./main:/app
     environment:
-      VIRTUAL_HOST: placehold.local.entwickl.de
-      APP_NAME: placehold
-      APP_TEXT_LEAD: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+      VIRTUAL_HOST: amber.127.0.0.1.xip.io
+      APP_NAME: amber
+      APP_TEXT_LEAD: Simple Docker Placeholder Website
