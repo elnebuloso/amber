@@ -15,7 +15,7 @@ Simple Docker Placeholder Website
 ## docker
 
 - https://hub.docker.com/r/elnebuloso/amber
-- https://hub.docker.com/r/elnebuloso/amber/tags
+- https://hub.docker.com/r/elnebuloso/amber/tags?page=1&ordering=last_updated
 
 ## environment variables
 
