@@ -72,7 +72,10 @@ services:
 
 ## Image
 
-![the amber logo](logo.svg)
+<figure>
+<img src="image.svg" alt="a striped field standing in for an operator's own image">
+<figcaption>served from the mounted directory</figcaption>
+</figure>
 
 ## Collapsible
 

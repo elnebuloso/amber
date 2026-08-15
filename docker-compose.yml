@@ -19,6 +19,6 @@ services:
       - 127.0.0.1:8081:80
     volumes:
       - ./demo/index.md:/app/content/index.md:ro
-      - ./demo/logo.svg:/app/content/logo.svg:ro
+      - ./demo/image.svg:/app/content/image.svg:ro
     environment:
       APP_NAME: amber

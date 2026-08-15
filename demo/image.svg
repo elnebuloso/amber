@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img"
+     aria-label="a striped field standing in for an operator's own image">
+	<defs>
+		<pattern id="stripes" width="16" height="16" patternUnits="userSpaceOnUse"
+		         patternTransform="rotate(45)">
+			<rect width="16" height="16" fill="#8b8b93"/>
+			<rect width="8" height="16" fill="#7c7c85"/>
+		</pattern>
+	</defs>
+	<rect width="640" height="200" fill="url(#stripes)"/>
+</svg>
