@@ -29,7 +29,7 @@ das Syntaxklassen mitgibt.
 ```
 /app/index.html      Template               aus dem Image
 /app/style.css       Vorgaben               aus dem Image
-/app/content/        Dateien des Betreibers leer im Image
+/app/content/        Dateien des Betreibers existiert im Image nicht
         index.md     optional
         index.css    optional
 ```
@@ -75,9 +75,13 @@ Codefärbung bleibt aus. Chroma liefert die Klassen mit, aber ein Farbschema sin
 die in hell und dunkel funktionieren müssen — Aufwand ohne Ertrag für eine Platzhalterseite. Code
 bleibt lesbar, nur einfarbig.
 
-Am Layout ändert sich nichts. Gemessen mit einem Dokument von 2251 px Höhe im 917 px hohen
-Fenster: Die Überschrift steht 53 px unter der Oberkante und wird nicht abgeschnitten, weil das
-Stylesheet `min-height` verwendet und nicht `height` — der Container wächst mit dem Inhalt.
+Die Grundmaße des Layouts ändern sich nicht: Gemessen mit einem Dokument von 2251 px Höhe im
+917 px hohen Fenster steht die Überschrift 53 px unter der Oberkante und wird nicht abgeschnitten,
+weil das Stylesheet `min-height` verwendet und nicht `height` — der Container wächst mit dem
+Inhalt. Der Abstand unter der Überschrift wächst allerdings: `main > * + *` setzt zwischen allen
+direkten Kindern von `main` 1,25rem Abstand, und das gilt auch für die alte Platzhalterseite mit
+Überschrift und Fließtext. Gemessen wächst der Abstand zwischen Überschrift und Satz dadurch von
+8 px auf 20 px. Kosmetisch, aber am Layout ändert sich damit doch etwas.
 
 ## Demo und Entwicklung
 
@@ -89,11 +93,14 @@ Die `docker-compose.yml` zeigt alle drei Fälle nebeneinander:
 
 ```
 amber            127.0.0.1:8080   nur Umgebungsvariablen
-amber-markdown   127.0.0.1:8081   ./demo als /app/content
-amber-custom     127.0.0.1:8082   ./demo als /app/content, dazu ./demo/custom.css als /app/content/index.css
+amber-markdown   127.0.0.1:8081   demo/index.md und demo/logo.svg einzeln als /app/content/*
+amber-custom     127.0.0.1:8082   dieselben zwei Dateien, dazu demo/custom.css als /app/content/index.css
 ```
 
-Der dritte Dienst legt nur eine Datei zusätzlich über denselben Ordner. Die Demo-Inhalte gibt es
+Gemountet werden einzelne Dateien, kein Verzeichnis: Läge `./demo` als Ganzes auf `/app/content`
+und `demo/custom.css` zusätzlich verschachtelt darunter auf `/app/content/index.css`, müsste
+Docker für diesen zweiten Mount einen Mountpoint anlegen — und täte das im Host-Verzeichnis
+`demo/`, also im Repository selbst. Einzelne Datei-Mounts umgehen das. Die Demo-Inhalte gibt es
 damit genau einmal im Repository, und der Unterschied zwischen 8081 und 8082 ist exakt das
 Stylesheet.
 
@@ -107,8 +114,9 @@ Umgebungsvariablen nicht unbemerkt kaputtgeht.
 
 ## Auslieferung
 
-Ein `feat`-Commit, also 1.2.0. Die Änderung ist additiv: Wer die Umgebungsvariablen nutzt, merkt
-nichts, das Layout bleibt, und die neuen Pfade sind vorher unbenutzt gewesen.
+Ein `feat`-Commit, also 1.2.0. Die Änderung ist additiv: Wer die Umgebungsvariablen nutzt, bekommt
+weiterhin dieselbe Seite, bis auf den unter „Aussehen" beschriebenen kosmetischen Abstand; die
+neuen Pfade sind vorher unbenutzt gewesen.
 
 Keine `CHANGELOG.md`. Die Release-Notes auf GitHub enthalten dasselbe, entstehen aus denselben
 Commits und kosten keinen Bot-Commit auf `master`.

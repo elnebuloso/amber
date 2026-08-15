@@ -12,7 +12,7 @@ A placeholder website in a container. Point a domain at it until the real site e
 docker run -p 80:80 \
   -e APP_NAME="my site" \
   -e APP_TEXT_LEAD="coming soon" \
-  elnebuloso/amber:1.1.0
+  elnebuloso/amber:1.2.0
 ```
 
 Images carry the full version as their only tag — there is no `latest`, because a moving
@@ -37,12 +37,19 @@ instead of the environment variables. `APP_NAME` stays the browser tab title.
 ```
 docker run -p 80:80 \
   -e APP_NAME="my site" \
-  -v ./content:/app/content:ro \
+  -v "$(pwd)/content:/app/content:ro" \
   elnebuloso/amber:1.2.0
 ```
 
 An `index.css` in the same directory is loaded after the built-in stylesheet, so a few lines are
 enough to change colours. Images next to the markdown file are served as well.
+
+Everything in the mounted directory is served, not just the markdown — mount a directory that
+contains only what should be public.
+
+The markdown goes through Caddy's template engine before it is rendered. A `{{` in the content is
+executed, and a broken one makes every URL answer 500; raw HTML passes through unfiltered. Only
+mount content you wrote yourself, and escape or avoid `{{`.
 
 ## development
 
