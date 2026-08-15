@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T00:00:00Z",
+  "generatedAt": "2026-08-16T12:00:00Z",
   "title": "Design System: amber",
   "extensions": {
     "colorMeta": {
@@ -23,6 +23,7 @@
         "displayName": "Note Tint",
         "canonical": "oklch(0.965 0.008 60)",
         "darkCounterpart": "bg-note-dark",
+        "note": "Blockquote panel only. Too close to the page to carry a transient highlight; selection uses accent-ink instead.",
         "tonalRamp": ["oklch(0.15 0.008 60)", "oklch(0.26 0.008 60)", "oklch(0.37 0.008 60)", "oklch(0.48 0.008 60)", "oklch(0.60 0.008 60)", "oklch(0.72 0.008 60)", "oklch(0.84 0.008 60)", "oklch(0.95 0.008 60)"]
       },
       "fg": {
@@ -43,7 +44,8 @@
         "role": "neutral",
         "displayName": "Subtle Ink",
         "canonical": "oklch(0.42 0.005 250)",
-        "darkCounterpart": "fg-muted-dark",
+        "darkCounterpart": "fg-subtle-dark",
+        "note": "Dark moved from 0.76 to 0.71: at 0.76 it was identical to Muted Ink, so the nested-list and footnote step existed only in light. Now 7.31:1 on the dark page.",
         "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
       },
       "fg-faint": {
@@ -65,6 +67,7 @@
         "displayName": "Ember",
         "canonical": "oklch(0.58 0.14 45)",
         "darkCounterpart": "accent-dark",
+        "note": "A fill, never text. Tried as the selection background and measured 4.41:1 against Paper — rejected for accent-ink.",
         "tonalRamp": ["oklch(0.15 0.14 45)", "oklch(0.26 0.14 45)", "oklch(0.37 0.14 45)", "oklch(0.48 0.14 45)", "oklch(0.60 0.14 45)", "oklch(0.72 0.14 45)", "oklch(0.84 0.14 45)", "oklch(0.95 0.14 45)"]
       },
       "accent-ink": {
@@ -72,13 +75,15 @@
         "displayName": "Ember Ink",
         "canonical": "oklch(0.5 0.14 45)",
         "darkCounterpart": "accent-ink-dark",
+        "note": "Links, footnote refs, focus ring, and the selection background against Paper text: 6.2:1 light, 10.3:1 dark.",
         "tonalRamp": ["oklch(0.15 0.14 45)", "oklch(0.26 0.14 45)", "oklch(0.37 0.14 45)", "oklch(0.48 0.14 45)", "oklch(0.60 0.14 45)", "oklch(0.72 0.14 45)", "oklch(0.84 0.14 45)", "oklch(0.95 0.14 45)"]
       },
       "accent-code": {
         "role": "primary",
         "displayName": "Ember Deep",
         "canonical": "oklch(0.45 0.13 45)",
-        "darkCounterpart": "accent-ink-dark",
+        "darkCounterpart": "accent-code-dark",
+        "note": "Dark moved from 0.82 to 0.87: at 0.82 it was identical to Ember Ink, so inline code and links were the same colour in dark. Now 11.73:1.",
         "tonalRamp": ["oklch(0.15 0.13 45)", "oklch(0.26 0.13 45)", "oklch(0.37 0.13 45)", "oklch(0.48 0.13 45)", "oklch(0.60 0.13 45)", "oklch(0.72 0.13 45)", "oklch(0.84 0.13 45)", "oklch(0.95 0.13 45)"]
       },
       "border-strong": {
@@ -100,7 +105,7 @@
         "displayName": "Comment Grey",
         "canonical": "oklch(0.54 0.008 250)",
         "darkCounterpart": "code-comment-dark",
-        "note": "Darkened from 0.56 to 0.54: the lighter value measured 4.20:1 against Sunken Paper in light and missed AA.",
+        "note": "Darkened from 0.56 to 0.54: the lighter value measured 4.20:1 against Sunken Paper in light and missed AA. At 0.54 it is the system's lowest measured pair, 4.58:1.",
         "tonalRamp": ["oklch(0.15 0.008 250)", "oklch(0.26 0.008 250)", "oklch(0.37 0.008 250)", "oklch(0.48 0.008 250)", "oklch(0.60 0.008 250)", "oklch(0.72 0.008 250)", "oklch(0.84 0.008 250)", "oklch(0.95 0.008 250)"]
       },
       "code-keyword": {
@@ -126,11 +131,12 @@
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem." },
+      "display": { "displayName": "Display", "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem and hyphenates, so a long single-word APP_NAME breaks at a syllable rather than mid-word." },
       "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 34ch so it stacks rather than running the full column." },
       "label": { "displayName": "Section Label", "purpose": "Section heads (h2) in the sans face, uppercase and tracked, always beneath the 2px rule." },
-      "headline": { "displayName": "Headline", "purpose": "h3 — the first heading that reads as a heading rather than a label." },
-      "title": { "displayName": "Title", "purpose": "h4/h5/h6 at body size in bold; h5 and h6 step back to Muted Ink instead of shrinking." },
+      "headline": { "displayName": "Headline", "purpose": "h3 at 20px — the first heading that reads as a heading rather than a label, and the last level with a size of its own." },
+      "title": { "displayName": "Title", "purpose": "h4 at body size in bold Ink." },
+      "title-quiet": { "displayName": "Title Quiet", "purpose": "h5 (bold) and h6 (medium) at body size in Muted Ink — the two levels that separate by tone and weight because the scale has no size left." },
       "body": { "displayName": "Body", "purpose": "All prose, in a 40rem column with text-wrap: pretty." },
       "label-mono": { "displayName": "Mono Label", "purpose": "Table heads (0.12em) and figure captions (0.08em) — machine-shaped labels, never sentences." },
       "code": { "displayName": "Code", "purpose": "Inline and block code in the self-hosted IBM Plex Mono." }
@@ -141,8 +147,13 @@
       { "name": "narrow", "value": "34rem", "purpose": "The only breakpoint: tightens page padding and shrinks the display and lead sizes." }
     ],
     "lineWeights": [
-      { "name": "rule", "value": "2px", "purpose": "Structural: the section-head rule, the table head underline, the focus outline." },
-      { "name": "hairline", "value": "1px", "purpose": "Dividers: table rows, hr, nested-quote stripe, unchecked checkbox." }
+      { "name": "rule", "value": "2px", "purpose": "Structural: the section-head rule, the table head underline, the focus outline. Never above a block without an uppercase label." },
+      { "name": "hairline", "value": "1px", "purpose": "Dividers: table rows, hr, nested-quote stripe, the footnote block's top line, unchecked checkbox." }
+    ],
+    "knownLimits": [
+      { "name": "No section label on the environment-variable surface", "detail": "That surface emits only h1 and p, so the system's signature ruled label cannot appear on it. Tracked as TASK-6 in the project backlog; a decision, not drift." },
+      { "name": "Scroll containers carry no tabindex", "detail": "pre and table scroll without tabindex=\"0\". Chromium makes scrollable regions focusable itself — measured, pre.chroma is a tab stop with a visible ring — but that is browser behaviour, not a guarantee. Markdown cannot set the attribute and the page carries no JavaScript." },
+      { "name": "Footnote reference target size", "detail": "Footnote references measure 6x12px. WCAG 2.2 SC 2.5.8 exempts targets inside a block of text, so this is an ergonomic note rather than a conformance failure." }
     ]
   },
   "components": [
@@ -150,17 +161,25 @@
       "name": "Section Head",
       "kind": "custom",
       "refersTo": "section-label",
-      "description": "The signature mark: a small uppercase tracked label under a full-width 2px rule.",
+      "description": "The signature mark: a small uppercase tracked label under a full-width 2px rule. The only element that draws the heavy rule above a block.",
       "html": "<h2 class=\"ds-section-head\">Configuration</h2>",
       "css": ".ds-section-head { margin: var(--space-10) 0 var(--space-3); padding-top: var(--space-3); border-top: var(--rule) solid var(--border-strong); color: var(--fg); font-family: var(--font-sans); font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-label); text-transform: uppercase; }"
+    },
+    {
+      "name": "Heading Ladder",
+      "kind": "custom",
+      "refersTo": "title-quiet",
+      "description": "Four levels below the section label, separated by size once and then by tone and weight: h3 20px bold ink, h4 body bold ink, h5 body bold muted, h6 body medium muted.",
+      "html": "<div class=\"ds-headings\"><h3>Mounting a markdown file</h3><h4>Where the file goes</h4><h5>Files served alongside it</h5><h6>Everything in the directory is served</h6></div>",
+      "css": ".ds-headings { font-family: var(--font-sans); line-height: var(--leading-body); color: var(--fg); } .ds-headings h3 { margin: var(--space-8) 0 var(--space-3); font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: var(--tracking-snug); } .ds-headings h4, .ds-headings h5, .ds-headings h6 { margin: var(--space-6) 0 var(--space-2); font-size: var(--text-base); font-weight: var(--weight-bold); } .ds-headings h5, .ds-headings h6 { color: var(--fg-muted); } .ds-headings h6 { font-weight: var(--weight-medium); }"
     },
     {
       "name": "Link",
       "kind": "custom",
       "refersTo": "link",
-      "description": "Accent ink with an offset underline; hover thickens the underline, focus draws the 2px rule as an outline.",
+      "description": "Accent ink with an offset underline; hover thickens the underline, focus draws the 2px rule as an outline, selection paints accent ink with paper text.",
       "html": "<p class=\"ds-prose\">A bare address such as <a class=\"ds-link\" href=\"#\">https://example.com</a> becomes a link on its own.</p>",
-      "css": ".ds-prose { font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); } .ds-link { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
+      "css": ".ds-prose { font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); } .ds-prose ::selection { background: var(--accent-ink); color: var(--bg); } .ds-link { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
     },
     {
       "name": "Code Block",
@@ -168,7 +187,7 @@
       "refersTo": "code-block",
       "description": "A square sunken panel with the four syntax tones; scrolls horizontally rather than wrapping a command line.",
       "html": "<pre class=\"ds-pre\"><code><span class=\"ds-c\"># every service shares one image</span>\ndocker run -p 80:80 <span class=\"ds-s\">\"$(pwd)/content\"</span> <span class=\"ds-m\">1.2.0</span></code></pre>",
-      "css": ".ds-pre { margin: 0 0 var(--space-5); padding: var(--space-5); background: var(--bg-sunken); border-radius: 0; overflow-x: auto; } .ds-pre code { font-family: var(--font-mono); font-size: var(--text-sm); line-height: var(--leading-code); color: var(--fg); } .ds-pre .ds-c { color: var(--code-comment); } .ds-pre .ds-k { color: var(--code-keyword); } .ds-pre .ds-m { color: var(--code-number); } .ds-pre .ds-s { color: var(--code-string); }"
+      "css": ".ds-pre { margin: 0 0 var(--space-5); padding: var(--space-5); background: var(--bg-sunken); border-radius: 0; overflow-x: auto; } .ds-pre code { font-family: var(--font-mono); font-size: var(--text-sm); line-height: var(--leading-code); color: var(--fg); } .ds-pre .ds-c { color: var(--code-comment); } .ds-pre .ds-k { color: var(--code-keyword); } .ds-pre .ds-m { color: var(--code-number); } .ds-pre .ds-s { color: var(--code-string); } .ds-pre:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
     },
     {
       "name": "Note",
@@ -182,17 +201,17 @@
       "name": "Table",
       "kind": "custom",
       "refersTo": "table-head",
-      "description": "Mono uppercase head on the 2px rule, hairline row lines, flush right edge.",
-      "html": "<table class=\"ds-table\"><thead><tr><th>Variable</th><th>Meaning</th></tr></thead><tbody><tr><td>APP_NAME</td><td>page title and heading</td></tr><tr><td>APP_TEXT_LEAD</td><td>the line below the heading</td></tr></tbody></table>",
-      "css": ".ds-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--text-base); color: var(--fg); } .ds-table th { text-align: left; padding: 0 var(--space-3) var(--space-2) 0; border-bottom: var(--rule) solid var(--border-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; } .ds-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: var(--hairline) solid var(--border); } .ds-table th:last-child, .ds-table td:last-child { padding-right: 0; }"
+      "description": "Mono uppercase head on the 2px rule, hairline row lines, flush right edge — and its own scroll container, because a cell never shrinks below its longest word.",
+      "html": "<table class=\"ds-table\"><thead><tr><th>Variable</th><th>Meaning</th></tr></thead><tbody><tr><td>APP_NAME</td><td>page title and heading</td></tr><tr><td>APP_TEXT_LEAD</td><td>the line below the heading</td></tr><tr><td>APP_LANG</td><td>the page language</td></tr></tbody></table>",
+      "css": ".ds-table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--text-base); color: var(--fg); } .ds-table th { text-align: left; padding: 0 var(--space-3) var(--space-2) 0; border-bottom: var(--rule) solid var(--border-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; } .ds-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: var(--hairline) solid var(--border); } .ds-table th:last-child, .ds-table td:last-child { padding-right: 0; } .ds-table:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
     },
     {
       "name": "Task List",
       "kind": "custom",
       "refersTo": "task-checkbox",
-      "description": "A drawn square checkbox, because the renderer emits the control disabled and a disabled control ignores accent-color.",
+      "description": "A drawn square checkbox, because the renderer emits the control disabled and a disabled control ignores accent-color; under forced colours the platform draws it instead.",
       "html": "<ul class=\"ds-tasks\"><li><input type=\"checkbox\" checked disabled> a task that is done</li><li><input type=\"checkbox\" disabled> a task that is not</li><li class=\"ds-plain\">an ordinary item in the same list</li></ul>",
-      "css": ".ds-tasks { margin: 0 0 var(--space-5); padding-left: var(--space-5); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); } .ds-tasks li { margin-bottom: var(--space-2); } .ds-tasks li:has(> input[type=\"checkbox\"]) { list-style: none; margin-left: calc(-1 * var(--space-5)); } .ds-tasks input[type=\"checkbox\"] { appearance: none; width: 0.85em; height: 0.85em; margin: 0 var(--space-2) 0 0; vertical-align: -0.05em; border: var(--hairline) solid var(--border-strong); border-radius: 0; background: none; } .ds-tasks input[type=\"checkbox\"]:checked { border-color: var(--accent); background: var(--accent); }"
+      "css": ".ds-tasks { margin: 0 0 var(--space-5); padding-left: var(--space-5); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); } .ds-tasks li { margin-bottom: var(--space-2); } .ds-tasks li:has(> input[type=\"checkbox\"]) { list-style: none; margin-left: calc(-1 * var(--space-5)); } .ds-tasks input[type=\"checkbox\"] { appearance: none; width: 0.85em; height: 0.85em; margin: 0 var(--space-2) 0 0; vertical-align: -0.05em; border: var(--hairline) solid var(--border-strong); border-radius: 0; background: none; } .ds-tasks input[type=\"checkbox\"]:checked { border-color: var(--accent); background: var(--accent); } @media (forced-colors: active) { .ds-tasks input[type=\"checkbox\"] { appearance: auto; } }"
     },
     {
       "name": "Disclosure",
@@ -201,6 +220,14 @@
       "description": "Raw HTML passes the renderer, so details/summary is usable; only the marker is tinted, the native triangle stays the affordance.",
       "html": "<details class=\"ds-details\"><summary>What this page is for</summary><p>Every URL answers with the same page.</p></details>",
       "css": ".ds-details { margin: 0 0 var(--space-5); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); color: var(--fg); } .ds-details summary { font-weight: var(--weight-bold); cursor: pointer; } .ds-details summary::marker { color: var(--accent); } .ds-details summary:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
+    },
+    {
+      "name": "Footnotes",
+      "kind": "custom",
+      "refersTo": "footnotes",
+      "description": "The collected notes under a hairline — not the section rule, because the heavy rule always carries an uppercase label and the renderer emits none here.",
+      "html": "<section class=\"ds-footnotes\"><ol><li><p>Every URL answers 200 with the same page. <a class=\"ds-backref\" href=\"#\">&#8617;</a></p></li></ol></section>",
+      "css": ".ds-footnotes { margin-top: var(--space-8); padding-top: var(--space-3); border-top: var(--hairline) solid var(--border); font-family: var(--font-sans); font-size: var(--text-sm); line-height: var(--leading-body); color: var(--fg-subtle); } .ds-footnotes ol { padding-left: var(--space-5); } .ds-footnotes p { margin: 0; } .ds-backref { color: var(--accent-ink); text-decoration: none; } .ds-backref:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
     },
     {
       "name": "Figure Caption",
@@ -214,30 +241,31 @@
       "name": "Placeholder Surface",
       "kind": "custom",
       "refersTo": "link",
-      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height.",
+      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height. It renders only h1 and p, so the ruled section label cannot appear here.",
       "html": "<div class=\"ds-placeholder\"><h1>amber</h1><p>Simple Docker Placeholder Website</p></div>",
-      "css": ".ds-placeholder { display: flex; flex-direction: column; justify-content: center; min-height: 20rem; padding: var(--space-14) var(--space-6) var(--space-16); background: var(--bg); color: var(--fg); font-family: var(--font-sans); } .ds-placeholder h1 { margin: 0 0 var(--space-3); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); } .ds-placeholder p { margin: 0; max-width: var(--measure-lead); font-size: var(--text-md); line-height: var(--leading-snug); color: var(--fg-muted); }"
+      "css": ".ds-placeholder { display: flex; flex-direction: column; justify-content: center; min-height: 20rem; padding: var(--space-14) var(--space-6) var(--space-16); background: var(--bg); color: var(--fg); font-family: var(--font-sans); } .ds-placeholder h1 { margin: 0 0 var(--space-3); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); hyphens: auto; } .ds-placeholder p { margin: 0; max-width: var(--measure-lead); font-size: var(--text-md); line-height: var(--leading-snug); color: var(--fg-muted); }"
     }
   ],
   "narrative": {
     "northStar": "The Technical Document",
-    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. Text tones were measured in-browser against their own surface in both schemes and the lowest pair reads 4.58:1, above the WCAG AA floor. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
+    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. The signature mark itself is not shared: the environment-variable surface emits only h1 and p, so the ruled section label cannot appear there at all. That is a decision, not drift, and it is tracked in the project backlog as TASK-6.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
     "keyCharacteristics": [
       "Flat sheet, no shadows, no radii, no gradients, no motion.",
       "Two line weights only: a 2px structural rule and a 1px hairline.",
       "Uppercase tracked labels for section heads, table heads and captions.",
       "One warm accent; four code tones; everything else neutral at hue 250.",
       "Styled by element selector — the renderer emits no classes to hook.",
-      "Light and dark are peers, both measured to AA."
+      "Light and dark are peers, both measured to AA, with the same tone relations."
     ],
     "rules": [
       { "name": "The Four Tones Rule", "body": "Syntax highlighting has exactly four colours. A new Chroma token class joins one of the four groups in app/style.css or it stays body colour. A fifth tone is not added to distinguish a fifth category.", "section": "colors" },
-      { "name": "The Measured Palette Rule", "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; the system's current lowest is 4.58:1. A value is never lightened to make a design read better — that is the one direction this rule does not bend.", "section": "colors" },
+      { "name": "The Measured Palette Rule", "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used accent and measured 4.41:1, so the shipped value is accent-ink at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.", "section": "colors" },
+      { "name": "The Mirrored Scheme Rule", "body": "Dark is not a separate palette, it is the same relationships inverted. Every tone that sits one step from its neighbour in light sits one step from it in dark too. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme.", "section": "colors" },
       { "name": "The One Warm Hue Rule", "body": "Outside code blocks the page carries a single warm family (hue 45–60): the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job instead.", "section": "colors" },
-      { "name": "The Ruled Label Rule", "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line.", "section": "typography" },
-      { "name": "The Tone-Not-Size Rule", "body": "The type scale runs out of sizes before markdown runs out of heading levels. Below h4, depth is expressed by dropping to Muted Ink, never by shrinking below body size. A future level does the same.", "section": "typography" },
+      { "name": "The Ruled Label Rule", "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line above a block. The rule holds without exception — the footnote block, which the renderer gives no label, takes a hairline instead.", "section": "typography" },
+      { "name": "The Tone-Not-Size Rule", "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 at 20px is the last level with a size; below it, depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. Four levels, four marks, one size. A future level does the same or does not exist.", "section": "typography" },
       { "name": "The Mono-Means-Machine Rule", "body": "The monospace face marks code, table heads and captions. It is never used for body prose, a heading, or emphasis.", "section": "typography" },
-      { "name": "The Unbreakable Column Rule", "body": "Nothing an operator writes may push the document sideways. Any new element either wraps, breaks or scrolls within the 40rem column.", "section": "layout" },
+      { "name": "The Unbreakable Column Rule", "body": "Nothing an operator writes may push the document sideways. Text wraps or breaks; anything with an internal minimum width of its own — a code block, a table — becomes its own scroll container. Adding a new block means picking one of the two mechanisms deliberately, because the body-level wrap rule silently fails to cover the second kind.", "section": "layout" },
       { "name": "The Both-Modes Rule", "body": "Every layout rule is checked against both surfaces — the two-line placeholder and the full markdown page. A rule that only looks right on one of them is not a rule yet.", "section": "layout" },
       { "name": "The Two Weights Rule", "body": "Every line on the page is either the 2px structural rule or the 1px hairline. A third weight, a dashed line or a coloured border is not part of the vocabulary.", "section": "elevation" },
       { "name": "The Tint-Once Rule", "body": "A tinted surface does not nest inside a tinted surface. A quote inside a quote drops the tint and steps back to a hairline stripe; anything nested deeper does the same rather than stacking washes.", "section": "elevation" }
@@ -245,20 +273,26 @@
     "dos": [
       "Do put every value in app/tokens.css and author it in OKLCH; hue 250 for neutrals, hue 45–50 for the accent, hue 60 for the note tint.",
       "Do style by element selector. The markdown renderer emits no classes, so a rule that needs a class only works for hand-written markup and silently fails on the operator's page.",
-      "Do measure both schemes in a browser whenever a colour changes, and record the lowest ratio. The floor is 4.5:1.",
+      "Do measure both schemes in a browser whenever a colour changes, and record the lowest ratio. The floor is 4.5:1, and a value that misses it is replaced, not rounded.",
+      "Do check a moved token against its neighbours in the other scheme; a distinction can be intact in light and collapsed in dark.",
       "Do define every colour in both the light block and the prefers-color-scheme: dark block. A token that exists in only one scheme is a bug.",
       "Do check every change against both surfaces — the two-line placeholder and the full demo/index.md page, which exercises every construct the product can render.",
+      "Do give any new block with an internal minimum width its own overflow-x: auto; the body-level word break does not reach it.",
+      "Do hand a control back to the platform (appearance: auto) when forced colours would strip what carries its state.",
       "Do ship any new font file inside the image and declare it with @font-face locally.",
-      "Do express new depth with a tone step or one of the two line weights."
+      "Do express new depth with a tone step or one of the two line weights.",
+      "Do delete a token nothing consumes. --space-1, --tracking-wide and --weight-regular were removed for exactly that reason."
     ],
     "donts": [
       "Don't add a box-shadow, a border-radius, a gradient, a transition or an animation. The sheet is flat and still.",
       "Don't fetch anything at runtime — no font CDN, no script, no image from another host. The page must render with the machine offline.",
       "Don't introduce a third line weight, a second accent hue, or a fifth syntax tone.",
-      "Don't add a fifth heading size. Below h4, step back in tone instead.",
+      "Don't add a fifth heading size. Below h3, step back in tone and then in weight.",
+      "Don't draw the 2px rule above a block that carries no uppercase label; use the hairline.",
       "Don't set body prose, headings or emphasis in the monospace face.",
       "Don't let any element exceed the 40rem column or force horizontal page scroll; wrap, break, or scroll inside the block.",
       "Don't nest a tinted surface inside a tinted surface.",
+      "Don't use a page-adjacent tint for a transient highlight such as selection; that needs a measured accent, not a wash.",
       "Don't add a logo, wordmark or decorative image — the product has none by commitment, and the page's only mark is the ruled section label."
     ]
   }
