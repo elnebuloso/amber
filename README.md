@@ -29,10 +29,25 @@ tag makes a deployment non-deterministic. Pick one from
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.
 
+## markdown page
+
+Mount a directory containing an `index.md` at `/app/content` and the page is rendered from it
+instead of the environment variables. `APP_NAME` stays the browser tab title.
+
+```
+docker run -p 80:80 \
+  -e APP_NAME="my site" \
+  -v ./content:/app/content:ro \
+  elnebuloso/amber:1.2.0
+```
+
+An `index.css` in the same directory is loaded after the built-in stylesheet, so a few lines are
+enough to change colours. Images next to the markdown file are served as well.
+
 ## development
 
 ```
-make up      # serves on http://127.0.0.1:8080
+make up      # 8080 plain, 8081 markdown, 8082 markdown with a custom stylesheet
 make down
 make test    # builds the image and runs the smoke test against it
 ```
