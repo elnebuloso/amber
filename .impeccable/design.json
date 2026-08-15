@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-15T22:40:00Z",
+  "title": "Design System: amber",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#fbfbfa",
+        "tonalRamp": [
+          "#1a1a18",
+          "#3a3a36",
+          "#5c5c56",
+          "#7d7d75",
+          "#a3a39a",
+          "#c6c6bd",
+          "#e4e4dd",
+          "#fbfbfa"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Warm Ink",
+        "canonical": "#1a1a18",
+        "tonalRamp": [
+          "#0d0d0c",
+          "#1a1a18",
+          "#33332f",
+          "#4d4d47",
+          "#6b6b63",
+          "#94948b",
+          "#c2c2b9",
+          "#ececea"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "#5c5c56",
+        "tonalRamp": [
+          "#1f1f1d",
+          "#33332f",
+          "#474742",
+          "#5c5c56",
+          "#7d7d75",
+          "#9a9a95",
+          "#c4c4bd",
+          "#e8e8e3"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#dededa",
+        "tonalRamp": [
+          "#2f2f35",
+          "#4a4a4f",
+          "#6b6b70",
+          "#8f8f93",
+          "#b4b4b1",
+          "#dededa",
+          "#ececea",
+          "#f7f7f5"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Sunken Surface",
+        "canonical": "#f1f1ee",
+        "tonalRamp": [
+          "#1f1f25",
+          "#33333a",
+          "#4d4d54",
+          "#75757b",
+          "#a0a09c",
+          "#c9c9c4",
+          "#f1f1ee",
+          "#fbfbfa"
+        ]
+      },
+      "code-comment": {
+        "role": "tertiary",
+        "displayName": "Comment",
+        "canonical": "#6b6b61",
+        "tonalRamp": [
+          "#26261f",
+          "#3b3b32",
+          "#525248",
+          "#6b6b61",
+          "#8b8b95",
+          "#a9a9a1",
+          "#cbcbc4",
+          "#e9e9e4"
+        ]
+      },
+      "code-string": {
+        "role": "tertiary",
+        "displayName": "String",
+        "canonical": "#7a5230",
+        "tonalRamp": [
+          "#2c1c0e",
+          "#452c17",
+          "#5f3b20",
+          "#7a5230",
+          "#a2714a",
+          "#c4916b",
+          "#d8ab7c",
+          "#eed3b8"
+        ]
+      },
+      "code-keyword": {
+        "role": "tertiary",
+        "displayName": "Keyword",
+        "canonical": "#6a4a86",
+        "tonalRamp": [
+          "#241a2e",
+          "#382649",
+          "#4f3563",
+          "#6a4a86",
+          "#8c6ba8",
+          "#a888c4",
+          "#c3a2dd",
+          "#e2ceef"
+        ]
+      },
+      "code-number": {
+        "role": "tertiary",
+        "displayName": "Number",
+        "canonical": "#2b6660",
+        "tonalRamp": [
+          "#0d2523",
+          "#153a36",
+          "#1f504a",
+          "#2b6660",
+          "#3f8a82",
+          "#5aa9a0",
+          "#79c7bd",
+          "#b6e3dd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The page name. Exactly one per page; scales with the viewport instead of wrapping."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Top-level division inside a markdown page."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Third and fourth heading level; drops to quiet ink at the sixth rather than shrinking further."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "The sentence under the name and every paragraph, held to a 34rem measure."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Monospace on the sunken surface, inline at 0.9em and 0.85rem in blocks."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Fourth heading level."
+      },
+      "title-xs": {
+        "displayName": "Title Extra Small",
+        "purpose": "Fifth and sixth heading level; the sixth drops to quiet ink instead of shrinking further."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table text — the only step below body size that is not code."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "scheme",
+        "value": "prefers-color-scheme: dark"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Page Name",
+      "kind": "custom",
+      "refersTo": "typography.display",
+      "description": "The one display heading a page carries; scales between 2.5rem and 4rem with the viewport.",
+      "html": "<h1 class=\"ds-display\">amber</h1>",
+      "css": ".ds-display { margin: 0 0 0.5rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.6; color: var(--text, #1a1a18); }"
+    },
+    {
+      "name": "Lead Sentence",
+      "kind": "custom",
+      "refersTo": "typography.body",
+      "description": "The single sentence under the page name, and the shape of every paragraph.",
+      "html": "<p class=\"ds-body\">Simple Docker Placeholder Website</p>",
+      "css": ".ds-body { margin: 0; max-width: 34rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: clamp(1.05rem, 2.5vw, 1.25rem); line-height: 1.6; color: var(--muted, #5c5c56); }"
+    },
+    {
+      "name": "Inline Code",
+      "kind": "custom",
+      "refersTo": "code-inline",
+      "description": "Code inside a sentence: sunken surface, small radius, no border.",
+      "html": "<p class=\"ds-body\">Set <code class=\"ds-code-inline\">APP_NAME</code> to name the page.</p>",
+      "css": ".ds-code-inline { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; background: var(--surface, #f1f1ee); padding: 0.15em 0.35em; border-radius: 4px; }"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "code-block",
+      "description": "A fenced block on the sunken surface, scrolling within itself, with the four syntax tones.",
+      "html": "<pre class=\"ds-code-block\"><code><span class=\"ds-tok-comment\"># every service shares one image</span>\n<span class=\"ds-tok-keyword\">services</span>:\n  <span class=\"ds-tok-keyword\">amber</span>:\n    <span class=\"ds-tok-keyword\">ports</span>: <span class=\"ds-tok-number\">8080</span>\n    <span class=\"ds-tok-keyword\">name</span>: <span class=\"ds-tok-string\">\"my site\"</span></code></pre>",
+      "css": ".ds-code-block { margin: 0; padding: 0.9rem 1rem; background: var(--surface, #f1f1ee); border-radius: 6px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; line-height: 1.5; color: var(--text, #1a1a18); } .ds-tok-comment { color: var(--code-comment, #6b6b61); font-style: italic; } .ds-tok-string { color: var(--code-string, #7a5230); } .ds-tok-keyword { color: var(--code-keyword, #6a4a86); } .ds-tok-number { color: var(--code-number, #2b6660); }"
+    },
+    {
+      "name": "Ruled Table",
+      "kind": "custom",
+      "refersTo": "table-cell",
+      "description": "Ruled, never boxed; a block-level scroll container so an over-wide table scrolls inside itself.",
+      "html": "<table class=\"ds-table\"><thead><tr><th>variable</th><th>default</th></tr></thead><tbody><tr><td>APP_NAME</td><td>amber</td></tr><tr><td>APP_TEXT_LEAD</td><td>Simple Docker Placeholder Website</td></tr></tbody></table>",
+      "css": ".ds-table { display: block; width: max-content; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 0.95rem; } .ds-table th, .ds-table td { padding: 0.5rem 0.7rem; text-align: left; border-bottom: 1px solid var(--line, #dededa); } .ds-table th { font-weight: 600; color: var(--text, #1a1a18); } .ds-table td { color: var(--muted, #5c5c56); }"
+    },
+    {
+      "name": "Quote",
+      "kind": "custom",
+      "refersTo": "quote",
+      "description": "Set aside by a hairline stroke on the left, never by a background tint or a quotation glyph.",
+      "html": "<blockquote class=\"ds-quote\"><p>A placeholder has no business in a search index.</p></blockquote>",
+      "css": ".ds-quote { margin: 0; padding-left: 1rem; border-left: 3px solid var(--line, #dededa); font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-style: italic; color: var(--muted, #5c5c56); } .ds-quote p { margin: 0; }"
+    },
+    {
+      "name": "Secondary List",
+      "kind": "custom",
+      "refersTo": "typography.body",
+      "description": "Reads as one block of secondary text rather than a stack of separate lines.",
+      "html": "<ul class=\"ds-list\"><li>first item</li><li>second item<ul><li>nested item</li></ul></li></ul>",
+      "css": ".ds-list { margin: 0; padding-left: 1.4rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--muted, #5c5c56); line-height: 1.6; } .ds-list li + li, .ds-list li > ul { margin-top: 0.35rem; } .ds-list ul { padding-left: 1.4rem; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "typography.body",
+      "description": "Carries the surrounding colour; only the underline changes on hover.",
+      "html": "<p class=\"ds-body\">Written up in the <a class=\"ds-link\" href=\"#\">readme</a>.</p>",
+      "css": ".ds-link { color: inherit; text-decoration-color: var(--muted, #5c5c56); text-underline-offset: 0.2em; } .ds-link:hover { text-decoration-color: currentColor; } .ds-link:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Notice",
+    "overview": "A notice that does not press. It says what there is to say and then stops — no countdown, no invitation to sign up, no rhetoric of anticipation. The page exists because a domain resolves somewhere before its real site does, and its whole ambition is to make that moment unembarrassing. Everything in the system follows from that: one column, no chrome, no motion, nothing to click but the links the operator wrote.\n\nThe material is paper rather than screen. Every neutral leans warm — the background is off-white rather than white, the text near-black rather than black — so the page reads as a printed card someone left on the table, not as an interface that happens to be empty. Depth comes from tone and a hairline, never from a shadow. Type is whatever the visitor's device already has, which means the page appears complete on the first paint and looks native on every platform instead of importing a personality from a font file.\n\nTwo things the page must never resemble were named explicitly. It is not a maintenance or error screen: nothing here is broken, it is only not there yet, so there is no warning glyph, no apology, no grey-on-grey. And it is not a developer surface: no terminal window, no monospace headings, no green-on-black. The visitor is a visitor, not an operator.",
+    "keyCharacteristics": [
+      "One centred column, at most 34rem wide, on an otherwise empty field",
+      "Warm neutrals only; colour appears exclusively inside code",
+      "Flat by construction — no shadow anywhere in the system",
+      "System type at every level, no web font, nothing fetched at render time",
+      "Both colour schemes are first-class; neither is the afterthought"
+    ],
+    "rules": [
+      {
+        "name": "The Warm Paper Rule",
+        "body": "No pure white and no pure black, in either scheme. Every neutral carries a warm cast; a cool grey reads as software and breaks the material.",
+        "section": "colors"
+      },
+      {
+        "name": "The Four Tones Rule",
+        "body": "Code gets exactly four colours. A highlighter emits sixty token classes; anything not in the four groups keeps body colour. Adding a fifth means arguing why the page needs it more than it needs quiet.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Contrast Rule",
+        "body": "Whenever a colour changes, its contrast against its own ground is measured in both schemes and held at or above 4.5:1. The lowest value in the system today is 4.76 (comment on sunken surface, light). No colour ships on the assumption that it looks fine.",
+        "section": "colors"
+      },
+      {
+        "name": "The Borrowed Type Rule",
+        "body": "Only fonts the device already has. No web font, no @font-face, no preconnect — the page must render complete with the machine offline.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Voice Rule",
+        "body": "One family for everything except code. A second display face would make the page an identity; it is a notice.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Column Rule",
+        "body": "Everything lives in one column of at most 34rem. No sidebar, no grid, no second region — a placeholder that needs a layout has stopped being a placeholder.",
+        "section": "layout"
+      },
+      {
+        "name": "The Content Scrolls, Not The Page Rule",
+        "body": "Anything that cannot fit — a wide table, a long code line — scrolls inside its own box. The document itself never scrolls horizontally, at any width.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Rule",
+        "body": "No box-shadow, no filter: drop-shadow, no layered card. If something needs to read as separate, it changes tone or gains a hairline.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do measure contrast in both schemes whenever a colour changes; hold 4.5:1 or better.",
+      "Do keep min-width: 0 on the column — it is what makes the scroll rules work at all.",
+      "Do express a new distinction with tone, weight or space before reaching for a colour.",
+      "Do let wide content scroll inside its own box.",
+      "Do treat both colour schemes as equally finished; test the dark one before shipping."
+    ],
+    "donts": [
+      "Don't add a shadow, a boxed card, or an outlined container.",
+      "Don't load a web font, an icon set, or any asset from the network.",
+      "Don't introduce an accent colour outside the four code tones.",
+      "Don't make it look like a maintenance or error screen — no warning glyph, no apology, no grey-on-grey.",
+      "Don't make it look like a developer surface — no terminal frame, no monospace headings.",
+      "Don't add motion, a hero image, or anything that asks for attention."
+    ]
+  }
+}
