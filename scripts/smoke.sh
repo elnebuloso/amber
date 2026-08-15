@@ -39,6 +39,7 @@ start() {
   docker run -d --name "$NAME" -p 127.0.0.1::80 \
     -e APP_NAME=smoke-name \
     -e APP_TEXT_LEAD=smoke-lead \
+    -e APP_LANG=smoke-lang \
     "$@" "$IMAGE" >/dev/null
   local port
   port="$(docker port "$NAME" 80 | head -1 | cut -d: -f2)"
@@ -55,6 +56,7 @@ BASE="$(start)"
 root="$(curl -s "$BASE/")" || true
 check "page shows APP_NAME" "$root" "smoke-name"
 check "page shows APP_TEXT_LEAD" "$root" "smoke-lead"
+check "APP_LANG reaches the html element" "$root" '<html lang="smoke-lang">'
 check "unknown path serves the page" \
   "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/does/not/exist")" "200"
 check "robots header is set" "$(curl -si "$BASE/")" "X-Robots-Tag: noindex, nofollow"

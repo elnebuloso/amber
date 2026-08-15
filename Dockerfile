@@ -5,3 +5,4 @@ COPY app /app
 
 ENV APP_NAME=amber
 ENV APP_TEXT_LEAD="This site is not online yet."
+ENV APP_LANG=en

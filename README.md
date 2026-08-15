@@ -25,6 +25,7 @@ tag makes a deployment non-deterministic. Pick one from
 | --- | --- | --- |
 | `APP_NAME` | `amber` | page title and heading |
 | `APP_TEXT_LEAD` | `This site is not online yet.` | the line below the heading |
+| `APP_LANG` | `en` | the page's language, for screen readers and hyphenation |
 
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.
