@@ -53,7 +53,7 @@ mount content you wrote yourself, and escape or avoid `{{`.
 ## development
 
 ```
-make up      # 8080 plain, 8081 markdown, 8082 markdown with a custom stylesheet
+make up      # 8080 plain, 8081 markdown
 make down
 make test    # builds the image and runs the smoke test against it
 ```
