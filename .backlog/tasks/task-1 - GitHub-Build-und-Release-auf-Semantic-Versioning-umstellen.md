@@ -5,7 +5,7 @@ status: Done
 assignee:
   - '@claude'
 created_date: '2026-08-15 17:53'
-updated_date: '2026-08-15 18:25'
+updated_date: '2026-08-15 18:30'
 labels: []
 dependencies: []
 priority: high
@@ -76,6 +76,8 @@ Bewusst in Kauf genommen: semantic-release setzt Tag und GitHub-Release vor dem 
 Nachbesserung der Reihenfolge: Tag und GitHub-Release entstehen jetzt **nach** dem Docker-Push. Der Workflow ruft `cycjimmy/semantic-release-action` zweimal auf — zuerst mit `dry_run: true`, das nur die Version liefert, am Ende ohne, was taggt und released. Ausschlaggebend war, dass der Fehlerfall der alten Reihenfolge nicht selbstheilend ist: existiert das Tag bereits, meldet ein erneuter Lauf "no release", `new_release_published` wird `false` und genau die Docker-Schritte werden uebersprungen, die das fehlende Image nachliefern muessten. In der neuen Reihenfolge dreht sich der Fehlerfall zu "Image gepusht, Tag fehlt", und der heilt beim naechsten Lauf von selbst. Zusaetzlich `concurrency: release`, damit zwei schnell aufeinanderfolgende Pushes nicht parallel je ein Release erzeugen.
 
 Verifikation der neuen Reihenfolge in einem Wegwerf-Klon mit lokalem Remote, alle vier Faelle bestanden: Trockenlauf bestimmt `1.1.0`; ein zweiter Trockenlauf liefert erneut `1.1.0` und belegt damit die Heilung nach einem fehlgeschlagenen Tag-Schritt; der echte Lauf legt `refs/tags/v1.1.0` im Remote an; ein Trockenlauf danach meldet "no release", es entsteht also kein Doppel-Release. `yamllint` ohne Befund.
+
+Nachtrag nach dem Push: der erste echte Lauf auf GitHub (Run 31901293255, 21s, erfolgreich) hat die zuvor nur statisch belegten Kriterien bestaetigt. Der Lauf fand `v1.0.0`, analysierte die sechs `ci`/`chore`-Commits seither und meldete "no release"; die Schritte `Set up Buildx`, `Login`, `Build and push` und `Tag and release` wurden uebersprungen. Damit ist auch der Trigger auf `master` im Betrieb nachgewiesen. Offen bleibt der Pfad mit tatsaechlichem Release, den erst der naechste `feat`- oder `fix`-Commit ausloest.
 <!-- SECTION:NOTES:END -->
 
 ## Final Summary
