@@ -87,8 +87,9 @@ h4, h5, h6 {
 }
 
 /* The scale runs out of sizes before the markup runs out of levels, so the
-   deepest two step back in tone instead of shrinking further. */
+   deepest levels step back in tone and then in weight. */
 h5, h6 { color: var(--fg-muted); }
+h6 { font-weight: var(--weight-medium); }
 
 p, ul, ol, pre, blockquote, table, figure, details {
 	margin: 0 0 var(--space-5);
