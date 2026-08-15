@@ -17,7 +17,6 @@ was heute gilt. Gegen `caddy:2-alpine` geprüft, alle drei Fälle gemessen:
 ```
 ohne content/   -> <h1>amber</h1><p>lead text</p>
 mit index.md    -> h1, p, ul, table, blockquote, pre — vollständiges GitHub-Markdown
-mit index.css   -> beide Stylesheets verlinkt, /content/index.css als text/css ausgeliefert
 ```
 
 Zwei Eigenschaften der Laufzeit, die dabei sichtbar wurden: Caddy vergibt Überschriften
@@ -28,10 +27,9 @@ das Syntaxklassen mitgibt.
 
 ```
 /app/index.html      Template               aus dem Image
-/app/style.css       Vorgaben               aus dem Image
+/app/index.css       Vorgaben               aus dem Image
 /app/content/        Dateien des Betreibers existiert im Image nicht
         index.md     optional
-        index.css    optional
 ```
 
 Die Dateien des Betreibers liegen in einem eigenen Ordner, nicht direkt in `/app`. Wer ein
@@ -52,9 +50,12 @@ Die Regel im Template:
 {{end}}
 ```
 
-`/content/index.css` wird als zweites Stylesheet verlinkt, wenn es existiert — nach `style.css`,
-damit es die Vorgaben ergänzt statt sie zu ersetzen. Wer nur die Farben ändern will, schreibt drei
-Zeilen; wer alles selbst bestimmen will, überschreibt so viel er mag.
+Ein eigenes Stylesheet des Betreibers wird nicht unterstützt. Der Gedanke war, eine `index.css`
+neben der Markdown-Datei einzuhängen und nach den Vorgaben zu laden — das ist verworfen worden,
+bevor es je ausgeliefert wurde: Ein zweites Stylesheet gewinnt auch gegen den Dunkelmodus-Block der
+Vorgaben, wer also nur helle Farben setzt, serviert Dunkelmodus-Nutzern helle Flächen mit
+hellgrauer Schrift. Wer das Aussehen wirklich bestimmen will, baut ein eigenes Image auf diesem
+auf; die Vorgaben sind eine Datei.
 
 `APP_NAME` bleibt in beiden Fällen der Titel im Browser-Tab: eine Regel, kein Sonderfall.
 `APP_TEXT_LEAD` wird bei vorhandener `index.md` nicht mehr angezeigt.
@@ -71,9 +72,12 @@ auch verschachtelt, Tabellen mit Trennlinien, `pre` und `code` mit gedämpftem H
 Bilder auf Spaltenbreite begrenzt, Trennlinien. Tabellen und Codeblöcke scrollen bei Überbreite in
 sich selbst, statt die Seite waagerecht zu sprengen.
 
-Codefärbung bleibt aus. Chroma liefert die Klassen mit, aber ein Farbschema sind zwanzig Regeln,
-die in hell und dunkel funktionieren müssen — Aufwand ohne Ertrag für eine Platzhalterseite. Code
-bleibt lesbar, nur einfarbig.
+Codeblöcke werden eingefärbt. Caddy schickt sie durch Chroma, das die Token-Klassen mitliefert;
+vier Töne genügen — Kommentare gedämpft und kursiv, Zeichenketten warm, Schlüsselwörter kräftiger,
+Zahlen und Konstanten im vierten Ton. Alles Übrige bleibt Fliesstextfarbe. Ein vollständiges
+Editor-Thema mit sechzig Klassen wäre für eine Platzhalterseite Aufwand ohne Ertrag; vier Farben
+je Schema sind es nicht. Die Töne stammen aus derselben Palette und sind in beiden Schemata gegen
+die Codefläche gemessen — der niedrigste Wert liegt bei 4,76, alle übrigen darüber.
 
 Die Grundmaße des Layouts ändern sich nicht: Gemessen mit einem Dokument von 2251 px Höhe im
 917 px hohen Fenster steht die Überschrift 53 px unter der Oberkante und wird nicht abgeschnitten,
@@ -86,30 +90,27 @@ direkten Kindern von `main` 1,25rem Abstand, und das gilt auch für die alte Pla
 ## Demo und Entwicklung
 
 `demo/index.md` enthält absichtlich jedes Element, das GitHub-Markdown kennt. Damit ist die
-Abdeckung des Stylesheets sichtbar geprüft statt geraten. `demo/custom.css` ändert erkennbar
-etwas, damit der Override auf einen Blick zu sehen ist.
+Abdeckung des Stylesheets sichtbar geprüft statt geraten. Dazu gehört ein Codeblock mit genug
+Syntax, dass sich die Färbung überhaupt beurteilen lässt.
 
 Die `docker-compose.yml` zeigt alle drei Fälle nebeneinander:
 
 ```
 amber            127.0.0.1:8080   nur Umgebungsvariablen
 amber-markdown   127.0.0.1:8081   demo/index.md und demo/logo.svg einzeln als /app/content/*
-amber-custom     127.0.0.1:8082   dieselben zwei Dateien, dazu demo/custom.css als /app/content/index.css
 ```
 
-Gemountet werden einzelne Dateien, kein Verzeichnis: Läge `./demo` als Ganzes auf `/app/content`
-und `demo/custom.css` zusätzlich verschachtelt darunter auf `/app/content/index.css`, müsste
-Docker für diesen zweiten Mount einen Mountpoint anlegen — und täte das im Host-Verzeichnis
-`demo/`, also im Repository selbst. Einzelne Datei-Mounts umgehen das. Die Demo-Inhalte gibt es
-damit genau einmal im Repository, und der Unterschied zwischen 8081 und 8082 ist exakt das
-Stylesheet.
+Gemountet werden einzelne Dateien statt des Verzeichnisses. Das stammt aus der Zeit, als ein
+zweiter Mount eine Datei darin überlagerte: Docker legt den Mountpunkt dafür im Host-Verzeichnis
+an, also im Repository selbst. Der Fall ist mit dem eigenen Stylesheet entfallen, die Form bleibt —
+sie ist ausdrücklich darüber, was im Container landet.
 
 ## Prüfung
 
 `scripts/smoke.sh` bekommt die beiden neuen Fälle: Mit eingehängter Demo muss die Seite
 gerendertes Markdown enthalten — eine Tabelle ist der eindeutigste Beleg, weil sie in Markdown
-nicht wie HTML aussieht. Mit zusätzlicher `index.css` müssen beide Stylesheets verlinkt und beide
-abrufbar sein. Der bestehende Fall ohne Markdown bleibt, damit der Rückfall auf die
+nicht wie HTML aussieht — und die Syntaxklassen von Chroma müssen auftauchen, sonst ist die
+Färbung wirkungslos. Der bestehende Fall ohne Markdown bleibt, damit der Rückfall auf die
 Umgebungsvariablen nicht unbemerkt kaputtgeht.
 
 ## Auslieferung
