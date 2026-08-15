@@ -7,8 +7,9 @@ set -euo pipefail
 IMAGE="${1:?usage: smoke.sh <image>}"
 DEMO="$(cd "$(dirname "$0")/.." && pwd)/demo"
 NAME="amber-smoke-$$"
+CONTENT="$(mktemp -d)"
 
-cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; }
+cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; rm -rf "$CONTENT"; }
 trap cleanup EXIT
 
 FAILED=0
@@ -61,8 +62,12 @@ check "unknown path serves the page" \
 check "robots header is set" "$(curl -si "$BASE/")" "X-Robots-Tag: noindex, nofollow"
 check "stylesheet is served as css" "$(curl -si "$BASE/style.css")" "text/css"
 
+# Mounted as a copy, not $DEMO itself: Docker has to create a mountpoint file for the nested
+# index.css mount below, and would otherwise create it inside the repository's demo/ directory.
+cp -r "$DEMO"/. "$CONTENT"/
+
 echo "-- with a markdown file"
-BASE="$(start -v "$DEMO:/app/content:ro")"
+BASE="$(start -v "$CONTENT:/app/content:ro")"
 root="$(curl -s "$BASE/")" || true
 check "markdown is rendered to html" "$root" "<table>"
 check "markdown headings survive" "$root" "<h2"
@@ -72,7 +77,9 @@ check "image next to the markdown is served as svg" \
   "$(curl -si "$BASE/content/logo.svg")" "image/svg+xml"
 
 echo "-- with an extra stylesheet"
-BASE="$(start -v "$DEMO:/app/content:ro" -v "$DEMO/custom.css:/app/content/index.css:ro")"
+# The outer mount can't be :ro here: Docker needs to create a mountpoint for the nested
+# index.css mount inside it, which a read-only mount would refuse.
+BASE="$(start -v "$CONTENT:/app/content" -v "$DEMO/custom.css:/app/content/index.css:ro")"
 root="$(curl -s "$BASE/")" || true
 check "default stylesheet is linked" "$root" 'href="/style.css"'
 check "extra stylesheet is linked" "$root" 'href="/content/index.css"'
