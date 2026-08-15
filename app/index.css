@@ -5,6 +5,10 @@
 	--muted: #5c5c56;
 	--line: #dededa;
 	--surface: #f1f1ee;
+	--code-comment: #6b6b61;
+	--code-string: #7a5230;
+	--code-keyword: #6a4a86;
+	--code-number: #2b6660;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +18,10 @@
 		--muted: #9a9a95;
 		--line: #2f2f35;
 		--surface: #1f1f25;
+		--code-comment: #8b8b95;
+		--code-string: #d8ab7c;
+		--code-keyword: #c3a2dd;
+		--code-number: #79c7bd;
 	}
 }
 
@@ -156,4 +164,29 @@ hr {
 	border: 0;
 	border-top: 1px solid var(--line);
 	margin: 2rem 0;
+}
+
+/* Caddy highlights code with Chroma, which emits these token classes.
+   Four tones are enough here; anything unlisted stays body colour. */
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs,
+.chroma .cp, .chroma .cpf {
+	color: var(--code-comment);
+	font-style: italic;
+}
+
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl,
+.chroma .sd, .chroma .s2, .chroma .sh, .chroma .si, .chroma .sx,
+.chroma .sr, .chroma .s1, .chroma .ss, .chroma .se {
+	color: var(--code-string);
+}
+
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp,
+.chroma .kr, .chroma .kt, .chroma .nb, .chroma .bp, .chroma .ow,
+.chroma .nt {
+	color: var(--code-keyword);
+}
+
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi,
+.chroma .mo, .chroma .il, .chroma .no {
+	color: var(--code-number);
 }

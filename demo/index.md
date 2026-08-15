@@ -49,6 +49,20 @@ docker run -p 80:80 \
   elnebuloso/amber:1.2.0
 ```
 
+A second block, with more syntax in it, so the colouring is visible at all:
+
+```yaml
+# every service shares one image
+services:
+  amber:
+    image: elnebuloso/amber:1.2.0
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      APP_NAME: "my site"
+      APP_TEXT_LEAD: coming soon
+```
+
 ## Image
 
 ![the amber logo](logo.svg)
