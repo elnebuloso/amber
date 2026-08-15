@@ -49,6 +49,9 @@ h1 {
 	font-weight: var(--weight-bold);
 	letter-spacing: var(--tracking-tight);
 	line-height: var(--leading-tight);
+	/* A long single-word name would otherwise break mid-syllable at 44px.
+	   APP_LANG is what makes the break points correct rather than arbitrary. */
+	hyphens: auto;
 }
 
 /* the lead: first paragraph after h1 */
@@ -138,6 +141,12 @@ li > input[type="checkbox"] {
 li > input[type="checkbox"]:checked {
 	border-color: var(--accent);
 	background: var(--accent);
+}
+
+/* Forced colours discard background-color, and the fill is the only thing
+   separating a ticked box from an empty one — so the platform draws it there. */
+@media (forced-colors: active) {
+	li > input[type="checkbox"] { appearance: auto; }
 }
 
 summary::marker { color: var(--accent); }
