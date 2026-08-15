@@ -41,14 +41,26 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push
+      - name: Build
         if: steps.version.outputs.new_release_published == 'true'
         uses: docker/build-push-action@v7
         with:
           context: .
           pull: true
-          push: true
+          load: true
           tags: elnebuloso/amber:${{ steps.version.outputs.new_release_version }}
+
+      - name: Smoke test
+        if: steps.version.outputs.new_release_published == 'true'
+        env:
+          IMAGE: elnebuloso/amber:${{ steps.version.outputs.new_release_version }}
+        run: ./scripts/smoke.sh "$IMAGE"
+
+      - name: Push
+        if: steps.version.outputs.new_release_published == 'true'
+        env:
+          IMAGE: elnebuloso/amber:${{ steps.version.outputs.new_release_version }}
+        run: docker push "$IMAGE"
 
       - name: Tag and release
         if: steps.version.outputs.new_release_published == 'true'
