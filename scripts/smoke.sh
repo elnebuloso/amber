@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 # Smoke test for the placeholder image: starts containers from the given image and checks the
-# three ways the page can be produced — environment variables, a markdown file, and a markdown
-# file with an extra stylesheet.
+# two ways the page can be produced — environment variables, or a markdown file.
 set -euo pipefail
 
 IMAGE="${1:?usage: smoke.sh <image>}"
 DEMO="$(cd "$(dirname "$0")/.." && pwd)/demo"
 NAME="amber-smoke-$$"
-CONTENT="$(mktemp -d)"
 
-cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; rm -rf "$CONTENT"; }
+cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; }
 trap cleanup EXIT
 
 FAILED=0
@@ -60,31 +58,21 @@ check "page shows APP_TEXT_LEAD" "$root" "smoke-lead"
 check "unknown path serves the page" \
   "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/does/not/exist")" "200"
 check "robots header is set" "$(curl -si "$BASE/")" "X-Robots-Tag: noindex, nofollow"
-check "stylesheet is served as css" "$(curl -si "$BASE/style.css")" "text/css"
-
-# Mounted as a copy, not $DEMO itself: Docker has to create a mountpoint file for the nested
-# index.css mount below, and would otherwise create it inside the repository's demo/ directory.
-cp -r "$DEMO"/. "$CONTENT"/
+check "stylesheet is served as css" "$(curl -si "$BASE/index.css")" "text/css"
 
 echo "-- with a markdown file"
-BASE="$(start -v "$CONTENT:/app/content:ro")"
+BASE="$(start -v "$DEMO:/app/content:ro")"
 root="$(curl -s "$BASE/")" || true
 check "markdown is rendered to html" "$root" "<table>"
 check "markdown headings survive" "$root" "<h2"
+check "code is highlighted" "$root" 'class="chroma"'
 check "title still comes from APP_NAME" "$root" "<title>smoke-name</title>"
 check_absent "the lead text gives way to the markdown" "$root" "smoke-lead"
-image_src="$(grep -o 'src="[^"]*"' <<<"$root" | head -1 | cut -d'"' -f2)"
+# Ask for the URL the page actually requests, not one we assume. Empty on no match, which the
+# check below then reports as a failure rather than aborting the script.
+image_src="$(grep -o 'src="[^"]*"' <<<"$root" | head -1 | cut -d'"' -f2 || true)"
 check "image next to the markdown is served as svg" \
   "$(curl -si "$BASE/${image_src#/}")" "image/svg+xml"
-
-echo "-- with an extra stylesheet"
-# The outer mount can't be :ro here: Docker needs to create a mountpoint for the nested
-# index.css mount inside it, which a read-only mount would refuse.
-BASE="$(start -v "$CONTENT:/app/content" -v "$DEMO/custom.css:/app/content/index.css:ro")"
-root="$(curl -s "$BASE/")" || true
-check "default stylesheet is linked" "$root" 'href="/style.css"'
-check "extra stylesheet is linked" "$root" 'href="/content/index.css"'
-check "extra stylesheet is served as css" "$(curl -si "$BASE/content/index.css")" "text/css"
 
 [[ $FAILED -eq 0 ]] && printf '\nall checks passed\n' || printf '\nsmoke test failed\n'
 exit $FAILED

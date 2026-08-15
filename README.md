@@ -41,8 +41,7 @@ docker run -p 80:80 \
   elnebuloso/amber:1.2.0
 ```
 
-An `index.css` in the same directory is loaded after the built-in stylesheet, so a few lines are
-enough to change colours. Images next to the markdown file are served as well.
+Images next to the markdown file are served as well.
 
 Everything in the mounted directory is served, not just the markdown — mount a directory that
 contains only what should be public.

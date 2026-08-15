@@ -22,16 +22,3 @@ services:
       - ./demo/logo.svg:/app/content/logo.svg:ro
     environment:
       APP_NAME: amber
-
-  amber-custom:
-    image: amber:local
-    build:
-      context: .
-    ports:
-      - 127.0.0.1:8082:80
-    volumes:
-      - ./demo/index.md:/app/content/index.md:ro
-      - ./demo/logo.svg:/app/content/logo.svg:ro
-      - ./demo/custom.css:/app/content/index.css:ro
-    environment:
-      APP_NAME: amber

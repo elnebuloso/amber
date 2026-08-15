@@ -45,7 +45,7 @@ screen, which is the only way to see whether the line height is comfortable.
 
 ```bash
 docker run -p 80:80 \
-  -v ./content:/app/content:ro \
+  -v "$(pwd)/content:/app/content:ro" \
   elnebuloso/amber:1.2.0
 ```
 
