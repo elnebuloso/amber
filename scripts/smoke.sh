@@ -73,8 +73,9 @@ check "markdown is rendered to html" "$root" "<table>"
 check "markdown headings survive" "$root" "<h2"
 check "title still comes from APP_NAME" "$root" "<title>smoke-name</title>"
 check_absent "the lead text gives way to the markdown" "$root" "smoke-lead"
+image_src="$(grep -o 'src="[^"]*"' <<<"$root" | head -1 | cut -d'"' -f2)"
 check "image next to the markdown is served as svg" \
-  "$(curl -si "$BASE/content/logo.svg")" "image/svg+xml"
+  "$(curl -si "$BASE/${image_src#/}")" "image/svg+xml"
 
 echo "-- with an extra stylesheet"
 # The outer mount can't be :ro here: Docker needs to create a mountpoint for the nested
