@@ -5,11 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{env "APP_NAME"}}</title>
 	<link rel="stylesheet" href="/style.css">
+	{{if fileExists "/content/index.css"}}<link rel="stylesheet" href="/content/index.css">{{end}}
 </head>
 <body>
 <main>
-	<h1>{{env "APP_NAME"}}</h1>
-	<p>{{env "APP_TEXT_LEAD"}}</p>
+	{{if fileExists "/content/index.md"}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME"}}</h1>
+	<p>{{env "APP_TEXT_LEAD"}}</p>{{end}}
 </main>
 </body>
 </html>
