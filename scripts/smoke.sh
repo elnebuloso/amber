@@ -68,8 +68,8 @@ check "markdown is rendered to html" "$root" "<table>"
 check "markdown headings survive" "$root" "<h2"
 check "title still comes from APP_NAME" "$root" "<title>smoke-name</title>"
 check_absent "the lead text gives way to the markdown" "$root" "smoke-lead"
-check "image next to the markdown is served" \
-  "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/content/logo.svg")" "200"
+check "image next to the markdown is served as svg" \
+  "$(curl -si "$BASE/content/logo.svg")" "image/svg+xml"
 
 echo "-- with an extra stylesheet"
 BASE="$(start -v "$DEMO:/app/content:ro" -v "$DEMO/custom.css:/app/content/index.css:ro")"
