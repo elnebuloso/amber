@@ -307,10 +307,39 @@ page produces, which is the entire component set.
 - Quiet ink, italic, a 3px hairline stroke down the left edge, 1rem of padding after it. No
   background tint and no quotation glyph.
 
+### Links
+
+- **Character:** part of the sentence, not a button in disguise.
+- The link takes the colour of its surrounding text; only the underline is tinted, in quiet ink,
+  offset 0.2em from the baseline. On hover the underline takes the text colour — the emphasis
+  arrives on the line, never on the word.
+- **Focus:** a 2px outline in the current text colour, 2px clear of the word, following the small
+  radius. It appears for keyboard navigation only (`:focus-visible`), so a mouse click leaves no
+  ring behind.
+
 ### Images
 
 - Full column width at most, height automatic, `{rounded.md}` corners. No frame, no caption
   styling, no shadow.
+
+### Not yet in the system
+
+Two constructs the renderer can produce have no rule of their own today, and the honest place to
+say so is here rather than in a task list:
+
+- **Task lists** (`- [ ] …`) arrive as a list carrying `<input type="checkbox">`. Without a rule the
+  box sits misaligned beside a bullet that should not be there.
+- **Footnotes** arrive as superscript references plus a trailing `<section class="footnotes">` with
+  its own ordered list and return arrows. They currently inherit list and link styling, which is
+  legible but unconsidered.
+
+Struck-through text, bold and italic are deliberately left to the browser: the defaults are correct
+and a rule would only restate them.
+
+### Named Rules
+
+**The Visible Focus Rule.** Every focusable element shows a focus ring in the current text colour.
+The ring is never removed to tidy up a layout, and it is never traded for a colour change alone.
 
 ## Do's and Don'ts
 
@@ -320,6 +349,7 @@ page produces, which is the entire component set.
 - **Do** express a new distinction with tone, weight or space before reaching for a colour.
 - **Do** let wide content scroll inside its own box.
 - **Do** treat both colour schemes as equally finished; test the dark one before shipping.
+- **Do** give every focusable element a visible `:focus-visible` ring in the current text colour.
 
 ### Don't:
 - **Don't** add a shadow, a boxed card, or an outlined container.

@@ -299,6 +299,11 @@
         "name": "The Flat Rule",
         "body": "No box-shadow, no filter: drop-shadow, no layered card. If something needs to read as separate, it changes tone or gains a hairline.",
         "section": "elevation"
+      },
+      {
+        "name": "The Visible Focus Rule",
+        "body": "Every focusable element shows a focus ring in the current text colour. The ring is never removed to tidy up a layout, and it is never traded for a colour change alone.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -306,7 +311,8 @@
       "Do keep min-width: 0 on the column — it is what makes the scroll rules work at all.",
       "Do express a new distinction with tone, weight or space before reaching for a colour.",
       "Do let wide content scroll inside its own box.",
-      "Do treat both colour schemes as equally finished; test the dark one before shipping."
+      "Do treat both colour schemes as equally finished; test the dark one before shipping.",
+      "Do give every focusable element a visible :focus-visible ring in the current text colour."
     ],
     "donts": [
       "Don't add a shadow, a boxed card, or an outlined container.",
