@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T12:00:00Z",
+  "generatedAt": "2026-08-16T18:00:00Z",
   "title": "Design System: amber",
   "extensions": {
     "colorMeta": {
@@ -132,7 +132,7 @@
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem and hyphenates, so a long single-word APP_NAME breaks at a syllable rather than mid-word." },
-      "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 34ch so it stacks rather than running the full column." },
+      "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 34ch so it stacks rather than running the full column. The selector is h1 + p and stays literal: a plain APP_TEXT_LEAD still renders as one <p> after the <h1> and gets the treatment, but text opening with a heading or a list correctly gets none." },
       "label": { "displayName": "Section Label", "purpose": "Section heads (h2) in the sans face, uppercase and tracked, always beneath the 2px rule." },
       "headline": { "displayName": "Headline", "purpose": "h3 at 20px — the first heading that reads as a heading rather than a label, and the last level with a size of its own." },
       "title": { "displayName": "Title", "purpose": "h4 at body size in bold Ink." },
@@ -151,7 +151,6 @@
       { "name": "hairline", "value": "1px", "purpose": "Dividers: table rows, hr, nested-quote stripe, the footnote block's top line, unchecked checkbox." }
     ],
     "knownLimits": [
-      { "name": "No section label on the environment-variable surface", "detail": "That surface emits only h1 and p, so the system's signature ruled label cannot appear on it. Tracked as TASK-6 in the project backlog; a decision, not drift." },
       { "name": "Scroll containers carry no tabindex", "detail": "pre and table scroll without tabindex=\"0\". Chromium makes scrollable regions focusable itself — measured, pre.chroma is a tab stop with a visible ring — but that is browser behaviour, not a guarantee. Markdown cannot set the attribute and the page carries no JavaScript." },
       { "name": "Footnote reference target size", "detail": "Footnote references measure 6x12px. WCAG 2.2 SC 2.5.8 exempts targets inside a block of text, so this is an ergonomic note rather than a conformance failure." }
     ]
@@ -241,14 +240,14 @@
       "name": "Placeholder Surface",
       "kind": "custom",
       "refersTo": "link",
-      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height. It renders only h1 and p, so the ruled section label cannot appear here.",
+      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height. APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so this surface reaches the full element vocabulary; only APP_NAME is emitted as a literal h1, so a name is never reformatted by its own value.",
       "html": "<div class=\"ds-placeholder\"><h1>amber</h1><p>Simple Docker Placeholder Website</p></div>",
       "css": ".ds-placeholder { display: flex; flex-direction: column; justify-content: center; min-height: 20rem; padding: var(--space-14) var(--space-6) var(--space-16); background: var(--bg); color: var(--fg); font-family: var(--font-sans); } .ds-placeholder h1 { margin: 0 0 var(--space-3); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); hyphens: auto; } .ds-placeholder p { margin: 0; max-width: var(--measure-lead); font-size: var(--text-md); line-height: var(--leading-snug); color: var(--fg-muted); }"
     }
   ],
   "narrative": {
     "northStar": "The Technical Document",
-    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. The signature mark itself is not shared: the environment-variable surface emits only h1 and p, so the ruled section label cannot appear there at all. That is a decision, not drift, and it is tracked in the project backlog as TASK-6.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
+    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. They also reach the same element vocabulary: APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so an operator who writes ## What is coming into an environment variable gets the ruled section label with nothing mounted at all. What separates the two surfaces is now only where the text comes from, not what it can be. The one thing held back from the renderer is APP_NAME: it is set as a literal h1, because a name is a name \u2014 composed into the same markdown document it would come back as <h1><em>star</em> site</h1>, measured, and a page title must not be reformatted by its own value.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
     "keyCharacteristics": [
       "Flat sheet, no shadows, no radii, no gradients, no motion.",
       "Two line weights only: a 2px structural rule and a 1px hairline.",

@@ -174,10 +174,15 @@ look deliberate. The default is a heading and one sentence on an otherwise empty
 window; the richer one is an operator's markdown file rendered whole. The same
 rules serve both because the page column is centred vertically by `min-height`
 rather than `height` — two lines sit in the middle of the viewport, a long
-document grows from the top under the identical stylesheet. The signature mark
-itself is not shared: the environment-variable surface emits only `h1` and `p`,
-so the ruled section label cannot appear there at all. That is a decision, not
-drift, and it is tracked in the project backlog as `TASK-6`.
+document grows from the top under the identical stylesheet. They also reach the
+same element vocabulary: `APP_TEXT_LEAD` runs through the same markdown
+renderer as a mounted file, so an operator who writes `## What is coming` into
+an environment variable gets the ruled section label with nothing mounted at
+all. What separates the two surfaces is now only where the text comes from, not
+what it can be. The one thing held back from the renderer is `APP_NAME`: it is
+set as a literal `h1`, because a name is a name — composed into the same
+markdown document it would come back as `<h1><em>star</em> site</h1>`, measured,
+and a page title must not be reformatted by its own value.
 
 Every value lives in `app/tokens.css` and is authored in OKLCH, light as the
 default and dark applied from `prefers-color-scheme`. Contrast is not a review
@@ -298,7 +303,12 @@ one the operator's words carry.
   than arbitrary because the page language is set from `APP_LANG`.
 - **Lead** (400, 1.125rem / 1.0625rem below 34rem, 1.5, Muted Ink): the first
   paragraph after the title, clamped to 34ch so it breaks into a short stack
-  rather than running the full column.
+  rather than running the full column. The rule is `h1 + p` and it is deliberately
+  literal: a plain sentence in `APP_TEXT_LEAD` still renders as exactly one `<p>`
+  after the `<h1>` and still gets the treatment, but text that opens with a
+  heading or a list does not match and gets no lead treatment. That is correct —
+  the lead is the *first sentence under the title*, not a slot the first block
+  falls into whatever it is. Do not loosen the selector to `h1 + *`.
 - **Label** (700, 0.6875rem, 0.14em, uppercase): section heads (`h2`), set
   under a 2px rule. This is the system's signature mark.
 - **Headline** (700, 1.25rem, -0.01em): `h3`, the first heading that reads as a
@@ -412,15 +422,22 @@ checkbox.
 
 There are no interactive components in this product — no buttons, no inputs, no
 navigation, no forms, by product constraint. What follows is the full set of
-things the page actually renders.
+things the page actually renders, and every one of them is reachable from both
+surfaces: `APP_TEXT_LEAD` and a mounted `/content/index.md` pass through the
+same markdown renderer, so a table, a code block or a ruled section head can
+come from either. The remaining branch in `app/index.html` chooses the *source*
+of the text, not what the text may become. `APP_NAME` is the deliberate
+exception and is emitted as a literal `h1` — the renderer never sees it, so a
+name containing markdown characters stays the name.
 
 ### Section Head
 
 The signature mark. A 2px full-ink rule across the column, 0.75rem of air, then
 the section name in 11px uppercase tracked 0.14em at weight 700. Opens 2.5rem
 above, closes 0.75rem below. Used for `h2` and nothing else; it is the only
-element that draws the heavy rule above a block. It cannot appear on the
-environment-variable surface, which renders only a heading and a sentence.
+element that draws the heavy rule above a block. It is reachable from both
+surfaces — `## What is coming` in `APP_TEXT_LEAD` produces it with nothing
+mounted.
 
 ### Links
 
