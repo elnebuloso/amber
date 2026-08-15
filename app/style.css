@@ -81,7 +81,7 @@ a:hover {
 }
 
 ul, ol {
-	margin: 0;
+	margin-bottom: 0;
 	padding-left: 1.4rem;
 	color: var(--muted);
 }
@@ -93,7 +93,7 @@ li > ol {
 }
 
 blockquote {
-	margin: 0;
+	margin-bottom: 0;
 	padding-left: 1rem;
 	border-left: 3px solid var(--line);
 	color: var(--muted);
@@ -109,7 +109,7 @@ code {
 }
 
 pre {
-	margin: 0;
+	margin-bottom: 0;
 	padding: 0.9rem 1rem;
 	background: var(--surface);
 	border-radius: 6px;
