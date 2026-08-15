@@ -39,7 +39,7 @@ as https://example.com becomes a link on its own.
 | variable | meaning | default |
 | --- | --- | --- |
 | `APP_NAME` | page title and heading | `amber` |
-| `APP_TEXT_LEAD` | the line below the heading | `Simple Docker Placeholder Website` |
+| `APP_TEXT_LEAD` | the line below the heading | `This site is not online yet.` |
 
 ## Quote
 

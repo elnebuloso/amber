@@ -24,7 +24,7 @@ tag makes a deployment non-deterministic. Pick one from
 | variable | default | appears as |
 | --- | --- | --- |
 | `APP_NAME` | `amber` | page title and heading |
-| `APP_TEXT_LEAD` | `Simple Docker Placeholder Website` | the line below the heading |
+| `APP_TEXT_LEAD` | `This site is not online yet.` | the line below the heading |
 
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.

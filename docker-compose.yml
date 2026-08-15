@@ -7,9 +7,8 @@ services:
       - 127.0.0.1:8080:80
     volumes:
       - ./app:/app
-    environment:
-      APP_NAME: amber
-      APP_TEXT_LEAD: Simple Docker Placeholder Website
+    # No variables on purpose: this is the page a stranger gets from `docker run`
+    # with nothing configured, which is the one nobody would otherwise look at.
 
   amber-markdown:
     image: amber:local
