@@ -1,19 +1,11 @@
-version: "3"
-
 services:
-  proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - 80:80
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-
-  main:
+  amber:
     build:
       context: .
+    ports:
+      - 127.0.0.1:8080:80
     volumes:
-      - ./main:/app
+      - ./app:/app
     environment:
-      VIRTUAL_HOST: amber.127.0.0.1.xip.io
       APP_NAME: amber
       APP_TEXT_LEAD: Simple Docker Placeholder Website

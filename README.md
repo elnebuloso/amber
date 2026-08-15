@@ -24,6 +24,7 @@ Simple Docker Placeholder Website
 
 ## development
 ```
-docker-compose up --build --remove-orphans -d
-docker-compose down --remove-orphans
+make up
+make down
+make test
 ```
