@@ -4,13 +4,13 @@
     "ignoreFiles": [],
     "ignoreValues": [
       {
-        "rule": "side-tab",
-        "value": "*",
+        "rule": "design-system-color",
+        "value": "rgb(0, 0, 0)",
         "files": [
-          "app/index.css"
+          "app/index.html"
         ],
-        "createdAt": "2026-08-15T22:04:22.124Z",
-        "reason": "User confirmed: the stroke marks a blockquote, not a card accent; documented as a system rule in DESIGN.md"
+        "createdAt": "2026-08-15T23:03:14.399Z",
+        "reason": "Caddy template judged without its stylesheet: main inherits the browser default because app/style.css is not applied to the file in isolation; the served page paints --fg"
       }
     ]
   }
