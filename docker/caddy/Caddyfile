@@ -1,0 +1,7 @@
+:80 {
+	root * /app
+	header X-Robots-Tag "noindex, nofollow"
+	templates
+	file_server
+	try_files {path} /index.html
+}
