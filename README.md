@@ -1,35 +1,44 @@
-<img src="https://raw.githubusercontent.com/elnebuloso/amber/master/logo.png" width="100%"/>
-
 # amber
 
-![Release](https://github.com/elnebuloso/amber/workflows/Release/badge.svg)
+[![Release](https://github.com/elnebuloso/amber/actions/workflows/release.yml/badge.svg)](https://github.com/elnebuloso/amber/actions/workflows/release.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/elnebuloso/amber.svg)](https://hub.docker.com/r/elnebuloso/amber)
-[![GitHub](https://img.shields.io/github/license/elnebuloso/amber.svg)](https://github.com/elnebuloso/amber)
+[![License](https://img.shields.io/github/license/elnebuloso/amber.svg)](https://github.com/elnebuloso/amber)
 
-Simple Docker Placeholder Website
+A placeholder website in a container. Point a domain at it while the real site does not
+exist yet — every URL answers with the same page.
 
-## github
+## usage
 
-- https://github.com/elnebuloso/amber
+```
+docker run -p 80:80 \
+  -e APP_NAME="my site" \
+  -e APP_TEXT_LEAD="coming soon" \
+  elnebuloso/amber:1.1.0
+```
 
-## docker
-
-- https://hub.docker.com/r/elnebuloso/amber
-- https://hub.docker.com/r/elnebuloso/amber/tags?page=1&ordering=last_updated
+Images carry the full version as their only tag — there is no `latest`, because a moving
+tag makes a deployment non-deterministic. Pick one from
+[the tag list](https://hub.docker.com/r/elnebuloso/amber/tags).
 
 ## environment variables
 
-- APP_NAME, default `amber`
-- APP_TEXT_LEAD, default `Simple Docker Placeholder Website`
-- APP_ENV no longer exists. The `X-Robots-Tag: noindex, nofollow` header is sent on every response, always.
+| variable | default | appears as |
+| --- | --- | --- |
+| `APP_NAME` | `amber` | page title and heading |
+| `APP_TEXT_LEAD` | `Simple Docker Placeholder Website` | the line below the heading |
 
-## document root
-
-Content is served from `/app`. `index.html` is the page.
+Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
+a search index — least of all under the domain the real site is about to use.
 
 ## development
+
 ```
-make up
+make up      # serves on http://127.0.0.1:8080
 make down
-make test
+make test    # builds the image and runs the smoke test against it
 ```
+
+## links
+
+- https://github.com/elnebuloso/amber
+- https://hub.docker.com/r/elnebuloso/amber
