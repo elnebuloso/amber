@@ -19,8 +19,13 @@ Simple Docker Placeholder Website
 
 ## environment variables
 
-- APP_NAME
-- APP_TEXT_LEAD
+- APP_NAME, default `amber`
+- APP_TEXT_LEAD, default `Simple Docker Placeholder Website`
+- APP_ENV no longer exists. The `X-Robots-Tag: noindex, nofollow` header is sent on every response, always.
+
+## document root
+
+Content is served from `/app`. `index.html` is the page.
 
 ## development
 ```
