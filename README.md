@@ -4,8 +4,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/elnebuloso/amber.svg)](https://hub.docker.com/r/elnebuloso/amber)
 [![License](https://img.shields.io/github/license/elnebuloso/amber.svg)](https://github.com/elnebuloso/amber)
 
-A placeholder website in a container. Point a domain at it while the real site does not
-exist yet — every URL answers with the same page.
+A placeholder website in a container. Point a domain at it until the real site exists.
 
 ## usage
 
