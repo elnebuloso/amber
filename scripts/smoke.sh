@@ -61,6 +61,8 @@ check "robots header is set" "$(curl -si "$BASE/")" "X-Robots-Tag: noindex, nofo
 check "stylesheet is served as css" "$(curl -si "$BASE/index.css")" "text/css"
 
 echo "-- with a markdown file"
+# One plain directory mount, deliberately. Layering a second mount onto a file inside it makes
+# Docker create that mount point in the host directory — which once left a stray file in demo/.
 BASE="$(start -v "$DEMO:/app/content:ro")"
 root="$(curl -s "$BASE/")" || true
 check "markdown is rendered to html" "$root" "<table>"
