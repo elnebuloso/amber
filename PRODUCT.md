@@ -47,7 +47,8 @@ an unchanged configuration.
 
 Confirmed capabilities:
 
-- `APP_NAME` and `APP_TEXT_LEAD` render a heading and one sentence.
+- `APP_NAME` renders as the heading, `APP_TEXT_LEAD` as markdown below it — so the same page the
+  mounted file produces is reachable from a `docker run` line, without mounting anything.
 - A mounted `/app/content/index.md` replaces that page and is rendered as GitHub-flavoured
   markdown, including footnotes and syntax-highlighted code. `APP_NAME` stays the tab title.
 - Files next to the markdown, such as images, are served.

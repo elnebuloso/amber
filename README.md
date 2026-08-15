@@ -24,8 +24,23 @@ tag makes a deployment non-deterministic. Pick one from
 | variable | default | appears as |
 | --- | --- | --- |
 | `APP_NAME` | `amber` | page title and heading |
-| `APP_TEXT_LEAD` | `This site is not online yet.` | the line below the heading |
+| `APP_TEXT_LEAD` | `This site is not online yet.` | the text below the heading |
 | `APP_LANG` | `en` | the page's language, for screen readers and hyphenation |
+
+`APP_TEXT_LEAD` is rendered as markdown, so a plain sentence stays a plain sentence and anything
+more is available without mounting a file:
+
+```
+docker run -p 80:80 \
+  -e APP_NAME="my site" \
+  -e APP_TEXT_LEAD=$'Coming in spring. Write to [hello@example.com](mailto:hello@example.com).\n\n## What is coming\n\nA shop, and a page about the workshop.' \
+  elnebuloso/amber:1.2.0
+```
+
+Raw HTML in it passes through unfiltered, as it does in a mounted file. A `{{` is **not** executed
+here — unlike in a mounted file, the value is inserted rather than evaluated.
+
+`APP_NAME` is never treated as markdown, so a name containing `*` or `_` stays as written.
 
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.

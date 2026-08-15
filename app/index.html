@@ -10,7 +10,7 @@
 <body>
 <main>
 	{{if fileExists "/content/index.md"}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME"}}</h1>
-	<p>{{env "APP_TEXT_LEAD"}}</p>{{end}}
+	{{markdown (env "APP_TEXT_LEAD")}}{{end}}
 </main>
 </body>
 </html>
