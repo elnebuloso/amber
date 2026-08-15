@@ -51,6 +51,8 @@ Confirmed capabilities:
 - A mounted `/app/content/index.md` replaces that page and is rendered as GitHub-flavoured
   markdown, including footnotes and syntax-highlighted code. `APP_NAME` stays the tab title.
 - Files next to the markdown, such as images, are served.
+- The page's monospace face ships inside the image and is served from it, so code and labels look
+  the same everywhere without the page reaching for a font server.
 - Every URL, known or not, answers 200 with the page.
 - `X-Robots-Tag: noindex, nofollow` is sent on every response, always.
 
