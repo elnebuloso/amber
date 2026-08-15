@@ -34,8 +34,8 @@ main {
 }
 
 ::selection {
-	background: var(--bg-note);
-	color: var(--fg);
+	background: var(--accent-ink);
+	color: var(--bg);
 }
 
 :focus-visible {
@@ -257,10 +257,12 @@ sup a, .footnote-backref { text-decoration: none; }
 
 sup a { font-size: var(--text-xs); }
 
+/* A hairline, not the section rule: the heavy rule always carries an uppercase
+   label, and the renderer gives this block none. */
 .footnotes {
 	margin-top: var(--space-8);
 	padding-top: var(--space-3);
-	border-top: var(--rule) solid var(--border-strong);
+	border-top: var(--hairline) solid var(--border);
 	font-size: var(--text-sm);
 	color: var(--fg-subtle);
 }

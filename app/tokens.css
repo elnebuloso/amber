@@ -45,14 +45,11 @@
 	--tracking-tight: -0.03em;
 	--tracking-snug: -0.01em;
 	--tracking-label: 0.14em;
-	--tracking-wide: 0.16em;
 
-	--weight-regular: 400;
 	--weight-medium: 500;
 	--weight-bold: 700;
 
 	/* ---- space ---- */
-	--space-1: 0.25rem;
 	--space-2: 0.5rem;
 	--space-3: 0.75rem;
 	--space-4: 1rem;
@@ -101,13 +98,13 @@
 
 		--fg: oklch(0.93 0.004 250);
 		--fg-muted: oklch(0.76 0.005 250);
-		--fg-subtle: oklch(0.76 0.005 250);
+		--fg-subtle: oklch(0.71 0.005 250);
 		--fg-faint: oklch(0.66 0.005 250);
 		--fg-note: oklch(0.88 0.01 60);
 
 		--accent: oklch(0.8 0.13 50);
 		--accent-ink: oklch(0.82 0.12 50);
-		--accent-code: oklch(0.82 0.12 50);
+		--accent-code: oklch(0.87 0.11 50);
 
 		--border-strong: oklch(0.93 0.004 250);
 		--border: oklch(0.28 0.006 250);
