@@ -1,0 +1,120 @@
+/* amber — design tokens
+ * Single source of truth for colour, type and spacing.
+ * Light is the default; dark is applied from prefers-color-scheme.
+ * All colours are authored in oklch. Text tones are held at or above
+ * WCAG AA against their own surface in both schemes.
+ */
+
+/* Shipped with the image rather than fetched: the page must render complete
+   with the machine offline. */
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-500.woff2") format("woff2");
+}
+
+:root {
+	color-scheme: light dark;
+
+	/* ---- type ---- */
+	--font-sans: Helvetica, "Helvetica Neue", Arial, sans-serif;
+	--font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+	--text-xs: 0.6875rem;    /* 11px — labels, table heads, captions */
+	--text-sm: 0.8125rem;    /* 13px — code, footnotes */
+	--text-base: 0.96875rem; /* 15.5px — body */
+	--text-md: 1.125rem;     /* 18px — lead */
+	--text-lg: 1rem;         /* 16px — h3 */
+	--text-xl: 2.75rem;      /* 44px — h1 */
+
+	--leading-tight: 1.05;
+	--leading-snug: 1.5;
+	--leading-body: 1.62;
+	--leading-code: 1.7;
+
+	--tracking-tight: -0.03em;
+	--tracking-snug: -0.01em;
+	--tracking-label: 0.14em;
+	--tracking-wide: 0.16em;
+
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-bold: 700;
+
+	/* ---- space ---- */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-14: 3.5rem;
+	--space-16: 4rem;
+
+	--measure: 40rem;      /* page column */
+	--measure-lead: 34ch;  /* lead sentence */
+	--rule: 2px;           /* section rule */
+	--hairline: 1px;
+
+	/* ---- colour: light ---- */
+	--bg: oklch(0.99 0.002 250);
+	--bg-sunken: oklch(0.965 0.004 250);  /* code block */
+	--bg-note: oklch(0.965 0.008 60);     /* blockquote */
+
+	--fg: oklch(0.2 0.005 250);        /* headings, body */
+	--fg-muted: oklch(0.38 0.005 250); /* lead */
+	--fg-subtle: oklch(0.42 0.005 250);/* nested list, footnote */
+	--fg-faint: oklch(0.55 0.005 250); /* caption, struck text */
+	--fg-note: oklch(0.33 0.02 60);    /* blockquote text */
+
+	--accent: oklch(0.58 0.14 45);      /* checkbox */
+	--accent-ink: oklch(0.5 0.14 45);   /* links, footnote refs */
+	--accent-code: oklch(0.45 0.13 45); /* inline code */
+
+	--border-strong: oklch(0.2 0.005 250);
+	--border: oklch(0.91 0.004 250);
+
+	/* code tones — four, measured against --bg-sunken */
+	--code-comment: oklch(0.54 0.008 250);
+	--code-keyword: oklch(0.46 0.14 300);
+	--code-number: oklch(0.5 0.13 40);
+	--code-string: oklch(0.44 0.11 155);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: oklch(0.18 0.006 250);
+		--bg-sunken: oklch(0.225 0.006 250);
+		--bg-note: oklch(0.25 0.02 60);
+
+		--fg: oklch(0.93 0.004 250);
+		--fg-muted: oklch(0.76 0.005 250);
+		--fg-subtle: oklch(0.76 0.005 250);
+		--fg-faint: oklch(0.66 0.005 250);
+		--fg-note: oklch(0.88 0.01 60);
+
+		--accent: oklch(0.8 0.13 50);
+		--accent-ink: oklch(0.82 0.12 50);
+		--accent-code: oklch(0.82 0.12 50);
+
+		--border-strong: oklch(0.93 0.004 250);
+		--border: oklch(0.28 0.006 250);
+
+		--code-comment: oklch(0.66 0.008 250);
+		--code-keyword: oklch(0.78 0.12 300);
+		--code-number: oklch(0.82 0.11 45);
+		--code-string: oklch(0.8 0.11 155);
+	}
+}

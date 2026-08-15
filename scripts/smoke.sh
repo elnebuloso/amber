@@ -58,7 +58,10 @@ check "page shows APP_TEXT_LEAD" "$root" "smoke-lead"
 check "unknown path serves the page" \
   "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/does/not/exist")" "200"
 check "robots header is set" "$(curl -si "$BASE/")" "X-Robots-Tag: noindex, nofollow"
-check "stylesheet is served as css" "$(curl -si "$BASE/index.css")" "text/css"
+check "tokens are served as css" "$(curl -si "$BASE/tokens.css")" "text/css"
+check "styles are served as css" "$(curl -si "$BASE/style.css")" "text/css"
+check "the mono face is served from the image" \
+  "$(curl -sI "$BASE/fonts/ibm-plex-mono-400.woff2")" "font/woff2"
 
 echo "-- with a markdown file"
 # One plain directory mount, deliberately. Layering a second mount onto a file inside it makes
