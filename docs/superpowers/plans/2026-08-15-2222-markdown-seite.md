@@ -553,8 +553,8 @@ services:
     ports:
       - 127.0.0.1:8081:80
     volumes:
-      - ./app:/app
-      - ./demo:/app/content:ro
+      - ./demo/index.md:/app/content/index.md:ro
+      - ./demo/logo.svg:/app/content/logo.svg:ro
     environment:
       APP_NAME: amber
 
@@ -565,12 +565,24 @@ services:
     ports:
       - 127.0.0.1:8082:80
     volumes:
-      - ./app:/app
-      - ./demo:/app/content:ro
+      - ./demo/index.md:/app/content/index.md:ro
+      - ./demo/logo.svg:/app/content/logo.svg:ro
       - ./demo/custom.css:/app/content/index.css:ro
     environment:
       APP_NAME: amber
 ```
+
+Zwei Dinge daran sind bewusst so und dürfen nicht „vereinfacht" werden:
+
+**Einzelne Dateien statt des Ordners.** Hängt man `./demo` als Ganzes auf `/app/content` und legt dann
+`./demo/custom.css` auf `/app/content/index.css`, muss Docker den inneren Mountpunkt anlegen — und
+weil `/app/content` derselbe Host-Ordner ist, entsteht eine leere `demo/index.css` **im
+Repository**. Das ist beim Rauchtest tatsächlich passiert. Mit Einzeldatei-Mounts gibt es kein
+Verzeichnis, das sich selbst überlagert; `/app/content` entsteht im Container.
+
+**Kein `./app:/app` bei den beiden Demo-Diensten.** Derselbe Grund: Läge `/app` auf dem
+Arbeitsverzeichnis, würden die content-Mounts wieder Dateien auf dem Host anlegen. Der erste Dienst
+behält den Mount, weil man dort am Template arbeitet; die Demo-Dienste zeigen das fertige Image.
 
 - [ ] **Schritt 2: README ergänzen**
 
