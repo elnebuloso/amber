@@ -26,7 +26,7 @@ jobs:
         uses: cycjimmy/semantic-release-action@v6
         with:
           dry_run: true
-          extra_plugins: conventional-changelog-conventionalcommits
+          extra_plugins: conventional-changelog-conventionalcommits@9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,6 +66,6 @@ jobs:
         if: steps.version.outputs.new_release_published == 'true'
         uses: cycjimmy/semantic-release-action@v6
         with:
-          extra_plugins: conventional-changelog-conventionalcommits
+          extra_plugins: conventional-changelog-conventionalcommits@9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
