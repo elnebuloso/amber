@@ -6,7 +6,7 @@ help: ## Show the available targets
 build: ## Build the image as amber:dev
 	docker build --tag amber:dev .
 
-up: ## Start the site on http://127.0.0.1:8080
+up: ## Start 8080 plain, 8081 markdown, 8082 markdown with a custom stylesheet
 	docker compose up --build --remove-orphans -d
 
 down: ## Stop the site
