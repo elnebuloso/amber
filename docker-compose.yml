@@ -18,7 +18,9 @@ services:
     ports:
       - 127.0.0.1:8081:80
     volumes:
-      - ./demo/index.md:/app/content/index.md:ro
-      - ./demo/image.svg:/app/content/image.svg:ro
+      # The image carries an empty /app/content, because docker creates a missing
+      # mount point — and with ./app mounted over /app that lands in the source tree.
+      - ./app:/app
+      - ./demo:/app/content:ro
     environment:
       APP_NAME: amber
