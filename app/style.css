@@ -198,8 +198,13 @@ summary {
 	cursor: pointer;
 }
 
+/* A block, so an over-wide table scrolls inside itself the way a code block
+   already does. Table cells do not shrink below their longest word, so nothing
+   in the text can make the document scroll sideways instead. */
 table {
+	display: block;
 	width: 100%;
+	overflow-x: auto;
 	border-collapse: collapse;
 	font-size: var(--text-base);
 }
