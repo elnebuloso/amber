@@ -33,7 +33,7 @@ check() {
   fi
 }
 
-root="$(curl -s "$BASE/")"
+root="$(curl -s "$BASE/")" || true
 check "page shows APP_NAME" "$root" "smoke-name"
 check "page shows APP_TEXT_LEAD" "$root" "smoke-lead"
 check "unknown path serves the page" \
