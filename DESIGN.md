@@ -177,8 +177,14 @@ anything not in the four groups keeps body colour. Adding a fifth means arguing 
 it more than it needs quiet.
 
 **The Measured Contrast Rule.** Whenever a colour changes, its contrast against its own ground is
-measured in both schemes and held at or above 4.5:1. The lowest value in the system today is 4.76
-(comment on sunken surface, light). No colour ships on the assumption that it "looks fine".
+measured in both schemes and held at or above 4.5:1 for anything carrying text. The lowest value in
+the system today is 4.76 (comment on sunken surface, light). No colour ships on the assumption that
+it "looks fine".
+
+**The Decorative Hairline Rule.** The hairline sits at roughly 1.3:1 against the page and is meant
+to. It is decoration, never information: a quote is also italic and indented, a table also has its
+structure in the markup. Nothing may be encoded in that line alone — the day a distinction depends
+on it, it stops being a hairline and needs a contrast of its own.
 
 ## Typography
 
@@ -322,19 +328,34 @@ page produces, which is the entire component set.
 - Full column width at most, height automatic, `{rounded.md}` corners. No frame, no caption
   styling, no shadow.
 
-### Not yet in the system
+### Task Lists
 
-Two constructs the renderer can produce have no rule of their own today, and the honest place to
-say so is here rather than in a task list:
+- **Character:** a list that happens to carry state, not a form.
+- A task item arrives as an ordinary `<li>` with a leading `<input type="checkbox">` and **no
+  class**, so the bullet has to be removed per item — an ordinary item may sit in the same list and
+  keeps its marker. The item pulls back by the list's own indent (1.4rem) so the checkbox stands
+  where the bullet stood, and the box takes quiet ink through `accent-color`.
 
-- **Task lists** (`- [ ] …`) arrive as a list carrying `<input type="checkbox">`. Without a rule the
-  box sits misaligned beside a bullet that should not be there.
-- **Footnotes** arrive as superscript references plus a trailing `<section class="footnotes">` with
-  its own ordered list and return arrows. They currently inherit list and link styling, which is
-  legible but unconsidered.
+### Footnotes
 
-Struck-through text, bold and italic are deliberately left to the browser: the defaults are correct
-and a rule would only restate them.
+- **Character:** a quiet apparatus that never competes with the sentence carrying it.
+- The reference is a superscript digit; its underline is removed, because an underlined digit reads
+  as part of the sentence rather than as a marker.
+- The collected notes arrive as `<div class="footnotes">` with a rule above them, set one step back
+  from the body at label size in quiet ink. The return arrow loses its underline for the same reason
+  as the reference.
+
+### Disclosures
+
+- Raw HTML passes through the renderer, which makes `<details>`/`<summary>` a usable idiom. The
+  summary takes heading weight, warm ink and a pointer; the browser's own disclosure triangle is
+  kept. Nothing else is styled — the body inside inherits the page.
+
+### Deliberately left to the browser
+
+Struck-through text, bold and italic keep their defaults: they are correct, and a rule would only
+restate them. Definition lists have no rule because the renderer does not produce them — the
+extension is not enabled, and the markdown stays a paragraph with a colon in it.
 
 ### Named Rules
 

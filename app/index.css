@@ -106,12 +106,34 @@ li > ol {
 	margin-top: 0.35rem;
 }
 
+/* A task list item carries no class, only the checkbox — so the marker has to go
+   per item, because an ordinary item may sit in the same list. */
+li:has(> input[type="checkbox"]) {
+	list-style: none;
+	margin-left: -1.4rem;
+}
+
+li > input[type="checkbox"] {
+	margin-right: 0.45rem;
+	accent-color: var(--muted);
+}
+
 blockquote {
 	margin-bottom: 0;
 	padding-left: 1rem;
 	border-left: 3px solid var(--line);
 	color: var(--muted);
 	font-style: italic;
+}
+
+blockquote blockquote {
+	margin-top: 1.25rem;
+}
+
+summary {
+	cursor: pointer;
+	font-weight: 600;
+	color: var(--text);
 }
 
 code {
@@ -170,6 +192,18 @@ hr {
 	border: 0;
 	border-top: 1px solid var(--line);
 	margin: 2rem 0;
+}
+
+/* Footnote markers are digits and arrows, not words: an underline would read as
+   part of the sentence. The collected notes sit a step back from the body. */
+.footnote-ref,
+.footnote-backref {
+	text-decoration: none;
+}
+
+.footnotes {
+	font-size: 0.95rem;
+	color: var(--muted);
 }
 
 /* Caddy highlights code with Chroma, which emits these token classes.

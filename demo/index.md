@@ -7,7 +7,8 @@ stylesheet has to cope with.
 
 A paragraph with *emphasis*, **strong emphasis**, `inline code`, a [link](https://example.com)
 and ~~struck through~~ words. A second sentence keeps the line long enough to wrap on a narrow
-screen, which is the only way to see whether the line height is comfortable.
+screen, which is the only way to see whether the line height is comfortable. A bare address such
+as https://example.com becomes a link on its own.
 
 ### Third level
 
@@ -29,6 +30,10 @@ screen, which is the only way to see whether the line height is comfortable.
 2. another one
 3. a third
 
+- [x] a task that is done
+- [ ] a task that is not
+- an ordinary item in the same list
+
 ## Table
 
 | variable | meaning | default |
@@ -40,6 +45,8 @@ screen, which is the only way to see whether the line height is comfortable.
 
 > A placeholder has no business in a search index — least of all under the domain the real site
 > is about to use.
+>
+> > A quote inside a quote, because markdown allows it.
 
 ## Code
 
@@ -67,6 +74,24 @@ services:
 
 ![the amber logo](logo.svg)
 
+## Collapsible
+
+Raw HTML passes through, which makes the usual disclosure idiom work:
+
+<details>
+<summary>What this page is for</summary>
+
+It answers under a domain whose real site does not exist yet, and it goes away again.
+
+</details>
+
+## Footnotes
+
+Footnotes are supported too,[^why] including a second one further along.[^where]
+
 ---
 
 The horizontal rule above is part of the test too.
+
+[^why]: The reference is superscript; the note itself is collected at the end of the page.
+[^where]: Together with a link back to where it was cited.

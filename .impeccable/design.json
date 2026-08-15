@@ -247,6 +247,22 @@
       "description": "Carries the surrounding colour; only the underline changes on hover.",
       "html": "<p class=\"ds-body\">Written up in the <a class=\"ds-link\" href=\"#\">readme</a>.</p>",
       "css": ".ds-link { color: inherit; text-decoration-color: var(--muted, #5c5c56); text-underline-offset: 0.2em; } .ds-link:hover { text-decoration-color: currentColor; } .ds-link:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }"
+    },
+    {
+      "name": "Task List",
+      "kind": "custom",
+      "refersTo": "typography.body",
+      "description": "A list carrying state. The marker is removed per item, because an ordinary item may sit in the same list.",
+      "html": "<ul class=\"ds-list ds-task-list\"><li><input type=\"checkbox\" checked disabled> a task that is done</li><li><input type=\"checkbox\" disabled> a task that is not</li><li>an ordinary item in the same list</li></ul>",
+      "css": ".ds-task-list { margin: 0; padding-left: 1.4rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--muted, #5c5c56); line-height: 1.6; } .ds-task-list li + li { margin-top: 0.35rem; } .ds-task-list li:has(> input[type=\"checkbox\"]) { list-style: none; margin-left: -1.4rem; } .ds-task-list li > input[type=\"checkbox\"] { margin-right: 0.45rem; accent-color: var(--muted, #5c5c56); }"
+    },
+    {
+      "name": "Footnotes",
+      "kind": "custom",
+      "refersTo": "typography.label",
+      "description": "Superscript reference in the sentence, collected notes at the end; both markers lose their underline so a digit does not read as a word.",
+      "html": "<p class=\"ds-body\">Footnotes are supported too,<sup><a class=\"ds-footnote-ref\" href=\"#fn\">1</a></sup> including a second one.</p><div class=\"ds-footnotes\"><hr class=\"ds-rule\"><ol><li id=\"fn\"><p>The reference is superscript; the note itself is collected at the end. <a class=\"ds-footnote-backref\" href=\"#\">↩︎</a></p></li></ol></div>",
+      "css": ".ds-footnotes { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #5c5c56); } .ds-footnotes ol { padding-left: 1.4rem; } .ds-footnotes p { margin: 0; } .ds-footnote-ref, .ds-footnote-backref { color: inherit; text-decoration: none; } .ds-footnote-ref:focus-visible, .ds-footnote-backref:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 4px; } .ds-rule { border: 0; border-top: 1px solid var(--line, #dededa); margin: 2rem 0; }"
     }
   ],
   "narrative": {
@@ -304,6 +320,11 @@
         "name": "The Visible Focus Rule",
         "body": "Every focusable element shows a focus ring in the current text colour. The ring is never removed to tidy up a layout, and it is never traded for a colour change alone.",
         "section": "components"
+      },
+      {
+        "name": "The Decorative Hairline Rule",
+        "body": "The hairline sits at roughly 1.3:1 against the page and is meant to. It is decoration, never information: a quote is also italic and indented, a table also has its structure in the markup. Nothing may be encoded in that line alone — the day a distinction depends on it, it stops being a hairline and needs a contrast of its own.",
+        "section": "colors"
       }
     ],
     "dos": [
