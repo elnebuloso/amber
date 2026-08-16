@@ -5,4 +5,13 @@
 	templates
 	file_server
 	try_files {path} /content{path} /index.html
+
+	# A broken {{ in the mounted markdown fails the template, and without this the
+	# visitor gets the browser's own error screen on every url. The status stays
+	# 500 so the operator still sees the failure.
+	handle_errors {
+		rewrite * /index.html
+		templates
+		file_server
+	}
 }

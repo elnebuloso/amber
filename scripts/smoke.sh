@@ -7,7 +7,8 @@ IMAGE="${1:?usage: smoke.sh <image>}"
 DEMO="$(cd "$(dirname "$0")/.." && pwd)/demo"
 NAME="amber-smoke-$$"
 
-cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; }
+BROKEN="$(mktemp -d)"
+cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; rm -rf "$BROKEN"; }
 trap cleanup EXIT
 
 FAILED=0
@@ -85,6 +86,15 @@ check_absent "the lead text gives way to the markdown" "$root" "smoke-lead"
 image_src="$(grep -o 'src="[^"]*"' <<<"$root" | head -1 | cut -d'"' -f2 || true)"
 check "image next to the markdown is served as svg" \
   "$(curl -si "$BASE/${image_src#/}")" "image/svg+xml"
+
+echo "-- with markdown the template engine cannot parse"
+printf '# prices\n\nbread {{ 5\n' >"$BROKEN/index.md"
+BASE="$(start -v "$BROKEN:/app/content:ro")"
+check "a broken template still answers with a page" "$(curl -s "$BASE/")" "smoke-name"
+check "and keeps saying it failed" \
+  "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/")" "500"
+check "every url gets that page, not an empty body" \
+  "$(curl -s "$BASE/does/not/exist")" "smoke-lead"
 
 [[ $FAILED -eq 0 ]] && printf '\nall checks passed\n' || printf '\nsmoke test failed\n'
 exit $FAILED

@@ -9,7 +9,10 @@
 </head>
 <body>
 <main>
-	{{if fileExists "/content/index.md"}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME" | html}}</h1>
+	{{/* The status code is set only while an error is being handled. Without that
+	     guard the error route would render the same broken file again and fail
+	     again, which is how a broken {{ ends up serving an empty body. */}}
+	{{if and (fileExists "/content/index.md") (eq (placeholder "http.error.status_code") "")}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME" | html}}</h1>
 	{{markdown (env "APP_TEXT_LEAD")}}{{end}}
 </main>
 </body>
