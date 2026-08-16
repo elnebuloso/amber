@@ -134,7 +134,9 @@ li > input[type="checkbox"] {
 	appearance: none;
 	width: 0.85em;
 	height: 0.85em;
-	margin: 0 var(--space-2) 0 0;
+	/* Box plus this gap has to consume the item's pull-back, or the label sits
+	   further right than the labels of the ordinary items beside it. */
+	margin: 0 var(--space-1) 0 0;
 	vertical-align: -0.05em;
 	border: var(--hairline) solid var(--border-strong);
 	background: none;
