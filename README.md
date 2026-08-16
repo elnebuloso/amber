@@ -43,7 +43,8 @@ here — unlike in a mounted file, the value is inserted rather than evaluated.
 `APP_NAME` is never treated as markdown, so a name containing `*` or `_` stays as written.
 
 Setting `APP_TEXT_LEAD` to an empty string gives a page with the name and nothing else — the
-default applies when the variable is unset, not when it is empty.
+default applies when the variable is unset, not when it is empty. The same holds for `APP_NAME`:
+empty gives an empty title and an empty heading, unset gives the default back.
 
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.
@@ -56,6 +57,10 @@ instead of the environment variables. `APP_NAME` stays the browser tab title.
 Start the file with a `# ` heading. That heading is the only place the page says whose it is —
 `APP_NAME` does not appear in the page itself in this mode, so a file that opens with `##` or with
 a paragraph leaves the visitor without a name to read.
+
+Set `APP_NAME`, `APP_TEXT_LEAD` and `APP_LANG` here as well. `APP_LANG` still sets the page
+language for a mounted file, and the other two are what a visitor reads if the file ever fails to
+render — left unset, that page says `amber`, which is the name of the image and not of the site.
 
 ```
 docker run -p 80:80 \
