@@ -30,7 +30,7 @@ colors:
   accent-dark: "oklch(0.8 0.13 50)"
   accent-ink-dark: "oklch(0.82 0.12 50)"
   accent-code-dark: "oklch(0.87 0.11 50)"
-  border-strong-dark: "oklch(0.93 0.004 250)"
+  border-strong-dark: "oklch(0.76 0.004 250)"
   border-dark: "oklch(0.28 0.006 250)"
   code-comment-dark: "oklch(0.66 0.008 250)"
   code-keyword-dark: "oklch(0.78 0.12 300)"
@@ -243,8 +243,16 @@ in lightness from fill to link to code, dark steps up.
   quietest tone that still clears AA.
 - **Note Ink** (`{colors.fg-note}`): text inside the note panel, warmed to
   hue 60 to belong to its own surface.
-- **Rule** (`{colors.border-strong}`): the 2px structural rule; the same value
-  as Ink, so a section head and its rule are one mark.
+- **Rule** (`{colors.border-strong}`): the 2px structural rule, and the
+  hairline outline of an unchecked checkbox. In light it is the same value as
+  Ink, so a section head and its rule read as one mark. Dark does not repeat
+  that literally: at Ink's own lightness seven near-white bands bloomed against
+  the dark page and read louder than the 11px labels beneath them, so the dark
+  rule sits lower, at 8.73:1 against the page — the weight of secondary text
+  rather than of a heading. One mark in light, an approximation of it in dark.
+  8.73:1 also clears WCAG 1.4.11's 3:1 for the checkbox outline, which is a
+  component boundary rather than text; that number is what makes the dimming
+  safe rather than a matter of taste.
 - **Hairline** (`{colors.border}`): 1px dividers — table row lines, `hr`, the
   nested-quote stripe, the footnote block's top line, an unchecked checkbox.
 
@@ -272,11 +280,19 @@ bites again: the first selection highlight used `{colors.accent}` and measured
 dark. A value is never lightened to make a design read better.
 
 **The Mirrored Scheme Rule.** Dark is not a separate palette, it is the same
-relationships inverted. Every tone that sits one step from its neighbour in
-light sits one step from it in dark too. Two tokens once collapsed onto their
-neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember
-Ink — which silently deleted distinctions the light scheme still made. When a
-token moves, check its neighbours in the *other* scheme.
+*relationships* inverted — which is not the same as the same lightness values.
+Every tone that sits one step from its neighbour in light sits one step from it
+in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly
+that reading. Two tokens once collapsed onto their neighbours in dark only —
+Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted
+distinctions the light scheme still made. When a token moves, check its
+neighbours in the *other* scheme. The heavy rule is the documented exception,
+and the reason is stated: mirroring Ink's lightness literally made a line that
+measured almost identically (17.66:1 light, 15.28:1 dark) read far louder,
+because a light line on a dark ground blooms and a dark line on a light ground
+does not. Where perception and arithmetic disagree, perception decides which
+value ships and the number is measured afterwards to prove it is safe — never
+the other way round.
 
 **The One Warm Hue Rule.** Outside code blocks the page carries a single warm
 family (hue 45–60): the accent and the note tint. A second accent hue is not
@@ -476,7 +492,13 @@ right padding is zeroed so the table aligns flush with the column.
 ### Figure and Caption
 
 Images are block-level, `max-width: 100%`, no frame and no radius. The caption
-sits 0.5rem below in mono, 11px, uppercase, tracked 0.08em, in Faint Ink.
+sits 0.5rem below in mono, 11px, uppercase, tracked 0.08em, in Faint Ink. An
+image that ships with the product carries the scheme itself — `demo/image.svg`
+holds its own `prefers-color-scheme: dark` block and darkens its placeholder
+field, having otherwise been the brightest object on the dark page; a renderer
+that ignores the query falls back to the light fills. An operator's own image
+is served as-is and cannot be expected to do the same, so the page never
+assumes it will.
 
 ### Task List
 

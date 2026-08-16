@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T18:00:00Z",
+  "generatedAt": "2026-08-16T21:30:00Z",
   "title": "Design System: amber",
   "extensions": {
     "colorMeta": {
@@ -91,6 +91,7 @@
         "displayName": "Rule",
         "canonical": "oklch(0.2 0.005 250)",
         "darkCounterpart": "border-strong-dark",
+        "note": "Light is exactly fg, so rule and label read as one mark. Dark moved from 0.93 (also exactly fg-dark) to 0.76: the two measured near-symmetric (17.66:1 light, 15.28:1 dark) but read asymmetric — a light line on a dark ground blooms, and seven near-white bands were louder than the 11px labels beneath them. At 0.76 the dark rule is 8.73:1 against the page, the weight of secondary text; that also clears WCAG 1.4.11's 3:1 for the task-list checkbox outline it draws, which is a component boundary rather than text.",
         "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
       },
       "border": {
@@ -232,7 +233,7 @@
       "name": "Figure Caption",
       "kind": "custom",
       "refersTo": "caption",
-      "description": "Mono uppercase caption in the faintest ink, under an unframed image.",
+      "description": "Mono uppercase caption in the faintest ink, under an unframed image. An image that ships with the product carries the scheme itself — demo/image.svg holds its own prefers-color-scheme: dark block and darkens its placeholder field, falling back to the light fills where a renderer ignores the query. An operator's own image is served as-is and cannot be expected to do the same.",
       "html": "<figure class=\"ds-figure\"><img src=\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='120'><rect width='400' height='120' fill='%23bdbdbd'/></svg>\" alt=\"\"><figcaption>Served from the mounted directory</figcaption></figure>",
       "css": ".ds-figure { margin: 0 0 var(--space-5); margin-inline: 0; } .ds-figure img { display: block; max-width: 100%; height: auto; border-radius: 0; } .ds-figure figcaption { margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }"
     },
@@ -259,7 +260,7 @@
     "rules": [
       { "name": "The Four Tones Rule", "body": "Syntax highlighting has exactly four colours. A new Chroma token class joins one of the four groups in app/style.css or it stays body colour. A fifth tone is not added to distinguish a fifth category.", "section": "colors" },
       { "name": "The Measured Palette Rule", "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used accent and measured 4.41:1, so the shipped value is accent-ink at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.", "section": "colors" },
-      { "name": "The Mirrored Scheme Rule", "body": "Dark is not a separate palette, it is the same relationships inverted. Every tone that sits one step from its neighbour in light sits one step from it in dark too. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme.", "section": "colors" },
+      { "name": "The Mirrored Scheme Rule", "body": "Dark is not a separate palette, it is the same relationships inverted — which is not the same as the same lightness values. Every tone that sits one step from its neighbour in light sits one step from it in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly that reading. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme. The heavy rule is the documented exception, and the reason is stated: mirroring Ink's lightness literally made a line that measured almost identically (17.66:1 light, 15.28:1 dark) read far louder, because a light line on a dark ground blooms and a dark line on a light ground does not. Where perception and arithmetic disagree, perception decides which value ships and the number is measured afterwards to prove it is safe — never the other way round.", "section": "colors" },
       { "name": "The One Warm Hue Rule", "body": "Outside code blocks the page carries a single warm family (hue 45–60): the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job instead.", "section": "colors" },
       { "name": "The Ruled Label Rule", "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line above a block. The rule holds without exception — the footnote block, which the renderer gives no label, takes a hairline instead.", "section": "typography" },
       { "name": "The Tone-Not-Size Rule", "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 at 20px is the last level with a size; below it, depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. Four levels, four marks, one size. A future level does the same or does not exist.", "section": "typography" },
