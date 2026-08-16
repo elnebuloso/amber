@@ -196,12 +196,13 @@ blockquote {
 }
 blockquote > :last-child { margin-bottom: 0; }
 
-/* A quote inside a quote cannot tint a tint, so it steps back to a rule. */
+/* A quote inside a quote cannot tint a tint, so it steps back to a rule — in the
+   quote's own ink, because a neutral hairline is invisible on the tint. */
 blockquote blockquote {
 	margin-top: var(--space-4);
 	padding: 0 0 0 var(--space-4);
 	background: none;
-	border-left: var(--hairline) solid var(--border);
+	border-left: var(--hairline) solid var(--fg-note);
 }
 
 /* Raw html passes through the renderer, which makes the disclosure idiom usable. */
@@ -209,6 +210,8 @@ summary {
 	font-weight: var(--weight-bold);
 	cursor: pointer;
 }
+
+details > :last-child { margin-bottom: 0; }
 
 /* A block, so an over-wide table scrolls inside itself the way a code block
    already does. Table cells do not shrink below their longest word, so nothing
@@ -256,6 +259,10 @@ figcaption {
 /* Footnote markers are digits and arrows, not words: an underline would read as
    part of the sentence. The collected notes sit a step back from the body. */
 sup a, .footnote-backref { text-decoration: none; }
+
+/* An underline would read as part of the sentence at rest, but without one these
+   two are the only links on the page with no answer to a pointer at all. */
+sup a:hover, .footnote-backref:hover { text-decoration: underline; }
 
 sup a { font-size: var(--text-xs); }
 
