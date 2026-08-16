@@ -237,7 +237,11 @@ td {
 	padding: var(--space-3) var(--space-3) var(--space-3) 0;
 	border-bottom: var(--hairline) solid var(--border);
 }
-th:last-child, td:last-child { padding-right: 0; }
+/* display:block leaves the grid inside shrink-wrapped to its content, so a narrow
+   table would end mid-column while every rule above and below runs full width.
+   The slack all goes to the last column; distributing it would cost the
+   content-driven column widths. */
+th:last-child, td:last-child { padding-right: 0; width: 100%; }
 td code { color: var(--fg); }
 
 img {
