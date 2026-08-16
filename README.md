@@ -42,6 +42,9 @@ here — unlike in a mounted file, the value is inserted rather than evaluated.
 
 `APP_NAME` is never treated as markdown, so a name containing `*` or `_` stays as written.
 
+Setting `APP_TEXT_LEAD` to an empty string gives a page with the name and nothing else — the
+default applies when the variable is unset, not when it is empty.
+
 Every response carries `X-Robots-Tag: noindex, nofollow`. A placeholder has no business in
 a search index — least of all under the domain the real site is about to use.
 
@@ -49,6 +52,10 @@ a search index — least of all under the domain the real site is about to use.
 
 Mount a directory containing an `index.md` at `/app/content` and the page is rendered from it
 instead of the environment variables. `APP_NAME` stays the browser tab title.
+
+Start the file with a `# ` heading. That heading is the only place the page says whose it is —
+`APP_NAME` does not appear in the page itself in this mode, so a file that opens with `##` or with
+a paragraph leaves the visitor without a name to read.
 
 ```
 docker run -p 80:80 \
