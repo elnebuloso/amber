@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T23:10:00Z",
+  "generatedAt": "2026-08-16T01:17:50Z",
   "title": "Design System: amber",
   "extensions": {
     "colorMeta": {
@@ -466,7 +466,7 @@
   ],
   "narrative": {
     "northStar": "The Technical Document",
-    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. They also reach the same element vocabulary: APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so an operator who writes ## What is coming into an environment variable gets the ruled section label with nothing mounted at all. What separates the two surfaces is now only where the text comes from, not what it can be. The one thing held back from the renderer is APP_NAME: it is set as a literal h1, because a name is a name — composed into the same markdown document it would come back as <h1><em>star</em> site</h1>, measured, and a page title must not be reformatted by its own value. The principle now runs both ways: APP_NAME is emitted through | html in both <title> and <h1>, so markup written into the name is shown as characters instead of breaking out of the element it names. APP_TEXT_LEAD stays unescaped, because markdown there is the promise.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
+    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page *is* the container.\n\nThe system serves two surfaces of very different weight, and both have to look deliberate: a heading and one sentence on an otherwise empty window, or an operator's markdown file rendered whole. One declaration serves both — the column is centred vertically by `min-height` rather than `height`, so two lines sit mid-viewport and a long document grows from the top under the identical stylesheet. Both reach the same element vocabulary, because `APP_TEXT_LEAD` runs through the same markdown renderer as a mounted file. What separates the surfaces is where the text comes from, not what it can be.\n\n`APP_NAME` is the one thing held back from the renderer and set as a literal `h1`: composed into the same markdown document it came back as `<h1><em>star</em> site</h1>` (measured), and a page title must not be reformatted by its own value. The principle runs both ways — `APP_NAME` is emitted through `| html` in `<title>` and `<h1>`, so markup written into a name shows as characters instead of breaking out of the element it names. `APP_TEXT_LEAD` stays unescaped, because markdown there is the promise.\n\nThere is no build chain and no runtime fetch: the monospace face ships inside the image as two `woff2` files, so the page renders complete with the machine offline.",
     "keyCharacteristics": [
       "Flat sheet, no shadows, no radii, no gradients, no motion.",
       "Two line weights only: a 2px structural rule and a 1px hairline.",
@@ -484,37 +484,42 @@
       },
       {
         "name": "The Measured Palette Rule",
-        "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used accent and measured 4.41:1, so the shipped value is accent-ink at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.",
+        "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used {colors.accent} and measured 4.41:1, so the shipped value is {colors.accent-ink} at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.",
         "section": "colors"
       },
       {
         "name": "The Mirrored Scheme Rule",
-        "body": "Dark is not a separate palette, it is the same relationships inverted — which is not the same as the same lightness values. Every tone that sits one step from its neighbour in light sits one step from it in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly that reading. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme. The heavy rule is the documented exception, and the reason is stated: mirroring Ink's lightness literally made a line that measured almost identically (17.66:1 light, 15.28:1 dark) read far louder, because a light line on a dark ground blooms and a dark line on a light ground does not. Where perception and arithmetic disagree, perception decides which value ships and the number is measured afterwards to prove it is safe — never the other way round.",
+        "body": "Dark is not a separate palette, it is the same *relationships* inverted — which is not the same as the same lightness values. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — silently deleting distinctions the light scheme still made. When a token moves, check its neighbours in the *other* scheme. The heavy rule is the documented exception: mirroring Ink's lightness literally made a line that measured almost identically (17.66:1 light, 15.28:1 dark) read far louder, because a light line on a dark ground blooms and a dark line on a light ground does not. Where perception and arithmetic disagree, perception decides which value ships and the number is measured afterwards to prove it is safe — never the other way round.",
         "section": "colors"
       },
       {
         "name": "The One Warm Hue Rule",
-        "body": "Outside code blocks the page carries a single warm family (hue 45–60): the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job instead.",
+        "body": "Outside code blocks the page carries a single warm family: the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job.",
         "section": "colors"
       },
       {
         "name": "The Ruled Label Rule",
-        "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line above a block. The rule holds without exception — the footnote block, which the renderer gives no label, takes a hairline instead.",
+        "body": "A section head sits directly beneath a full-width 2px rule. The rule and the label are one unit: neither appears without the other. The heavy rule appears in exactly two places — the section head and the table head — and both carry an uppercase label, which is what makes the rule true rather than aspirational; the footnote block, which the renderer gives no label, takes a hairline instead. Inside one section the eye can meet both, a heavy stripe roughly sixty pixels under another heavy stripe, and it reads as a repeat. That is intended and it is what the rule costs: the fix is never to drop the rule from one of the two places.",
         "section": "typography"
       },
       {
         "name": "The Tone-Not-Size Rule",
-        "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 at 20px is the last level with a size; below it, depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. Four levels, four marks, one size. A future level does the same or does not exist.",
+        "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 is the last level with a size; below it depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. A future level does the same or does not exist.",
         "section": "typography"
       },
       {
         "name": "The Mono-Means-Machine Rule",
-        "body": "The monospace face marks code, table heads and captions. It is never used for body prose, a heading, or emphasis.",
+        "body": "The monospace face marks code, table heads and captions. Never body prose, a heading, or emphasis.",
+        "section": "typography"
+      },
+      {
+        "name": "The Counted Measure Rule",
+        "body": "A claim about line length is worth what the counting method is worth. ch is the width of the digit zero, not a character count, and in a proportional face it understates the real count — an earlier pass read the column as \"74ch\" and shipped a line of 82 characters on that reading. The measure is counted in the browser over the paragraph's actual text nodes and held inside 45–75: at 40rem the first line ran 82 characters, at 34rem it runs 75, at 30rem it would run 63. Change the column, count again; never convert.",
         "section": "typography"
       },
       {
         "name": "The Unbreakable Column Rule",
-        "body": "Nothing an operator writes may push the document sideways. Text wraps or breaks; anything with an internal minimum width of its own — a code block, a table — becomes its own scroll container. Adding a new block means picking one of the two mechanisms deliberately, because the body-level wrap rule silently fails to cover the second kind.",
+        "body": "Nothing an operator writes may push the document sideways. Text wraps or breaks; anything with an internal minimum width of its own becomes its own scroll container. A new block picks one of the two mechanisms deliberately, because the body-level wrap rule silently fails to cover the second kind.",
         "section": "layout"
       },
       {
@@ -524,58 +529,39 @@
       },
       {
         "name": "The Two Weights Rule",
-        "body": "Every line on the page is either the 2px structural rule or the 1px hairline. A third weight, a dashed line or a coloured border is not part of the vocabulary.",
+        "body": "Every line is either the 2px structural rule or the 1px hairline. A third weight, a dashed line or a coloured border is not part of the vocabulary.",
         "section": "elevation"
       },
       {
         "name": "The Tint-Once Rule",
-        "body": "A tinted surface does not nest inside a tinted surface. A quote inside a quote drops the tint and steps back to a hairline stripe; anything nested deeper does the same rather than stacking washes.",
+        "body": "A tinted surface does not nest inside a tinted surface. A quote inside a quote drops the tint for a hairline stripe; anything deeper does the same rather than stacking washes.",
         "section": "elevation"
       },
       {
-        "name": "The Counted Measure Rule",
-        "body": "A claim about line length is worth exactly what the counting method is worth. ch is the width of the digit zero, not a character count, and in a proportional face it understates the real count — an earlier pass read the column as \"74ch\" and shipped a line of 82 characters on that reading. The measure is counted in the browser over the paragraph's actual text nodes and held inside 45–75: at 40rem the first line ran 82 characters, at 34rem it runs 75, at 30rem it would run 63. Change the column, count again; never convert.",
-        "section": "typography"
-      },
-      {
         "name": "The One Surface Rule",
-        "body": "The system has exactly one error surface, and it is the environment-variable page. There is no separate error design, no apology copy, no status number set in type, no warning glyph — the failed page is the placeholder page. That is the only rendition consistent with never looking like a maintenance screen, and it is why the guard on the branch, not a new template, is where the work went.",
+        "body": "The system has exactly one error surface, and it is the environment-variable page. No separate error design, no apology copy, no status number set in type, no warning glyph — the failed page *is* the placeholder page. That is the only rendition consistent with never looking like a maintenance screen, and it is why the guard on the branch, not a new template, is where the work went.",
         "section": "components"
       },
       {
         "name": "The Silent Default Rule",
-        "body": "The default surface carries none of the system's marks — no rule, no uppercase label, no mono face, no accent — and that is settled, not an oversight. A placeholder is allowed to look like almost nothing; the restraint is the statement. Measured: that page loads three files and not one of them is a font. Every mark is available on it the moment an operator writes markdown into APP_TEXT_LEAD, and nothing is to be added to make the empty state look designed.",
+        "body": "The default surface carries none of the system's marks — no rule, no uppercase label, no mono face, no accent — and that is settled, not an oversight. A placeholder is allowed to look like almost nothing; the restraint is the statement. Measured: that page loads three files and not one of them is a font. Every mark is available the moment an operator writes markdown into APP_TEXT_LEAD, and nothing is to be added to make the empty state look designed.",
         "section": "components"
       }
     ],
     "dos": [
-      "Do put every value in app/tokens.css and author it in OKLCH; hue 250 for neutrals, hue 45–50 for the accent, hue 60 for the note tint.",
-      "Do style by element selector. The markdown renderer emits no classes, so a rule that needs a class only works for hand-written markup and silently fails on the operator's page.",
-      "Do measure both schemes in a browser whenever a colour changes, and record the lowest ratio. The floor is 4.5:1, and a value that misses it is replaced, not rounded.",
-      "Do check a moved token against its neighbours in the other scheme; a distinction can be intact in light and collapsed in dark.",
-      "Do define every colour in both the light block and the prefers-color-scheme: dark block. A token that exists in only one scheme is a bug.",
-      "Do check every change against both surfaces — the two-line placeholder and the full demo/index.md page, which exercises every construct the product can render.",
-      "Do give any new block with an internal minimum width its own overflow-x: auto; the body-level word break does not reach it.",
+      "Do put every value in app/tokens.css and author it in OKLCH.",
+      "Do style by element selector. The renderer emits no classes, so a rule needing a class works for hand-written markup and silently fails on the operator's page.",
+      "Do define every colour in both scheme blocks. A token that exists in only one scheme is a bug.",
       "Do hand a control back to the platform (appearance: auto) when forced colours would strip what carries its state.",
       "Do ship any new font file inside the image and declare it with @font-face locally.",
-      "Do express new depth with a tone step or one of the two line weights.",
-      "Do delete a token nothing consumes. --tracking-wide and --weight-regular were removed for exactly that reason. Deletion is not a one-way door: a token comes back the moment something consumes it again, which is how --space-1 returned for the task-list checkbox gap.",
-      "Do count the measure in the browser over real text when the column changes, and keep the first line inside 45–75 characters.",
-      "Do escape anything an operator sets that is not meant to be markup; APP_NAME runs through | html in both places it appears."
+      "Do escape anything an operator sets that is not meant to be markup.",
+      "Do delete a token nothing consumes, and restore it the moment something consumes it again. Delete on the evidence of today's build and restore on the same evidence — neither move needs an apology."
     ],
     "donts": [
       "Don't add a box-shadow, a border-radius, a gradient, a transition or an animation. The sheet is flat and still.",
       "Don't fetch anything at runtime — no font CDN, no script, no image from another host. The page must render with the machine offline.",
-      "Don't introduce a third line weight, a second accent hue, or a fifth syntax tone.",
-      "Don't add a fifth heading size. Below h3, step back in tone and then in weight.",
-      "Don't draw the 2px rule above a block that carries no uppercase label; use the hairline.",
-      "Don't set body prose, headings or emphasis in the monospace face.",
-      "Don't let any element exceed the 34rem column or force horizontal page scroll; wrap, break, or scroll inside the block.",
-      "Don't nest a tinted surface inside a tinted surface.",
-      "Don't use a page-adjacent tint for a transient highlight such as selection; that needs a measured accent, not a wash.",
-      "Don't add a logo, wordmark or decorative image — the product has none by commitment, and the page's only mark is the ruled section label.",
-      "Don't read a ch value as a character count when judging the measure.",
-      "Don't build a second surface for the error case, and don't dress the default surface up with marks the operator did not ask for."
+      "Don't dress the default surface up with marks the operator did not ask for.",
+      "Don't add a logo, wordmark or decorative image — the product has none by commitment, and the page's only mark is the ruled section label."
     ]
   }
 }

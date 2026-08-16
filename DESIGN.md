@@ -163,38 +163,28 @@ components:
 
 amber looks like a page torn out of a well-set manual: a flat sheet, ruled into
 sections, with nothing on it that is not text. There is no chrome, no card, no
-container — the page *is* the container. Sections are announced by a small
-uppercase tracked label sitting under a 2px rule that runs the full width of the
-column; everything else is body text, a table, a quote or a block of code. One
-warm accent at hue 45–50 carries links, inline code, the selection highlight and
-the one filled control the system has, and it is the only saturated colour
-outside a code block.
+container — the page *is* the container.
 
-The system is built for two surfaces of very different weight, and both have to
-look deliberate. The default is a heading and one sentence on an otherwise empty
-window; the richer one is an operator's markdown file rendered whole. The same
-rules serve both because the page column is centred vertically by `min-height`
-rather than `height` — two lines sit in the middle of the viewport, a long
-document grows from the top under the identical stylesheet. They also reach the
-same element vocabulary: `APP_TEXT_LEAD` runs through the same markdown
-renderer as a mounted file, so an operator who writes `## What is coming` into
-an environment variable gets the ruled section label with nothing mounted at
-all. What separates the two surfaces is now only where the text comes from, not
-what it can be. The one thing held back from the renderer is `APP_NAME`: it is
-set as a literal `h1`, because a name is a name — composed into the same
-markdown document it would come back as `<h1><em>star</em> site</h1>`, measured, and a page title must not be reformatted by its own value. The
-principle now runs both ways: `APP_NAME` is emitted through `| html` in both
-`<title>` and `<h1>`, so markup written into the name is shown as characters
-instead of breaking out of the element it names. `APP_TEXT_LEAD` stays
-unescaped, because markdown there is the promise.
+The system serves two surfaces of very different weight, and both have to look
+deliberate: a heading and one sentence on an otherwise empty window, or an
+operator's markdown file rendered whole. One declaration serves both — the
+column is centred vertically by `min-height` rather than `height`, so two lines
+sit mid-viewport and a long document grows from the top under the identical
+stylesheet. Both reach the same element vocabulary, because `APP_TEXT_LEAD` runs
+through the same markdown renderer as a mounted file. What separates the
+surfaces is where the text comes from, not what it can be.
 
-Every value lives in `app/tokens.css` and is authored in OKLCH, light as the
-default and dark applied from `prefers-color-scheme`. Contrast is not a review
-step here; it is a constraint the palette was tuned to. All 26 text pairs were
-measured in-browser against their own surface in both schemes and all 26 clear
-4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network
-fetch: the monospace face ships inside the image as two `woff2` files, so the
-page renders complete with the machine offline.
+`APP_NAME` is the one thing held back from the renderer and set as a literal
+`h1`: composed into the same markdown document it came back as
+`<h1><em>star</em> site</h1>` (measured), and a page title must not be
+reformatted by its own value. The principle runs both ways — `APP_NAME` is
+emitted through `| html` in `<title>` and `<h1>`, so markup written into a name
+shows as characters instead of breaking out of the element it names.
+`APP_TEXT_LEAD` stays unescaped, because markdown there is the promise.
+
+There is no build chain and no runtime fetch: the monospace face ships inside
+the image as two `woff2` files, so the page renders complete with the machine
+offline.
 
 **Key Characteristics:**
 
@@ -209,66 +199,60 @@ page renders complete with the machine offline.
 ## Colors
 
 Cool near-grey neutrals at hue 250 carrying one warm accent at hue 45–50 and a
-warm note tint at hue 60 — the only three hue families on the page outside
-syntax highlighting.
+warm note tint at hue 60 — the only three hue families outside syntax
+highlighting. Every value is authored in OKLCH in `app/tokens.css`, light as the
+default and dark from `prefers-color-scheme`.
 
 ### Primary
 
 - **Ember** (`{colors.accent}`): the one filled shape in the system — a checked
-  task-list box and the disclosure triangle's marker. Full-strength accent,
-  used as a fill, never as text.
-- **Ember Ink** (`{colors.accent-ink}`): links, footnote references, the focus
-  outline, and the selection highlight's background. A step darker than Ember in
-  light so it can be read as text, and the one accent step measured for use
-  *behind* text as well.
+  task-list box, the disclosure marker. A fill, never text.
+- **Ember Ink** (`{colors.accent-ink}`): links, footnote references, focus
+  outline, selection background. The one accent step also measured for use
+  *behind* text.
 - **Ember Deep** (`{colors.accent-code}`): inline code only. The far end of the
-  cascade from Ember Ink — darker in light, lighter in dark — so a code span
-  inside a sentence is distinguishable from a link without borrowing an
-  underline.
+  cascade from Ember Ink, so a code span inside a sentence is distinguishable
+  from a link without borrowing an underline.
 
-The three Ember steps are a genuine cascade in both schemes. Dark mirrors the
-light relationships rather than repeating its direction: where light steps down
-in lightness from fill to link to code, dark steps up.
+The three steps are a cascade in both schemes, mirrored rather than repeated:
+where light steps down in lightness from fill to link to code, dark steps up.
 
 ### Neutral
 
-- **Paper** (`{colors.bg}`): the page. Not white — a barely-warmed near-white
-  that stops the sheet from glaring. Also the text colour inside a selection.
-- **Sunken Paper** (`{colors.bg-sunken}`): code blocks. Depth here is a tone
-  step, not a shadow or a border.
+- **Paper** (`{colors.bg}`): the page — a barely-warmed near-white rather than
+  white, so the sheet does not glare. Also the text colour inside a selection.
+- **Sunken Paper** (`{colors.bg-sunken}`): code blocks. Depth is a tone step,
+  not a shadow or a border.
 - **Note Tint** (`{colors.bg-note}`): the blockquote panel. A wash this close to
   the page can mark a block that already has padding; it cannot carry a
   transient highlight, which is why selection uses the accent instead.
-- **Ink** (`{colors.fg}`): headings, body text, code-block text.
-- **Muted Ink** (`{colors.fg-muted}`): the lead sentence, and `h5`/`h6`.
-- **Subtle Ink** (`{colors.fg-subtle}`): nested list items and the collected
-  footnotes — text one level away from the main argument. Sits exactly one step
-  below Muted Ink in both schemes (dark reads 7.31:1).
+- **Ink** (`{colors.fg}`): headings and body text.
+- **Muted Ink** (`{colors.fg-muted}`): the lead sentence, `h5`/`h6`.
+- **Subtle Ink** (`{colors.fg-subtle}`): text one level from the main argument —
+  nested list items, collected footnotes. One step below Muted Ink in both
+  schemes.
 - **Faint Ink** (`{colors.fg-faint}`): captions and struck-through text. The
   quietest tone that still clears AA.
-- **Note Ink** (`{colors.fg-note}`): text inside the note panel, warmed to
-  hue 60 to belong to its own surface.
-- **Rule** (`{colors.border-strong}`): the 2px structural rule, and the
-  hairline outline of an unchecked checkbox. In light it is the same value as
-  Ink, so a section head and its rule read as one mark. Dark does not repeat
-  that literally: at Ink's own lightness seven near-white bands bloomed against
-  the dark page and read louder than the 11px labels beneath them, so the dark
-  rule sits lower, at 8.73:1 against the page — the weight of secondary text
-  rather than of a heading. One mark in light, an approximation of it in dark.
-  8.73:1 also clears WCAG 1.4.11's 3:1 for the checkbox outline, which is a
-  component boundary rather than text; that number is what makes the dimming
-  safe rather than a matter of taste.
-- **Hairline** (`{colors.border}`): 1px dividers — table row lines, `hr`, the
+- **Note Ink** (`{colors.fg-note}`): note-panel text, warmed to hue 60 to belong
+  to its own surface.
+- **Rule** (`{colors.border-strong}`): the structural rule and the unchecked
+  checkbox outline. In light it is Ink's own value, so a section head and its
+  rule read as one mark. Dark does not repeat that literally: at Ink's lightness
+  seven near-white bands bloomed against the dark page and read louder than the
+  labels beneath them, so the dark rule sits at 8.73:1 against the page — the
+  weight of secondary text, not of a heading. 8.73:1 also clears WCAG 1.4.11's
+  3:1 for the checkbox outline, a component boundary rather than text; that
+  number is what makes the dimming safe rather than a matter of taste.
+- **Hairline** (`{colors.border}`): every 1px divider — table rows, `hr`, the
   nested-quote stripe, the footnote block's top line, an unchecked checkbox.
 
 ### Tertiary
 
-Four code tones, and only four, measured against Sunken Paper:
-**Comment Grey** (`{colors.code-comment}`), **Keyword Violet**
-(`{colors.code-keyword}`), **Number Amber** (`{colors.code-number}`),
-**String Green** (`{colors.code-string}`). The renderer emits the full Chroma
-class vocabulary; every class is mapped onto one of these four, and anything
-unmapped falls back to body Ink.
+Four code tones, and only four, measured against Sunken Paper: **Comment Grey**
+(`{colors.code-comment}`), **Keyword Violet** (`{colors.code-keyword}`),
+**Number Amber** (`{colors.code-number}`), **String Green**
+(`{colors.code-string}`). The renderer emits the full Chroma class vocabulary;
+every class maps onto one of the four, and anything unmapped falls back to Ink.
 
 ### Named Rules
 
@@ -278,150 +262,129 @@ body colour. A fifth tone is not added to distinguish a fifth category.
 
 **The Measured Palette Rule.** No colour value ships until its pair has been
 measured in-browser against the surface it actually sits on, in both schemes.
-The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1
-(code comment on Sunken Paper, light). This rule bit once and is recorded so it
-bites again: the first selection highlight used `{colors.accent}` and measured
-4.41:1, so the shipped value is `{colors.accent-ink}` at 6.2:1 light and 10.3:1
-dark. A value is never lightened to make a design read better.
+The floor is 4.5:1; 26 of 26 pairs clear it and the lowest is 4.58:1 (code
+comment on Sunken Paper, light). This rule bit once and is recorded so it bites
+again: the first selection highlight used `{colors.accent}` and measured 4.41:1,
+so the shipped value is `{colors.accent-ink}` at 6.2:1 light and 10.3:1 dark. A
+value is never lightened to make a design read better.
 
 **The Mirrored Scheme Rule.** Dark is not a separate palette, it is the same
 *relationships* inverted — which is not the same as the same lightness values.
-Every tone that sits one step from its neighbour in light sits one step from it
-in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly
-that reading. Two tokens once collapsed onto their neighbours in dark only —
-Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted
-distinctions the light scheme still made. When a token moves, check its
-neighbours in the *other* scheme. The heavy rule is the documented exception,
-and the reason is stated: mirroring Ink's lightness literally made a line that
-measured almost identically (17.66:1 light, 15.28:1 dark) read far louder,
-because a light line on a dark ground blooms and a dark line on a light ground
-does not. Where perception and arithmetic disagree, perception decides which
-value ships and the number is measured afterwards to prove it is safe — never
-the other way round.
+Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto
+Muted Ink, Ember Deep onto Ember Ink — silently deleting distinctions the light
+scheme still made. When a token moves, check its neighbours in the *other*
+scheme. The heavy rule is the documented exception: mirroring Ink's lightness
+literally made a line that measured almost identically (17.66:1 light, 15.28:1
+dark) read far louder, because a light line on a dark ground blooms and a dark
+line on a light ground does not. Where perception and arithmetic disagree,
+perception decides which value ships and the number is measured afterwards to
+prove it is safe — never the other way round.
 
 **The One Warm Hue Rule.** Outside code blocks the page carries a single warm
-family (hue 45–60): the accent and the note tint. A second accent hue is not
-introduced to mark a new kind of content; tone, rule weight or the mono face
-does that job instead.
+family: the accent and the note tint. A second accent hue is not introduced to
+mark a new kind of content; tone, rule weight or the mono face does that job.
 
 ## Typography
 
 **Display / Body Font:** Helvetica (with Helvetica Neue, Arial, sans-serif)
 **Label / Mono Font:** IBM Plex Mono, self-hosted at 400 and 500
 
-**Character:** A plain grotesque doing all the reading, with a monospace used
-strictly as a *signal* rather than a texture — it appears only where something
-is machine-shaped (code) or is a label rather than a sentence (table heads,
+**Character:** A plain grotesque doing all the reading, with a monospace used as
+a *signal* rather than a texture — it appears only where something is
+machine-shaped (code) or is a label rather than a sentence (table heads,
 captions). Nothing is set in a display face; the page has no voice beyond the
 one the operator's words carry.
 
 ### Hierarchy
 
-- **Display** (700, 2.75rem / 2.125rem below 34rem, 1.05, -0.03em): the page
-  title, once. It is the only large type in the system, and it hyphenates
-  (`hyphens: auto`) so a long single-word `APP_NAME` breaks at a syllable
-  boundary rather than mid-word at 44px. The break points are correct rather
-  than arbitrary because the page language is set from `APP_LANG`.
-- **Lead** (400, 1.125rem / 1.0625rem below 34rem, 1.5, Muted Ink): the first
-  paragraph after the title, clamped to 40ch so it sits on a shorter measure
-  than the body column and registers as an opening rather than as the first
-  paragraph. It is not meant to stack: at 34ch the sentence fell into four lines
-  under the 44px display and read as a wrapping accident. The clamp moved with
-  the column — at 48ch in the narrowed 34rem column the lead filled 88% of it
-  and stopped reading as a shorter measure at all; 40ch is 400px, 74% of the
-  column, and still three lines, so the line count is unchanged and the
-  distinction is visible again. Below 34rem the clamp is inert — the sentence takes the full
-  column at either value — so this is a desktop decision. The rule is `h1 + p`
-  and it is deliberately literal: a plain sentence in `APP_TEXT_LEAD` still renders as exactly one `<p>`
-  after the `<h1>` and still gets the treatment, but text that opens with a
-  heading or a list does not match and gets no lead treatment. That is correct —
-  the lead is the *first sentence under the title*, not a slot the first block
-  falls into whatever it is. Do not loosen the selector to `h1 + *`.
-- **Label** (700, 0.6875rem, 0.14em, uppercase): section heads (`h2`), set
-  under a 2px rule. This is the system's signature mark.
-- **Headline** (700, 1.25rem, -0.01em): `h3`, the first heading that reads as a
-  heading rather than a label, and the last one with a size of its own.
-- **Title** (700, 0.96875rem): `h4` — body size, bold, full Ink.
-- **Title Quiet** (700 then 500, 0.96875rem, Muted Ink): `h5` is bold muted,
-  `h6` is medium muted. Below `h4` the levels separate by tone and then by
-  weight, because there is no size left.
-- **Body** (400, 0.96875rem, 1.62): everything else, in a 34rem column with
-  `text-wrap: pretty` — 75 characters on the first line, counted in the browser
-  over the paragraph's own text nodes.
-- **Label Mono** (500, 0.6875rem, 0.12em / 0.08em, uppercase): table heads and
-  figure captions.
-- **Code** (400, 0.8125rem, 1.7): inline and block code, and footnote text at
-  the same size in the sans face.
+- **Display**: the page title, once, and the only large type in the system. It
+  hyphenates (`hyphens: auto`) so a long single-word `APP_NAME` breaks at a
+  syllable boundary rather than mid-word, and the break points are correct
+  rather than arbitrary because the page language is set from `APP_LANG`.
+- **Lead**: the first paragraph after the title, clamped to 40ch so it sits on a
+  shorter measure than the body column and registers as an opening. It is not
+  meant to stack: at 34ch the sentence fell into four lines under the 44px
+  display and read as a wrapping accident, and at 48ch it filled 88% of the
+  narrowed column and stopped reading as a shorter measure at all. 40ch is 74%
+  of the column and still three lines. Below the breakpoint the clamp is inert,
+  so this is a desktop decision. The selector `h1 + p` is deliberately literal:
+  a plain sentence in `APP_TEXT_LEAD` still gets the treatment, but text opening
+  with a heading or a list does not match and gets none. That is correct — the
+  lead is the *first sentence under the title*, not a slot the first block falls
+  into whatever it is. Do not loosen it to `h1 + *`.
+- **Label**: section heads (`h2`), set under the 2px rule. The signature mark.
+- **Headline**: `h3`, the first heading that reads as a heading rather than a
+  label, and the last with a size of its own.
+- **Title** / **Title Quiet**: `h4` bold at body size, `h5` bold muted, `h6`
+  medium muted.
+- **Body**: everything else, with `text-wrap: pretty`.
+- **Label Mono**: table heads and figure captions.
+- **Code**: inline and block code, and footnote text at the same size in the
+  sans face.
 
 ### Named Rules
 
-**The Ruled Label Rule.** A section head is small, uppercase, tracked at 0.14em
-and sits directly beneath a full-width 2px rule with 0.75rem of air between
-them. The rule and the label are one unit: neither appears without the other,
-and no other element in the system draws a 2px horizontal line above a block.
-The rule holds without exception — the footnote block, which the renderer gives
-no label, takes a hairline instead.
+**The Ruled Label Rule.** A section head sits directly beneath a full-width 2px
+rule. The rule and the label are one unit: neither appears without the other.
+The heavy rule appears in exactly two places — the section head and the table
+head — and both carry an uppercase label, which is what makes the rule true
+rather than aspirational; the footnote block, which the renderer gives no label,
+takes a hairline instead. Inside one section the eye can meet both, a heavy
+stripe roughly sixty pixels under another heavy stripe, and it reads as a
+repeat. That is intended and it is what the rule costs: the fix is never to drop
+the rule from one of the two places.
 
 **The Tone-Not-Size Rule.** The type scale runs out of sizes before markdown
-runs out of heading levels. `h3` at 20px is the last level with a size; below
-it, depth steps first in tone (Ink to Muted Ink at `h5`) and then in weight
-(700 to 500 at `h6`), never in size. Four levels, four marks, one size. A
-future level does the same or does not exist.
+runs out of heading levels. `h3` is the last level with a size; below it depth
+steps first in tone (Ink to Muted Ink at `h5`) and then in weight (700 to 500 at
+`h6`), never in size. A future level does the same or does not exist.
 
 **The Mono-Means-Machine Rule.** The monospace face marks code, table heads and
-captions. It is never used for body prose, a heading, or emphasis.
+captions. Never body prose, a heading, or emphasis.
 
-**The Counted Measure Rule.** A claim about line length is worth exactly what
-the counting method is worth. `ch` is the width of the digit zero, not a
-character count, and in a proportional face it understates the real count — an
-earlier pass read the column as "74ch" and shipped a line of 82 characters on
-that reading. The measure is counted in the browser over the paragraph's actual
-text nodes and held inside 45–75: at 40rem the first line ran 82 characters, at
-34rem it runs 75, at 30rem it would run 63. Change the column, count again;
-never convert.
+**The Counted Measure Rule.** A claim about line length is worth what the
+counting method is worth. `ch` is the width of the digit zero, not a character
+count, and in a proportional face it understates the real count — an earlier
+pass read the column as "74ch" and shipped a line of 82 characters on that
+reading. The measure is counted in the browser over the paragraph's actual text
+nodes and held inside 45–75: at 40rem the first line ran 82 characters, at 34rem
+it runs 75, at 30rem it would run 63. Change the column, count again; never
+convert.
 
 ## Layout
 
-A single centred column, `max-width: 34rem`, on a `min-height: 100vh` flex body
-that centres its content vertically. That one declaration serves both surfaces:
-the two-line environment-variable page sits mid-viewport, a long markdown
-document starts at the top and grows. Page padding is 3.5rem top / 1.5rem
-side / 4rem bottom, tightening to 2rem / 1.25rem / 2.5rem below 34rem — the
-single breakpoint in the system, which also shrinks the display and lead sizes.
+A single centred column on a `min-height: 100vh` flex body that centres its
+content vertically — the one declaration that serves both surfaces. There is a
+single breakpoint, at the column width, which tightens page padding and shrinks
+the display and lead sizes.
 
-Vertical rhythm comes from a small step scale (0.25 / 0.5 / 0.75 / 1 / 1.25 /
-1.5 / 2 / 2.5 / 3.5 / 4rem). The 0.25rem step exists for one job only — the
-task-list checkbox's right margin, where 4px is what makes a task label line up
-with the labels of the ordinary items beside it (measured: 0.37px residual,
-down from 4px). Block elements share a 1.25rem bottom margin; a section
-head opens 2.5rem of space above itself, an `h3` 2rem, an `h4` 1.5rem. List
-items are separated by 0.5rem and the last item's margin is zeroed so a list
-does not double-space against the block below it.
+Vertical rhythm comes from the step scale in the frontmatter. The 0.25rem step
+exists for one job — the task-list checkbox's right margin, where it lines a
+task label up with the ordinary items beside it (measured: 0.37px residual, down
+from 4px).
 
-Sideways containment has two mechanisms, and which one applies depends on the
+Sideways containment has two mechanisms, and which applies depends on the
 element. `overflow-wrap: break-word` on `body` plus `min-width: 0` on the column
-handles text: a bare URL or a long identifier breaks instead of widening the
-page. It cannot handle a table, because a cell never shrinks below its longest
-word — six columns at 390px pushed the document 530px sideways. So `pre` and
-`table` are both scroll containers (`table` is `display: block` with
-`overflow-x: auto`): the overflow is absorbed inside the block, not by the page.
-A wrapped command line would be a wrong command line, and a wrapped table would
-be an unreadable one.
+handles text: a bare URL or long identifier breaks instead of widening the page.
+It cannot handle a table, because a cell never shrinks below its longest word —
+six columns at 390px pushed the document 530px sideways. So `pre` and `table`
+are both scroll containers (`table` is `display: block` with `overflow-x: auto`)
+and absorb the overflow inside the block. A wrapped command line would be a
+wrong command line, and a wrapped table an unreadable one.
 
-Both scroll containers are reachable by keyboard in Chromium, which makes a
-scrollable region focusable on its own — measured: `pre.chroma` is a tab stop
-with a visible ring. That is browser behaviour, not a guarantee. Neither element
-carries `tabindex="0"`, because markdown cannot set an attribute and the page
-carries no JavaScript. This is a documented limit of the system, not a solved
-problem.
+**Known limit.** Both scroll containers happen to be reachable by keyboard in
+Chromium, which makes a scrollable region focusable on its own (measured:
+`pre.chroma` is a tab stop with a visible ring). That is browser behaviour, not
+a guarantee. Neither carries `tabindex="0"`, because markdown cannot set an
+attribute and the page carries no JavaScript.
 
 ### Named Rules
 
 **The Unbreakable Column Rule.** Nothing an operator writes may push the
 document sideways. Text wraps or breaks; anything with an internal minimum width
-of its own — a code block, a table — becomes its own scroll container. Adding a
-new block means picking one of the two mechanisms deliberately, because the
-body-level wrap rule silently fails to cover the second kind.
+of its own becomes its own scroll container. A new block picks one of the two
+mechanisms deliberately, because the body-level wrap rule silently fails to
+cover the second kind.
 
 **The Both-Modes Rule.** Every layout rule is checked against both surfaces —
 the two-line placeholder and the full markdown page. A rule that only looks
@@ -430,92 +393,61 @@ right on one of them is not a rule yet.
 ## Elevation & Depth
 
 There are no shadows anywhere in this system, and none may be added. Depth is
-tonal and linear only: a code block recedes by sitting on a slightly darker
-surface, a note steps forward by carrying a warm tint, and structure is drawn
-with exactly two line weights — a 2px rule at full ink for section boundaries
-and a 1px hairline at low contrast for dividers and small controls. There is
-also no motion: no transitions, no transforms, no animation, on any state.
+tonal and linear only: a code block recedes onto a darker surface, a note steps
+forward with a warm tint, structure is drawn with two line weights. There is
+also no motion — no transitions, no transforms, no animation, on any state.
 
 ### Named Rules
 
-**The Two Weights Rule.** Every line on the page is either the 2px structural
-rule or the 1px hairline. A third weight, a dashed line or a coloured border is
-not part of the vocabulary.
+**The Two Weights Rule.** Every line is either the 2px structural rule or the
+1px hairline. A third weight, a dashed line or a coloured border is not part of
+the vocabulary.
 
 **The Tint-Once Rule.** A tinted surface does not nest inside a tinted surface.
-A quote inside a quote drops the tint and steps back to a hairline stripe;
-anything nested deeper does the same rather than stacking washes.
+A quote inside a quote drops the tint for a hairline stripe; anything deeper
+does the same rather than stacking washes.
 
 ## Shapes
 
-Every corner is square. There is no border-radius token because there is no
-radius: not on code blocks, not on the note panel, not on the drawn checkbox,
-not on the focus outline. The only drawn geometry in the system is the
-0.85em square checkbox — hairline outline when empty, solid accent fill when
-checked — and it is square for the same reason everything else is.
-
-Form language is horizontal: full-width rules that segment the column,
-full-width table row lines, full-bleed code and note panels that run edge to
-edge of the column with no inset. Nothing is boxed on all four sides except the
-checkbox.
+Every corner is square, and there is no radius token because there is no radius.
+Form language is horizontal: full-width rules segmenting the column, full-width
+table row lines, full-bleed code and note panels running edge to edge with no
+inset. The checkbox is the only drawn geometry and the only thing boxed on all
+four sides.
 
 ## Components
 
-There are no interactive components in this product — no buttons, no inputs, no
-navigation, no forms, by product constraint. What follows is the full set of
-things the page actually renders, and every one of them is reachable from both
-surfaces: `APP_TEXT_LEAD` and a mounted `/content/index.md` pass through the
-same markdown renderer, so a table, a code block or a ruled section head can
-come from either. The remaining branch in `app/index.html` chooses the *source*
-of the text, not what the text may become. `APP_NAME` is the deliberate
-exception and is emitted as a literal `h1` — the renderer never sees it, so a
-name containing markdown characters stays the name — and it passes through
-`| html` on the way out, so markup in the name is rendered as characters rather
-than executed in the `<title>` and the `<h1>`. One principle, both directions:
-the name never reaches the markdown renderer, and markup never reaches the
-name.
+There are no interactive components in this product — no buttons, inputs,
+navigation or forms, by product constraint. Everything below is reachable from
+both surfaces, because the branch in `app/index.html` chooses the *source* of
+the text, not what the text may become.
 
 ### Section Head
 
-The signature mark. A 2px full-ink rule across the column, 0.75rem of air, then
-the section name in 11px uppercase tracked 0.14em at weight 700. Opens 2.5rem
-above, closes 0.75rem below. Used for `h2` and nothing else; it is the only
-element that draws the heavy rule above a block. It is reachable from both
-surfaces — `## What is coming` in `APP_TEXT_LEAD` produces it with nothing
-mounted.
+The signature mark, used for `h2` and nothing else; the only element that draws
+the heavy rule above a block. Reachable from both surfaces.
 
 ### Links
 
-Ember Ink with a standard underline offset 2px. Hover thickens the underline to
-2px; there is no colour change and no transition. Footnote references and
-back-references drop the underline entirely — they are digits and arrows, and
-an underline would read them as part of the sentence. A footnote reference is
-about 6×12px; WCAG 2.2 SC 2.5.8 exempts targets inside a block of text, so this
-is an ergonomic note rather than a conformance failure, and enlarging one would
-cost the inline set of the sentence it sits in.
+Underlined, thickening on hover — the state change is weight, never colour.
+Footnote references and back-references drop the underline entirely: they are
+digits and arrows, and an underline would read them as part of the sentence.
+
+**Known limit.** A footnote reference is about 6×12px. WCAG 2.2 SC 2.5.8 exempts
+targets inside a block of text, so this is an ergonomic note rather than a
+conformance failure, and enlarging one would cost the inline set of the sentence
+it sits in.
 
 ### Code
 
-- **Inline:** mono at 13px in Ember Deep, no background, no border, no padding
-  (11.73:1 in dark). Inside a table cell it reverts to body Ink so the cell does
-  not read as a row of links.
-- **Block:** 1.25rem of padding on Sunken Paper, square, no border, body Ink
-  for unhighlighted text, line-height 1.7, horizontal scroll on overflow. The
-  four syntax tones sit on top.
+Inline code is unboxed — colour alone marks it — and inside a table cell it
+reverts to body Ink so the cell does not read as a row of links.
 
 ### Note (blockquote)
 
-A warm tint panel, 1rem / 1.25rem padding, square, explicitly borderless — the
-tint alone marks it. Its last child's bottom margin is zeroed. A nested quote
-drops the tint for a hairline left stripe.
+A warm tint panel, explicitly borderless — the tint alone marks it.
 
 ### Table
-
-Full width, collapsed borders, body size, and its own scroll container
-(`display: block`, `overflow-x: auto`) so an over-wide table behaves like a code
-block rather than widening the page. The head row is mono, 11px, weight 500,
-uppercase, tracked 0.12em, left-aligned, sitting on the 2px rule. Body cells
-carry 0.75rem of vertical padding and a hairline bottom line.
 
 The flush right edge takes two declarations, and the mechanism is worth stating
 because for a while only half of it was there. `th:last-child, td:last-child`
@@ -523,15 +455,13 @@ zero the right padding *and* set `width: 100%`. Without the width the table was
 flush only by accident: `display: block` makes the `<table>` a block box whose
 internal grid sits in an anonymous table box at `width: auto`, which
 shrink-wraps to its content — so `width: 100%` on the element sizes the block,
-not the grid, and `min-width: 100%` does nothing (both measured). Measured
-before: a two-column table drew its grid across 100 of 544px and a three-column
-one across 248, while every `h2` rule above and below ran the full width.
-Measured after, across three table widths and two viewports: two columns fill
-544/544 at desktop and 350/350 at mobile, an over-wide table still scrolls
-inside itself, and the document never scrolls sideways.
+not the grid, and `min-width: 100%` does nothing (both measured). Before the
+fix, a two-column table drew its grid across 100 of 544px while every `h2` rule
+above and below ran the full width; after it, two columns fill the column at
+both viewports and an over-wide table still scrolls inside itself.
 
-The known ceiling: all remaining width lands in the last column, so a table
-ending in a short value gets a wide final column. Distributing the slack needs
+**Known limit.** All remaining width lands in the last column, so a table ending
+in a short value gets a wide final column. Distributing the slack needs
 `table-layout: fixed`, which trades away content-driven column sizing — rejected
 for that reason.
 
@@ -542,115 +472,89 @@ below it.
 
 ### Figure and Caption
 
-Images are block-level, `max-width: 100%`, no frame and no radius. The caption
-sits 0.5rem below in mono, 11px, uppercase, tracked 0.08em, in Faint Ink. An
-image that ships with the product carries the scheme itself — `demo/image.svg`
-holds its own `prefers-color-scheme: dark` block and darkens its placeholder
-field, having otherwise been the brightest object on the dark page; a renderer
-that ignores the query falls back to the light fills. An operator's own image
-is served as-is and cannot be expected to do the same, so the page never
-assumes it will.
+Images are block-level and unframed, with the caption below in mono uppercase.
+An image shipped with the product carries the scheme itself — `demo/image.svg`
+holds its own `prefers-color-scheme: dark` block, having otherwise been the
+brightest object on the dark page, and a renderer ignoring the query falls back
+to the light fills. An operator's own image is served as-is and cannot be
+expected to do the same, so the page never assumes it will.
 
 ### Task List
 
 A drawn checkbox, because the renderer emits the control `disabled` and a
-disabled control ignores `accent-color`. `appearance: none`, 0.85em square,
-hairline outline when empty, Ember fill when checked. The list marker is removed
-per item — not per list — and the item pulls back by the list indent, because an
-ordinary bullet may sit in the same list.
+disabled control ignores `accent-color`. The list marker is removed per item,
+not per list, because an ordinary bullet may sit in the same list.
 
-Under `forced-colors: active` the drawn box returns to `appearance: auto`.
-Forced colours discard `background-color`, which is the only thing separating a
-ticked box from an empty one — verified by screenshot, both read as empty
-before. The system's answer to forced colours is to hand the control back to the
-platform, not to invent a second visual language for it.
+Under `forced-colors: active` the box returns to `appearance: auto`. Forced
+colours discard `background-color`, the only thing separating a ticked box from
+an empty one — verified by screenshot, both read as empty before. The system's
+answer to forced colours is to hand the control back to the platform, not to
+invent a second visual language for it.
 
 ### Disclosure
 
 Raw HTML passes through the renderer, so `details`/`summary` is a usable idiom.
-The summary is bold body text with a pointer cursor; its native marker is tinted
-Ember. Nothing else about it is styled — the native triangle is the affordance.
+The native marker is tinted Ember and nothing else is styled — the native
+triangle is the affordance.
 
 ### Footnotes
 
-The collected notes sit below a 1px hairline at 13px in Subtle Ink (7.31:1 in
-dark), with the renderer's own `hr` hidden so the line is not drawn twice. It
-takes the hairline and not the section rule because the heavy rule always
-carries an uppercase label and the renderer emits none for this block.
+The collected notes sit below a hairline rather than the structural rule,
+because the heavy rule always carries an uppercase label and the renderer emits
+none here. The renderer's own `hr` is hidden so the line is not drawn twice.
 
 ### Focus and Selection
 
-`:focus-visible` draws a 2px solid Ember Ink outline offset 2px — the
-structural rule weight, reused as a focus ring. Selection paints Ember Ink with
-Paper as the text colour (6.2:1 light, 10.3:1 dark), so a dragged range is
-plainly stronger than the browser default it replaces.
+`:focus-visible` reuses the structural rule weight as a focus ring. Selection
+paints Ember Ink with Paper as the text colour, so a dragged range is plainly
+stronger than the browser default it replaces.
 
 ### Failed Template
 
 The page answers with itself when it cannot render. A broken `{{` in a mounted
-file fails the template; `docker/caddy/Caddyfile` catches that in
-`handle_errors` and re-serves `/index.html`, and the branch in `app/index.html`
-is guarded with `(eq (placeholder "http.error.status_code") "")` so the error
-route takes the environment-variable path instead of re-rendering the file that
-just failed. The guard is load-bearing and was proven so: without it the error
-route renders the broken file again, fails again, and the visitor gets a
-zero-byte body. Measured after: a real page on `/` and on any other path, with
-the status still 500 so the operator sees the failure.
+file fails the template; `docker/caddy/Caddyfile` catches it in `handle_errors`
+and re-serves `/index.html`, and the branch in `app/index.html` is guarded with
+`(eq (placeholder "http.error.status_code") "")` so the error route takes the
+environment-variable path instead of re-rendering the file that just failed. The
+guard is load-bearing and was proven so: without it the error route renders the
+broken file again, fails again, and the visitor gets a zero-byte body. The
+status stays 500 so the operator sees the failure.
 
 ### Named Rules
 
 **The One Surface Rule.** The system has exactly one error surface, and it is
-the environment-variable page. There is no separate error design, no apology
-copy, no status number set in type, no warning glyph — the failed page *is* the
+the environment-variable page. No separate error design, no apology copy, no
+status number set in type, no warning glyph — the failed page *is* the
 placeholder page. That is the only rendition consistent with never looking like
-a maintenance screen, and it is why the guard on the branch, not a new
-template, is where the work went.
+a maintenance screen, and it is why the guard on the branch, not a new template,
+is where the work went.
 
 **The Silent Default Rule.** The default surface carries none of the system's
 marks — no rule, no uppercase label, no mono face, no accent — and that is
-settled, not an oversight. A placeholder is allowed to look like almost
-nothing; the restraint is the statement. Measured: that page loads three files
-and not one of them is a font. Every mark is available on it the moment an
-operator writes markdown into `APP_TEXT_LEAD`, and nothing is to be added to
-make the empty state look designed.
+settled, not an oversight. A placeholder is allowed to look like almost nothing;
+the restraint is the statement. Measured: that page loads three files and not
+one of them is a font. Every mark is available the moment an operator writes
+markdown into `APP_TEXT_LEAD`, and nothing is to be added to make the empty
+state look designed.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** put every value in `app/tokens.css` and author it in OKLCH; hue 250 for
-  neutrals, hue 45–50 for the accent, hue 60 for the note tint.
-- **Do** style by element selector. The markdown renderer emits no classes, so a
-  rule that needs a class only works for hand-written markup and silently fails
-  on the operator's page.
-- **Do** measure both schemes in a browser whenever a colour changes, and record
-  the lowest ratio. The floor is 4.5:1, and a value that misses it is replaced,
-  not rounded.
-- **Do** check a moved token against its neighbours in the *other* scheme; a
-  distinction can be intact in light and collapsed in dark.
-- **Do** define every colour in both the light block and the
-  `prefers-color-scheme: dark` block. A token that exists in only one scheme is
-  a bug.
-- **Do** check every change against both surfaces — the two-line placeholder and
-  the full `demo/index.md` page, which exercises every construct the product can
-  render.
-- **Do** give any new block with an internal minimum width its own
-  `overflow-x: auto`; the body-level word break does not reach it.
+- **Do** put every value in `app/tokens.css` and author it in OKLCH.
+- **Do** style by element selector. The renderer emits no classes, so a rule
+  needing a class works for hand-written markup and silently fails on the
+  operator's page.
+- **Do** define every colour in both scheme blocks. A token that exists in only
+  one scheme is a bug.
 - **Do** hand a control back to the platform (`appearance: auto`) when forced
   colours would strip what carries its state.
 - **Do** ship any new font file inside the image and declare it with
   `@font-face` locally.
-- **Do** count the measure in the browser over real text when the column
-  changes, and keep the first line inside 45–75 characters.
-- **Do** escape anything an operator sets that is not meant to be markup;
-  `APP_NAME` runs through `| html` in both places it appears.
-- **Do** express new depth with a tone step or one of the two line weights.
-- **Do** delete a token nothing consumes. `--tracking-wide` and
-  `--weight-regular` were removed for exactly that reason. Deletion is not a
-  one-way door: a token comes back the moment something consumes it again, which
-  is how `--space-1` returned for the checkbox gap. Delete on the evidence of
-  today's build, and restore on the same evidence — neither move needs an
-  apology.
+- **Do** escape anything an operator sets that is not meant to be markup.
+- **Do** delete a token nothing consumes, and restore it the moment something
+  consumes it again. Delete on the evidence of today's build and restore on the
+  same evidence — neither move needs an apology.
 
 ### Don't:
 
@@ -658,20 +562,7 @@ make the empty state look designed.
   animation. The sheet is flat and still.
 - **Don't** fetch anything at runtime — no font CDN, no script, no image from
   another host. The page must render with the machine offline.
-- **Don't** introduce a third line weight, a second accent hue, or a fifth
-  syntax tone.
-- **Don't** add a fifth heading size. Below `h3`, step back in tone and then in
-  weight.
-- **Don't** draw the 2px rule above a block that carries no uppercase label; use
-  the hairline.
-- **Don't** set body prose, headings or emphasis in the monospace face.
-- **Don't** let any element exceed the 34rem column or force horizontal page
-  scroll; wrap, break, or scroll inside the block.
-- **Don't** read a `ch` value as a character count when judging the measure.
-- **Don't** build a second surface for the error case, and don't dress the
-  default surface up with marks the operator did not ask for.
-- **Don't** nest a tinted surface inside a tinted surface.
-- **Don't** use a page-adjacent tint for a transient highlight such as
-  selection; that needs a measured accent, not a wash.
+- **Don't** dress the default surface up with marks the operator did not ask
+  for.
 - **Don't** add a logo, wordmark or decorative image — the product has none by
   commitment, and the page's only mark is the ruled section label.
