@@ -318,9 +318,14 @@ one the operator's words carry.
   boundary rather than mid-word at 44px. The break points are correct rather
   than arbitrary because the page language is set from `APP_LANG`.
 - **Lead** (400, 1.125rem / 1.0625rem below 34rem, 1.5, Muted Ink): the first
-  paragraph after the title, clamped to 34ch so it breaks into a short stack
-  rather than running the full column. The rule is `h1 + p` and it is deliberately
-  literal: a plain sentence in `APP_TEXT_LEAD` still renders as exactly one `<p>`
+  paragraph after the title, clamped to 48ch so it sits on a shorter measure
+  than the body column and registers as an opening rather than as the first
+  paragraph. It is not meant to stack: at 34ch the sentence fell into four lines
+  under the 44px display and read as a wrapping accident, where 48ch (481px in a
+  640px column at 1280px) holds three lines and still stays visibly short of the
+  body below it. Below 34rem the clamp is inert — the sentence takes the full
+  column at either value — so this is a desktop decision. The rule is `h1 + p`
+  and it is deliberately literal: a plain sentence in `APP_TEXT_LEAD` still renders as exactly one `<p>`
   after the `<h1>` and still gets the treatment, but text that opens with a
   heading or a list does not match and gets no lead treatment. That is correct —
   the lead is the *first sentence under the title*, not a slot the first block

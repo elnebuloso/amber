@@ -133,7 +133,7 @@
     },
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem and hyphenates, so a long single-word APP_NAME breaks at a syllable rather than mid-word." },
-      "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 34ch so it stacks rather than running the full column. The selector is h1 + p and stays literal: a plain APP_TEXT_LEAD still renders as one <p> after the <h1> and gets the treatment, but text opening with a heading or a list correctly gets none." },
+      "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 48ch so it sits on a shorter measure than the body column and registers as an opening rather than as the first paragraph \u2014 not so that it stacks; 34ch broke it into four lines that read as a wrapping accident, and below 34rem the clamp is inert, so this is a desktop decision. The selector is h1 + p and stays literal: a plain APP_TEXT_LEAD still renders as one <p> after the <h1> and gets the treatment, but text opening with a heading or a list correctly gets none." },
       "label": { "displayName": "Section Label", "purpose": "Section heads (h2) in the sans face, uppercase and tracked, always beneath the 2px rule." },
       "headline": { "displayName": "Headline", "purpose": "h3 at 20px — the first heading that reads as a heading rather than a label, and the last level with a size of its own." },
       "title": { "displayName": "Title", "purpose": "h4 at body size in bold Ink." },
