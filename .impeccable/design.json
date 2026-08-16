@@ -355,6 +355,10 @@
       {
         "name": "Failed template keeps the 500 status",
         "detail": "A broken {{ in the mounted file is answered with the environment-variable page via handle_errors, but the status stays 500 on every path so the operator still sees the failure. The branch guard (eq (placeholder \"http.error.status_code\") \"\") is load-bearing: without it the error route re-renders the broken file and returns a zero-byte body."
+      },
+      {
+        "name": "The table's slack all goes to the last column",
+        "detail": "width: 100% on the last cell is what makes a narrow table reach the column edge, so a table ending in a short value gets a wide final column. Distributing the slack evenly needs table-layout: fixed, which trades away content-driven column sizing and was rejected for that reason."
       }
     ],
     "measure": [
@@ -415,9 +419,9 @@
       "name": "Table",
       "kind": "custom",
       "refersTo": "table-head",
-      "description": "Mono uppercase head on the 2px rule, hairline row lines, flush right edge — and its own scroll container, because a cell never shrinks below its longest word.",
+      "description": "Mono uppercase head on the 2px rule, hairline row lines, and its own scroll container, because a cell never shrinks below its longest word. The flush right edge needs both padding-right: 0 and width: 100% on the last cell: display: block wraps the grid in an anonymous table box at width: auto that shrink-wraps to content, so width on the element sizes the block and not the grid (min-width: 100% does nothing — both measured). Before the fix a two-column table drew 100 of 544px while the rules above and below ran full width.",
       "html": "<table class=\"ds-table\"><thead><tr><th>Variable</th><th>Meaning</th></tr></thead><tbody><tr><td>APP_NAME</td><td>page title and heading</td></tr><tr><td>APP_TEXT_LEAD</td><td>the line below the heading</td></tr><tr><td>APP_LANG</td><td>the page language</td></tr></tbody></table>",
-      "css": ".ds-table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--text-base); color: var(--fg); } .ds-table th { text-align: left; padding: 0 var(--space-3) var(--space-2) 0; border-bottom: var(--rule) solid var(--border-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; } .ds-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: var(--hairline) solid var(--border); } .ds-table th:last-child, .ds-table td:last-child { padding-right: 0; } .ds-table:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
+      "css": ".ds-table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-family: var(--font-sans); font-size: var(--text-base); color: var(--fg); } .ds-table th { text-align: left; padding: 0 var(--space-3) var(--space-2) 0; border-bottom: var(--rule) solid var(--border-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; } .ds-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: var(--hairline) solid var(--border); } .ds-table th:last-child, .ds-table td:last-child { padding-right: 0; width: 100%; } .ds-table:focus-visible { outline: var(--rule) solid var(--accent-ink); outline-offset: 2px; }"
     },
     {
       "name": "Task List",
@@ -555,7 +559,7 @@
       "Do hand a control back to the platform (appearance: auto) when forced colours would strip what carries its state.",
       "Do ship any new font file inside the image and declare it with @font-face locally.",
       "Do express new depth with a tone step or one of the two line weights.",
-      "Do delete a token nothing consumes. --space-1, --tracking-wide and --weight-regular were removed for exactly that reason.",
+      "Do delete a token nothing consumes. --tracking-wide and --weight-regular were removed for exactly that reason. Deletion is not a one-way door: a token comes back the moment something consumes it again, which is how --space-1 returned for the task-list checkbox gap.",
       "Do count the measure in the browser over real text when the column changes, and keep the first line inside 45–75 characters.",
       "Do escape anything an operator sets that is not meant to be markup; APP_NAME runs through | html in both places it appears."
     ],

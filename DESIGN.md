@@ -94,6 +94,7 @@ typography:
 rounded:
   none: "0"
 spacing:
+  "1": "0.25rem"
   "2": "0.5rem"
   "3": "0.75rem"
   "4": "1rem"
@@ -388,8 +389,11 @@ document starts at the top and grows. Page padding is 3.5rem top / 1.5rem
 side / 4rem bottom, tightening to 2rem / 1.25rem / 2.5rem below 34rem — the
 single breakpoint in the system, which also shrinks the display and lead sizes.
 
-Vertical rhythm comes from a small step scale (0.5 / 0.75 / 1 / 1.25 / 1.5 /
-2 / 2.5 / 3.5 / 4rem). Block elements share a 1.25rem bottom margin; a section
+Vertical rhythm comes from a small step scale (0.25 / 0.5 / 0.75 / 1 / 1.25 /
+1.5 / 2 / 2.5 / 3.5 / 4rem). The 0.25rem step exists for one job only — the
+task-list checkbox's right margin, where 4px is what makes a task label line up
+with the labels of the ordinary items beside it (measured: 0.37px residual,
+down from 4px). Block elements share a 1.25rem bottom margin; a section
 head opens 2.5rem of space above itself, an `h3` 2rem, an `h4` 1.5rem. List
 items are separated by 0.5rem and the last item's margin is zeroed so a list
 does not double-space against the block below it.
@@ -511,8 +515,30 @@ Full width, collapsed borders, body size, and its own scroll container
 (`display: block`, `overflow-x: auto`) so an over-wide table behaves like a code
 block rather than widening the page. The head row is mono, 11px, weight 500,
 uppercase, tracked 0.12em, left-aligned, sitting on the 2px rule. Body cells
-carry 0.75rem of vertical padding and a hairline bottom line. The last column's
-right padding is zeroed so the table aligns flush with the column.
+carry 0.75rem of vertical padding and a hairline bottom line.
+
+The flush right edge takes two declarations, and the mechanism is worth stating
+because for a while only half of it was there. `th:last-child, td:last-child`
+zero the right padding *and* set `width: 100%`. Without the width the table was
+flush only by accident: `display: block` makes the `<table>` a block box whose
+internal grid sits in an anonymous table box at `width: auto`, which
+shrink-wraps to its content — so `width: 100%` on the element sizes the block,
+not the grid, and `min-width: 100%` does nothing (both measured). Measured
+before: a two-column table drew its grid across 100 of 544px and a three-column
+one across 248, while every `h2` rule above and below ran the full width.
+Measured after, across three table widths and two viewports: two columns fill
+544/544 at desktop and 350/350 at mobile, an over-wide table still scrolls
+inside itself, and the document never scrolls sideways.
+
+The known ceiling: all remaining width lands in the last column, so a table
+ending in a short value gets a wide final column. Distributing the slack needs
+`table-layout: fixed`, which trades away content-driven column sizing — rejected
+for that reason.
+
+`demo/index.md`'s table happens to fill the column on its own content, which is
+why the defect survived every visual pass. A fixture that happens to look
+correct proves nothing; check a two-column table against the rules above and
+below it.
 
 ### Figure and Caption
 
@@ -619,8 +645,12 @@ make the empty state look designed.
 - **Do** escape anything an operator sets that is not meant to be markup;
   `APP_NAME` runs through `| html` in both places it appears.
 - **Do** express new depth with a tone step or one of the two line weights.
-- **Do** delete a token nothing consumes. `--space-1`, `--tracking-wide` and
-  `--weight-regular` were removed for exactly that reason.
+- **Do** delete a token nothing consumes. `--tracking-wide` and
+  `--weight-regular` were removed for exactly that reason. Deletion is not a
+  one-way door: a token comes back the moment something consumes it again, which
+  is how `--space-1` returned for the checkbox gap. Delete on the evidence of
+  today's build, and restore on the same evidence — neither move needs an
+  apology.
 
 ### Don't:
 
