@@ -106,7 +106,9 @@
 		--accent-ink: oklch(0.82 0.12 50);
 		--accent-code: oklch(0.87 0.11 50);
 
-		--border-strong: oklch(0.93 0.004 250);
+		/* Not the mirror of the light value: a light line on a dark ground blooms,
+		   and at the text's own lightness the rule shouts down the label under it. */
+		--border-strong: oklch(0.76 0.004 250);
 		--border: oklch(0.28 0.006 250);
 
 		--code-comment: oklch(0.66 0.008 250);
