@@ -60,8 +60,8 @@
 	--space-14: 3.5rem;
 	--space-16: 4rem;
 
-	--measure: 40rem;      /* page column */
-	--measure-lead: 48ch;  /* lead sentence */
+	--measure: 34rem;      /* page column — 75 characters a line, measured */
+	--measure-lead: 40ch;  /* lead sentence — 74% of the column, still three lines */
 	--rule: 2px;           /* section rule */
 	--hairline: 1px;
 
