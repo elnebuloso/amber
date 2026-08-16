@@ -63,8 +63,12 @@ Everything in the mounted directory is served, not just the markdown — mount a
 contains only what should be public.
 
 The markdown goes through Caddy's template engine before it is rendered. A `{{` in the content is
-executed, and a broken one makes every URL answer 500; raw HTML passes through unfiltered. Only
-mount content you wrote yourself, and escape or avoid `{{`.
+executed, and raw HTML passes through unfiltered. Only mount content you wrote yourself, and escape
+or avoid `{{`.
+
+A `{{` the engine cannot parse makes every URL answer **500 with the page built from the
+environment variables**, so the domain still says whose it is while you fix the file. The status
+code stays 500, which is what tells you something is wrong.
 
 ## development
 

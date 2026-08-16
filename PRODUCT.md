@@ -48,7 +48,8 @@ an unchanged configuration.
 Confirmed capabilities:
 
 - `APP_NAME` renders as the heading, `APP_TEXT_LEAD` as markdown below it — so the same page the
-  mounted file produces is reachable from a `docker run` line, without mounting anything.
+  mounted file produces is reachable from a `docker run` line, without mounting anything. Markup in
+  `APP_NAME` is escaped: a name is a name, and nothing in it reaches the page as markup.
 - A mounted `/app/content/index.md` replaces that page and is rendered as GitHub-flavoured
   markdown, including footnotes and syntax-highlighted code. `APP_NAME` stays the tab title.
 - Files next to the markdown, such as images, are served.
@@ -69,8 +70,9 @@ Confirmed constraints, and the ones the maintainer named as permanent:
 
 Known sharp edges an operator has to be told about, because they cannot be designed away:
 
-- The markdown passes through the runtime's template engine, so `{{` in the content is executed and
-  a broken one makes every URL answer 500.
+- The markdown passes through the runtime's template engine, so `{{` in the content is executed. A
+  broken one still answers every URL with the environment-variable page, under a 500 status: the
+  domain keeps saying whose it is, and the status keeps saying the file is wrong.
 - Raw HTML in the markdown passes through unfiltered.
 - Everything in the mounted directory is served, not just the markdown.
 

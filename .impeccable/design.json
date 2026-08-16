@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T21:30:00Z",
+  "generatedAt": "2026-08-16T23:10:00Z",
   "title": "Design System: amber",
   "extensions": {
     "colorMeta": {
@@ -9,14 +9,32 @@
         "displayName": "Paper",
         "canonical": "oklch(0.99 0.002 250)",
         "darkCounterpart": "bg-dark",
-        "tonalRamp": ["oklch(0.15 0.002 250)", "oklch(0.26 0.002 250)", "oklch(0.37 0.002 250)", "oklch(0.48 0.002 250)", "oklch(0.60 0.002 250)", "oklch(0.72 0.002 250)", "oklch(0.84 0.002 250)", "oklch(0.95 0.002 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.002 250)",
+          "oklch(0.26 0.002 250)",
+          "oklch(0.37 0.002 250)",
+          "oklch(0.48 0.002 250)",
+          "oklch(0.60 0.002 250)",
+          "oklch(0.72 0.002 250)",
+          "oklch(0.84 0.002 250)",
+          "oklch(0.95 0.002 250)"
+        ]
       },
       "bg-sunken": {
         "role": "neutral",
         "displayName": "Sunken Paper",
         "canonical": "oklch(0.965 0.004 250)",
         "darkCounterpart": "bg-sunken-dark",
-        "tonalRamp": ["oklch(0.15 0.004 250)", "oklch(0.26 0.004 250)", "oklch(0.37 0.004 250)", "oklch(0.48 0.004 250)", "oklch(0.60 0.004 250)", "oklch(0.72 0.004 250)", "oklch(0.84 0.004 250)", "oklch(0.95 0.004 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.004 250)",
+          "oklch(0.26 0.004 250)",
+          "oklch(0.37 0.004 250)",
+          "oklch(0.48 0.004 250)",
+          "oklch(0.60 0.004 250)",
+          "oklch(0.72 0.004 250)",
+          "oklch(0.84 0.004 250)",
+          "oklch(0.95 0.004 250)"
+        ]
       },
       "bg-note": {
         "role": "neutral",
@@ -24,21 +42,48 @@
         "canonical": "oklch(0.965 0.008 60)",
         "darkCounterpart": "bg-note-dark",
         "note": "Blockquote panel only. Too close to the page to carry a transient highlight; selection uses accent-ink instead.",
-        "tonalRamp": ["oklch(0.15 0.008 60)", "oklch(0.26 0.008 60)", "oklch(0.37 0.008 60)", "oklch(0.48 0.008 60)", "oklch(0.60 0.008 60)", "oklch(0.72 0.008 60)", "oklch(0.84 0.008 60)", "oklch(0.95 0.008 60)"]
+        "tonalRamp": [
+          "oklch(0.15 0.008 60)",
+          "oklch(0.26 0.008 60)",
+          "oklch(0.37 0.008 60)",
+          "oklch(0.48 0.008 60)",
+          "oklch(0.60 0.008 60)",
+          "oklch(0.72 0.008 60)",
+          "oklch(0.84 0.008 60)",
+          "oklch(0.95 0.008 60)"
+        ]
       },
       "fg": {
         "role": "neutral",
         "displayName": "Ink",
         "canonical": "oklch(0.2 0.005 250)",
         "darkCounterpart": "fg-dark",
-        "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.005 250)",
+          "oklch(0.26 0.005 250)",
+          "oklch(0.37 0.005 250)",
+          "oklch(0.48 0.005 250)",
+          "oklch(0.60 0.005 250)",
+          "oklch(0.72 0.005 250)",
+          "oklch(0.84 0.005 250)",
+          "oklch(0.95 0.005 250)"
+        ]
       },
       "fg-muted": {
         "role": "neutral",
         "displayName": "Muted Ink",
         "canonical": "oklch(0.38 0.005 250)",
         "darkCounterpart": "fg-muted-dark",
-        "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.005 250)",
+          "oklch(0.26 0.005 250)",
+          "oklch(0.37 0.005 250)",
+          "oklch(0.48 0.005 250)",
+          "oklch(0.60 0.005 250)",
+          "oklch(0.72 0.005 250)",
+          "oklch(0.84 0.005 250)",
+          "oklch(0.95 0.005 250)"
+        ]
       },
       "fg-subtle": {
         "role": "neutral",
@@ -46,21 +91,48 @@
         "canonical": "oklch(0.42 0.005 250)",
         "darkCounterpart": "fg-subtle-dark",
         "note": "Dark moved from 0.76 to 0.71: at 0.76 it was identical to Muted Ink, so the nested-list and footnote step existed only in light. Now 7.31:1 on the dark page.",
-        "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.005 250)",
+          "oklch(0.26 0.005 250)",
+          "oklch(0.37 0.005 250)",
+          "oklch(0.48 0.005 250)",
+          "oklch(0.60 0.005 250)",
+          "oklch(0.72 0.005 250)",
+          "oklch(0.84 0.005 250)",
+          "oklch(0.95 0.005 250)"
+        ]
       },
       "fg-faint": {
         "role": "neutral",
         "displayName": "Faint Ink",
         "canonical": "oklch(0.55 0.005 250)",
         "darkCounterpart": "fg-faint-dark",
-        "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.005 250)",
+          "oklch(0.26 0.005 250)",
+          "oklch(0.37 0.005 250)",
+          "oklch(0.48 0.005 250)",
+          "oklch(0.60 0.005 250)",
+          "oklch(0.72 0.005 250)",
+          "oklch(0.84 0.005 250)",
+          "oklch(0.95 0.005 250)"
+        ]
       },
       "fg-note": {
         "role": "neutral",
         "displayName": "Note Ink",
         "canonical": "oklch(0.33 0.02 60)",
         "darkCounterpart": "fg-note-dark",
-        "tonalRamp": ["oklch(0.15 0.02 60)", "oklch(0.26 0.02 60)", "oklch(0.37 0.02 60)", "oklch(0.48 0.02 60)", "oklch(0.60 0.02 60)", "oklch(0.72 0.02 60)", "oklch(0.84 0.02 60)", "oklch(0.95 0.02 60)"]
+        "tonalRamp": [
+          "oklch(0.15 0.02 60)",
+          "oklch(0.26 0.02 60)",
+          "oklch(0.37 0.02 60)",
+          "oklch(0.48 0.02 60)",
+          "oklch(0.60 0.02 60)",
+          "oklch(0.72 0.02 60)",
+          "oklch(0.84 0.02 60)",
+          "oklch(0.95 0.02 60)"
+        ]
       },
       "accent": {
         "role": "primary",
@@ -68,7 +140,16 @@
         "canonical": "oklch(0.58 0.14 45)",
         "darkCounterpart": "accent-dark",
         "note": "A fill, never text. Tried as the selection background and measured 4.41:1 against Paper — rejected for accent-ink.",
-        "tonalRamp": ["oklch(0.15 0.14 45)", "oklch(0.26 0.14 45)", "oklch(0.37 0.14 45)", "oklch(0.48 0.14 45)", "oklch(0.60 0.14 45)", "oklch(0.72 0.14 45)", "oklch(0.84 0.14 45)", "oklch(0.95 0.14 45)"]
+        "tonalRamp": [
+          "oklch(0.15 0.14 45)",
+          "oklch(0.26 0.14 45)",
+          "oklch(0.37 0.14 45)",
+          "oklch(0.48 0.14 45)",
+          "oklch(0.60 0.14 45)",
+          "oklch(0.72 0.14 45)",
+          "oklch(0.84 0.14 45)",
+          "oklch(0.95 0.14 45)"
+        ]
       },
       "accent-ink": {
         "role": "primary",
@@ -76,7 +157,16 @@
         "canonical": "oklch(0.5 0.14 45)",
         "darkCounterpart": "accent-ink-dark",
         "note": "Links, footnote refs, focus ring, and the selection background against Paper text: 6.2:1 light, 10.3:1 dark.",
-        "tonalRamp": ["oklch(0.15 0.14 45)", "oklch(0.26 0.14 45)", "oklch(0.37 0.14 45)", "oklch(0.48 0.14 45)", "oklch(0.60 0.14 45)", "oklch(0.72 0.14 45)", "oklch(0.84 0.14 45)", "oklch(0.95 0.14 45)"]
+        "tonalRamp": [
+          "oklch(0.15 0.14 45)",
+          "oklch(0.26 0.14 45)",
+          "oklch(0.37 0.14 45)",
+          "oklch(0.48 0.14 45)",
+          "oklch(0.60 0.14 45)",
+          "oklch(0.72 0.14 45)",
+          "oklch(0.84 0.14 45)",
+          "oklch(0.95 0.14 45)"
+        ]
       },
       "accent-code": {
         "role": "primary",
@@ -84,7 +174,16 @@
         "canonical": "oklch(0.45 0.13 45)",
         "darkCounterpart": "accent-code-dark",
         "note": "Dark moved from 0.82 to 0.87: at 0.82 it was identical to Ember Ink, so inline code and links were the same colour in dark. Now 11.73:1.",
-        "tonalRamp": ["oklch(0.15 0.13 45)", "oklch(0.26 0.13 45)", "oklch(0.37 0.13 45)", "oklch(0.48 0.13 45)", "oklch(0.60 0.13 45)", "oklch(0.72 0.13 45)", "oklch(0.84 0.13 45)", "oklch(0.95 0.13 45)"]
+        "tonalRamp": [
+          "oklch(0.15 0.13 45)",
+          "oklch(0.26 0.13 45)",
+          "oklch(0.37 0.13 45)",
+          "oklch(0.48 0.13 45)",
+          "oklch(0.60 0.13 45)",
+          "oklch(0.72 0.13 45)",
+          "oklch(0.84 0.13 45)",
+          "oklch(0.95 0.13 45)"
+        ]
       },
       "border-strong": {
         "role": "neutral",
@@ -92,14 +191,32 @@
         "canonical": "oklch(0.2 0.005 250)",
         "darkCounterpart": "border-strong-dark",
         "note": "Light is exactly fg, so rule and label read as one mark. Dark moved from 0.93 (also exactly fg-dark) to 0.76: the two measured near-symmetric (17.66:1 light, 15.28:1 dark) but read asymmetric — a light line on a dark ground blooms, and seven near-white bands were louder than the 11px labels beneath them. At 0.76 the dark rule is 8.73:1 against the page, the weight of secondary text; that also clears WCAG 1.4.11's 3:1 for the task-list checkbox outline it draws, which is a component boundary rather than text.",
-        "tonalRamp": ["oklch(0.15 0.005 250)", "oklch(0.26 0.005 250)", "oklch(0.37 0.005 250)", "oklch(0.48 0.005 250)", "oklch(0.60 0.005 250)", "oklch(0.72 0.005 250)", "oklch(0.84 0.005 250)", "oklch(0.95 0.005 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.005 250)",
+          "oklch(0.26 0.005 250)",
+          "oklch(0.37 0.005 250)",
+          "oklch(0.48 0.005 250)",
+          "oklch(0.60 0.005 250)",
+          "oklch(0.72 0.005 250)",
+          "oklch(0.84 0.005 250)",
+          "oklch(0.95 0.005 250)"
+        ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Hairline",
         "canonical": "oklch(0.91 0.004 250)",
         "darkCounterpart": "border-dark",
-        "tonalRamp": ["oklch(0.15 0.004 250)", "oklch(0.26 0.004 250)", "oklch(0.37 0.004 250)", "oklch(0.48 0.004 250)", "oklch(0.60 0.004 250)", "oklch(0.72 0.004 250)", "oklch(0.84 0.004 250)", "oklch(0.95 0.004 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.004 250)",
+          "oklch(0.26 0.004 250)",
+          "oklch(0.37 0.004 250)",
+          "oklch(0.48 0.004 250)",
+          "oklch(0.60 0.004 250)",
+          "oklch(0.72 0.004 250)",
+          "oklch(0.84 0.004 250)",
+          "oklch(0.95 0.004 250)"
+        ]
       },
       "code-comment": {
         "role": "tertiary",
@@ -107,53 +224,150 @@
         "canonical": "oklch(0.54 0.008 250)",
         "darkCounterpart": "code-comment-dark",
         "note": "Darkened from 0.56 to 0.54: the lighter value measured 4.20:1 against Sunken Paper in light and missed AA. At 0.54 it is the system's lowest measured pair, 4.58:1.",
-        "tonalRamp": ["oklch(0.15 0.008 250)", "oklch(0.26 0.008 250)", "oklch(0.37 0.008 250)", "oklch(0.48 0.008 250)", "oklch(0.60 0.008 250)", "oklch(0.72 0.008 250)", "oklch(0.84 0.008 250)", "oklch(0.95 0.008 250)"]
+        "tonalRamp": [
+          "oklch(0.15 0.008 250)",
+          "oklch(0.26 0.008 250)",
+          "oklch(0.37 0.008 250)",
+          "oklch(0.48 0.008 250)",
+          "oklch(0.60 0.008 250)",
+          "oklch(0.72 0.008 250)",
+          "oklch(0.84 0.008 250)",
+          "oklch(0.95 0.008 250)"
+        ]
       },
       "code-keyword": {
         "role": "tertiary",
         "displayName": "Keyword Violet",
         "canonical": "oklch(0.46 0.14 300)",
         "darkCounterpart": "code-keyword-dark",
-        "tonalRamp": ["oklch(0.15 0.14 300)", "oklch(0.26 0.14 300)", "oklch(0.37 0.14 300)", "oklch(0.48 0.14 300)", "oklch(0.60 0.14 300)", "oklch(0.72 0.14 300)", "oklch(0.84 0.14 300)", "oklch(0.95 0.14 300)"]
+        "tonalRamp": [
+          "oklch(0.15 0.14 300)",
+          "oklch(0.26 0.14 300)",
+          "oklch(0.37 0.14 300)",
+          "oklch(0.48 0.14 300)",
+          "oklch(0.60 0.14 300)",
+          "oklch(0.72 0.14 300)",
+          "oklch(0.84 0.14 300)",
+          "oklch(0.95 0.14 300)"
+        ]
       },
       "code-number": {
         "role": "tertiary",
         "displayName": "Number Amber",
         "canonical": "oklch(0.5 0.13 40)",
         "darkCounterpart": "code-number-dark",
-        "tonalRamp": ["oklch(0.15 0.13 40)", "oklch(0.26 0.13 40)", "oklch(0.37 0.13 40)", "oklch(0.48 0.13 40)", "oklch(0.60 0.13 40)", "oklch(0.72 0.13 40)", "oklch(0.84 0.13 40)", "oklch(0.95 0.13 40)"]
+        "tonalRamp": [
+          "oklch(0.15 0.13 40)",
+          "oklch(0.26 0.13 40)",
+          "oklch(0.37 0.13 40)",
+          "oklch(0.48 0.13 40)",
+          "oklch(0.60 0.13 40)",
+          "oklch(0.72 0.13 40)",
+          "oklch(0.84 0.13 40)",
+          "oklch(0.95 0.13 40)"
+        ]
       },
       "code-string": {
         "role": "tertiary",
         "displayName": "String Green",
         "canonical": "oklch(0.44 0.11 155)",
         "darkCounterpart": "code-string-dark",
-        "tonalRamp": ["oklch(0.15 0.11 155)", "oklch(0.26 0.11 155)", "oklch(0.37 0.11 155)", "oklch(0.48 0.11 155)", "oklch(0.60 0.11 155)", "oklch(0.72 0.11 155)", "oklch(0.84 0.11 155)", "oklch(0.95 0.11 155)"]
+        "tonalRamp": [
+          "oklch(0.15 0.11 155)",
+          "oklch(0.26 0.11 155)",
+          "oklch(0.37 0.11 155)",
+          "oklch(0.48 0.11 155)",
+          "oklch(0.60 0.11 155)",
+          "oklch(0.72 0.11 155)",
+          "oklch(0.84 0.11 155)",
+          "oklch(0.95 0.11 155)"
+        ]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem and hyphenates, so a long single-word APP_NAME breaks at a syllable rather than mid-word." },
-      "lead": { "displayName": "Lead", "purpose": "The single sentence after the title, clamped to 48ch so it sits on a shorter measure than the body column and registers as an opening rather than as the first paragraph \u2014 not so that it stacks; 34ch broke it into four lines that read as a wrapping accident, and below 34rem the clamp is inert, so this is a desktop decision. The selector is h1 + p and stays literal: a plain APP_TEXT_LEAD still renders as one <p> after the <h1> and gets the treatment, but text opening with a heading or a list correctly gets none." },
-      "label": { "displayName": "Section Label", "purpose": "Section heads (h2) in the sans face, uppercase and tracked, always beneath the 2px rule." },
-      "headline": { "displayName": "Headline", "purpose": "h3 at 20px — the first heading that reads as a heading rather than a label, and the last level with a size of its own." },
-      "title": { "displayName": "Title", "purpose": "h4 at body size in bold Ink." },
-      "title-quiet": { "displayName": "Title Quiet", "purpose": "h5 (bold) and h6 (medium) at body size in Muted Ink — the two levels that separate by tone and weight because the scale has no size left." },
-      "body": { "displayName": "Body", "purpose": "All prose, in a 40rem column with text-wrap: pretty." },
-      "label-mono": { "displayName": "Mono Label", "purpose": "Table heads (0.12em) and figure captions (0.08em) — machine-shaped labels, never sentences." },
-      "code": { "displayName": "Code", "purpose": "Inline and block code in the self-hosted IBM Plex Mono." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "The page title, once. The only large type in the system; drops to 2.125rem below 34rem and hyphenates, so a long single-word APP_NAME breaks at a syllable rather than mid-word."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The single sentence after the title, clamped to 40ch so it sits on a shorter measure than the body column and registers as an opening rather than as the first paragraph. The clamp moved with the column: at 48ch in the narrowed 34rem column the lead filled 88% of it and no longer read as a shorter measure, while 40ch is 400px — 74% of the column, still three lines. 34ch broke it into four lines that read as a wrapping accident, and below 34rem the clamp is inert, so this is a desktop decision. The selector is h1 + p and stays literal: a plain APP_TEXT_LEAD still renders as one <p> after the <h1> and gets the treatment, but text opening with a heading or a list correctly gets none."
+      },
+      "label": {
+        "displayName": "Section Label",
+        "purpose": "Section heads (h2) in the sans face, uppercase and tracked, always beneath the 2px rule."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "h3 at 20px — the first heading that reads as a heading rather than a label, and the last level with a size of its own."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h4 at body size in bold Ink."
+      },
+      "title-quiet": {
+        "displayName": "Title Quiet",
+        "purpose": "h5 (bold) and h6 (medium) at body size in Muted Ink — the two levels that separate by tone and weight because the scale has no size left."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose, in a 34rem column with text-wrap: pretty — 75 characters on the first line, counted in the browser over the paragraph's own text nodes, not converted from ch."
+      },
+      "label-mono": {
+        "displayName": "Mono Label",
+        "purpose": "Table heads (0.12em) and figure captions (0.08em) — machine-shaped labels, never sentences."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline and block code in the self-hosted IBM Plex Mono."
+      }
     },
     "shadows": [],
     "motion": [],
     "breakpoints": [
-      { "name": "narrow", "value": "34rem", "purpose": "The only breakpoint: tightens page padding and shrinks the display and lead sizes." }
+      {
+        "name": "narrow",
+        "value": "34rem",
+        "purpose": "The only breakpoint: tightens page padding and shrinks the display and lead sizes."
+      }
     ],
     "lineWeights": [
-      { "name": "rule", "value": "2px", "purpose": "Structural: the section-head rule, the table head underline, the focus outline. Never above a block without an uppercase label." },
-      { "name": "hairline", "value": "1px", "purpose": "Dividers: table rows, hr, nested-quote stripe, the footnote block's top line, unchecked checkbox." }
+      {
+        "name": "rule",
+        "value": "2px",
+        "purpose": "Structural: the section-head rule, the table head underline, the focus outline. Never above a block without an uppercase label."
+      },
+      {
+        "name": "hairline",
+        "value": "1px",
+        "purpose": "Dividers: table rows, hr, nested-quote stripe, the footnote block's top line, unchecked checkbox."
+      }
     ],
     "knownLimits": [
-      { "name": "Scroll containers carry no tabindex", "detail": "pre and table scroll without tabindex=\"0\". Chromium makes scrollable regions focusable itself — measured, pre.chroma is a tab stop with a visible ring — but that is browser behaviour, not a guarantee. Markdown cannot set the attribute and the page carries no JavaScript." },
-      { "name": "Footnote reference target size", "detail": "Footnote references measure 6x12px. WCAG 2.2 SC 2.5.8 exempts targets inside a block of text, so this is an ergonomic note rather than a conformance failure." }
+      {
+        "name": "Scroll containers carry no tabindex",
+        "detail": "pre and table scroll without tabindex=\"0\". Chromium makes scrollable regions focusable itself — measured, pre.chroma is a tab stop with a visible ring — but that is browser behaviour, not a guarantee. Markdown cannot set the attribute and the page carries no JavaScript."
+      },
+      {
+        "name": "Footnote reference target size",
+        "detail": "Footnote references measure 6x12px. WCAG 2.2 SC 2.5.8 exempts targets inside a block of text, so this is an ergonomic note rather than a conformance failure."
+      },
+      {
+        "name": "Failed template keeps the 500 status",
+        "detail": "A broken {{ in the mounted file is answered with the environment-variable page via handle_errors, but the status stays 500 on every path so the operator still sees the failure. The branch guard (eq (placeholder \"http.error.status_code\") \"\") is load-bearing: without it the error route re-renders the broken file and returns a zero-byte body."
+      }
+    ],
+    "measure": [
+      {
+        "name": "measure",
+        "value": "34rem",
+        "purpose": "The page column. Counted in the browser over real text nodes: 75 characters on the first line (82 at 40rem, 63 at 30rem). The comfortable range is 45-75."
+      },
+      {
+        "name": "measure-lead",
+        "value": "40ch",
+        "purpose": "The lead sentence. 400px, 74% of the column, three lines — short enough to read as an opening. ch is the width of the digit zero, not a character count; this token is sized by proportion to the column, not by a character claim."
+      }
     ]
   },
   "components": [
@@ -241,34 +455,94 @@
       "name": "Placeholder Surface",
       "kind": "custom",
       "refersTo": "link",
-      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height. APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so this surface reaches the full element vocabulary; only APP_NAME is emitted as a literal h1, so a name is never reformatted by its own value.",
+      "description": "The default page: a title and one sentence, vertically centred by min-height rather than height. It carries none of the system's marks — no rule, no uppercase label, no mono, no accent — by decision; a placeholder is allowed to look like almost nothing. APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so every mark is one markdown line away; only APP_NAME is emitted as a literal h1 and escaped with | html, so a name is never reformatted by its own value and never breaks out of the element it names. This is also the error surface: a failed template re-serves this page rather than a maintenance screen.",
       "html": "<div class=\"ds-placeholder\"><h1>amber</h1><p>Simple Docker Placeholder Website</p></div>",
       "css": ".ds-placeholder { display: flex; flex-direction: column; justify-content: center; min-height: 20rem; padding: var(--space-14) var(--space-6) var(--space-16); background: var(--bg); color: var(--fg); font-family: var(--font-sans); } .ds-placeholder h1 { margin: 0 0 var(--space-3); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); hyphens: auto; } .ds-placeholder p { margin: 0; max-width: var(--measure-lead); font-size: var(--text-md); line-height: var(--leading-snug); color: var(--fg-muted); }"
     }
   ],
   "narrative": {
     "northStar": "The Technical Document",
-    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. They also reach the same element vocabulary: APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so an operator who writes ## What is coming into an environment variable gets the ruled section label with nothing mounted at all. What separates the two surfaces is now only where the text comes from, not what it can be. The one thing held back from the renderer is APP_NAME: it is set as a literal h1, because a name is a name \u2014 composed into the same markdown document it would come back as <h1><em>star</em> site</h1>, measured, and a page title must not be reformatted by its own value.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
+    "overview": "amber looks like a page torn out of a well-set manual: a flat sheet, ruled into sections, with nothing on it that is not text. There is no chrome, no card, no container — the page is the container. Sections are announced by a small uppercase tracked label sitting under a 2px rule that runs the full width of the column; everything else is body text, a table, a quote or a block of code. One warm accent at hue 45–50 carries links, inline code, the selection highlight and the one filled control the system has, and it is the only saturated colour outside a code block.\n\nThe system is built for two surfaces of very different weight, and both have to look deliberate. The default is a heading and one sentence on an otherwise empty window; the richer one is an operator's markdown file rendered whole. The same rules serve both because the page column is centred vertically by min-height rather than height — two lines sit in the middle of the viewport, a long document grows from the top under the identical stylesheet. They also reach the same element vocabulary: APP_TEXT_LEAD runs through the same markdown renderer as a mounted file, so an operator who writes ## What is coming into an environment variable gets the ruled section label with nothing mounted at all. What separates the two surfaces is now only where the text comes from, not what it can be. The one thing held back from the renderer is APP_NAME: it is set as a literal h1, because a name is a name — composed into the same markdown document it would come back as <h1><em>star</em> site</h1>, measured, and a page title must not be reformatted by its own value. The principle now runs both ways: APP_NAME is emitted through | html in both <title> and <h1>, so markup written into the name is shown as characters instead of breaking out of the element it names. APP_TEXT_LEAD stays unescaped, because markdown there is the promise.\n\nEvery value lives in app/tokens.css and is authored in OKLCH, light as the default and dark applied from prefers-color-scheme. Contrast is not a review step here; it is a constraint the palette was tuned to. All 26 text pairs were measured in-browser against their own surface in both schemes and all 26 clear 4.5:1; the lowest is 4.58:1. There is no build chain and no runtime network fetch: the monospace face ships inside the image as two woff2 files, so the page renders complete with the machine offline.",
     "keyCharacteristics": [
       "Flat sheet, no shadows, no radii, no gradients, no motion.",
       "Two line weights only: a 2px structural rule and a 1px hairline.",
       "Uppercase tracked labels for section heads, table heads and captions.",
       "One warm accent; four code tones; everything else neutral at hue 250.",
       "Styled by element selector — the renderer emits no classes to hook.",
-      "Light and dark are peers, both measured to AA, with the same tone relations."
+      "Light and dark are peers, both measured to AA, with the same tone relations.",
+      "One surface only — the failed page is the placeholder page, not an error design."
     ],
     "rules": [
-      { "name": "The Four Tones Rule", "body": "Syntax highlighting has exactly four colours. A new Chroma token class joins one of the four groups in app/style.css or it stays body colour. A fifth tone is not added to distinguish a fifth category.", "section": "colors" },
-      { "name": "The Measured Palette Rule", "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used accent and measured 4.41:1, so the shipped value is accent-ink at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.", "section": "colors" },
-      { "name": "The Mirrored Scheme Rule", "body": "Dark is not a separate palette, it is the same relationships inverted — which is not the same as the same lightness values. Every tone that sits one step from its neighbour in light sits one step from it in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly that reading. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme. The heavy rule is the documented exception, and the reason is stated: mirroring Ink's lightness literally made a line that measured almost identically (17.66:1 light, 15.28:1 dark) read far louder, because a light line on a dark ground blooms and a dark line on a light ground does not. Where perception and arithmetic disagree, perception decides which value ships and the number is measured afterwards to prove it is safe — never the other way round.", "section": "colors" },
-      { "name": "The One Warm Hue Rule", "body": "Outside code blocks the page carries a single warm family (hue 45–60): the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job instead.", "section": "colors" },
-      { "name": "The Ruled Label Rule", "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line above a block. The rule holds without exception — the footnote block, which the renderer gives no label, takes a hairline instead.", "section": "typography" },
-      { "name": "The Tone-Not-Size Rule", "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 at 20px is the last level with a size; below it, depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. Four levels, four marks, one size. A future level does the same or does not exist.", "section": "typography" },
-      { "name": "The Mono-Means-Machine Rule", "body": "The monospace face marks code, table heads and captions. It is never used for body prose, a heading, or emphasis.", "section": "typography" },
-      { "name": "The Unbreakable Column Rule", "body": "Nothing an operator writes may push the document sideways. Text wraps or breaks; anything with an internal minimum width of its own — a code block, a table — becomes its own scroll container. Adding a new block means picking one of the two mechanisms deliberately, because the body-level wrap rule silently fails to cover the second kind.", "section": "layout" },
-      { "name": "The Both-Modes Rule", "body": "Every layout rule is checked against both surfaces — the two-line placeholder and the full markdown page. A rule that only looks right on one of them is not a rule yet.", "section": "layout" },
-      { "name": "The Two Weights Rule", "body": "Every line on the page is either the 2px structural rule or the 1px hairline. A third weight, a dashed line or a coloured border is not part of the vocabulary.", "section": "elevation" },
-      { "name": "The Tint-Once Rule", "body": "A tinted surface does not nest inside a tinted surface. A quote inside a quote drops the tint and steps back to a hairline stripe; anything nested deeper does the same rather than stacking washes.", "section": "elevation" }
+      {
+        "name": "The Four Tones Rule",
+        "body": "Syntax highlighting has exactly four colours. A new Chroma token class joins one of the four groups in app/style.css or it stays body colour. A fifth tone is not added to distinguish a fifth category.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Palette Rule",
+        "body": "No colour value ships until its pair has been measured in-browser against the surface it actually sits on, in both schemes. The floor is 4.5:1; 26 of 26 pairs clear it and the current lowest is 4.58:1 (code comment on Sunken Paper, light). This rule bit once and is recorded so it bites again: the first selection highlight used accent and measured 4.41:1, so the shipped value is accent-ink at 6.2:1 light and 10.3:1 dark. A value is never lightened to make a design read better.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mirrored Scheme Rule",
+        "body": "Dark is not a separate palette, it is the same relationships inverted — which is not the same as the same lightness values. Every tone that sits one step from its neighbour in light sits one step from it in dark too; the Ember cascade and the Ink ramp are mirrored pairs on exactly that reading. Two tokens once collapsed onto their neighbours in dark only — Subtle Ink onto Muted Ink, Ember Deep onto Ember Ink — which silently deleted distinctions the light scheme still made. When a token moves, check its neighbours in the other scheme. The heavy rule is the documented exception, and the reason is stated: mirroring Ink's lightness literally made a line that measured almost identically (17.66:1 light, 15.28:1 dark) read far louder, because a light line on a dark ground blooms and a dark line on a light ground does not. Where perception and arithmetic disagree, perception decides which value ships and the number is measured afterwards to prove it is safe — never the other way round.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Warm Hue Rule",
+        "body": "Outside code blocks the page carries a single warm family (hue 45–60): the accent and the note tint. A second accent hue is not introduced to mark a new kind of content; tone, rule weight or the mono face does that job instead.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ruled Label Rule",
+        "body": "A section head is small, uppercase, tracked at 0.14em and sits directly beneath a full-width 2px rule with 0.75rem of air between them. The rule and the label are one unit: neither appears without the other, and no other element in the system draws a 2px horizontal line above a block. The rule holds without exception — the footnote block, which the renderer gives no label, takes a hairline instead.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tone-Not-Size Rule",
+        "body": "The type scale runs out of sizes before markdown runs out of heading levels. h3 at 20px is the last level with a size; below it, depth steps first in tone (Ink to Muted Ink at h5) and then in weight (700 to 500 at h6), never in size. Four levels, four marks, one size. A future level does the same or does not exist.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono-Means-Machine Rule",
+        "body": "The monospace face marks code, table heads and captions. It is never used for body prose, a heading, or emphasis.",
+        "section": "typography"
+      },
+      {
+        "name": "The Unbreakable Column Rule",
+        "body": "Nothing an operator writes may push the document sideways. Text wraps or breaks; anything with an internal minimum width of its own — a code block, a table — becomes its own scroll container. Adding a new block means picking one of the two mechanisms deliberately, because the body-level wrap rule silently fails to cover the second kind.",
+        "section": "layout"
+      },
+      {
+        "name": "The Both-Modes Rule",
+        "body": "Every layout rule is checked against both surfaces — the two-line placeholder and the full markdown page. A rule that only looks right on one of them is not a rule yet.",
+        "section": "layout"
+      },
+      {
+        "name": "The Two Weights Rule",
+        "body": "Every line on the page is either the 2px structural rule or the 1px hairline. A third weight, a dashed line or a coloured border is not part of the vocabulary.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Tint-Once Rule",
+        "body": "A tinted surface does not nest inside a tinted surface. A quote inside a quote drops the tint and steps back to a hairline stripe; anything nested deeper does the same rather than stacking washes.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Counted Measure Rule",
+        "body": "A claim about line length is worth exactly what the counting method is worth. ch is the width of the digit zero, not a character count, and in a proportional face it understates the real count — an earlier pass read the column as \"74ch\" and shipped a line of 82 characters on that reading. The measure is counted in the browser over the paragraph's actual text nodes and held inside 45–75: at 40rem the first line ran 82 characters, at 34rem it runs 75, at 30rem it would run 63. Change the column, count again; never convert.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Surface Rule",
+        "body": "The system has exactly one error surface, and it is the environment-variable page. There is no separate error design, no apology copy, no status number set in type, no warning glyph — the failed page is the placeholder page. That is the only rendition consistent with never looking like a maintenance screen, and it is why the guard on the branch, not a new template, is where the work went.",
+        "section": "components"
+      },
+      {
+        "name": "The Silent Default Rule",
+        "body": "The default surface carries none of the system's marks — no rule, no uppercase label, no mono face, no accent — and that is settled, not an oversight. A placeholder is allowed to look like almost nothing; the restraint is the statement. Measured: that page loads three files and not one of them is a font. Every mark is available on it the moment an operator writes markdown into APP_TEXT_LEAD, and nothing is to be added to make the empty state look designed.",
+        "section": "components"
+      }
     ],
     "dos": [
       "Do put every value in app/tokens.css and author it in OKLCH; hue 250 for neutrals, hue 45–50 for the accent, hue 60 for the note tint.",
@@ -281,7 +555,9 @@
       "Do hand a control back to the platform (appearance: auto) when forced colours would strip what carries its state.",
       "Do ship any new font file inside the image and declare it with @font-face locally.",
       "Do express new depth with a tone step or one of the two line weights.",
-      "Do delete a token nothing consumes. --space-1, --tracking-wide and --weight-regular were removed for exactly that reason."
+      "Do delete a token nothing consumes. --space-1, --tracking-wide and --weight-regular were removed for exactly that reason.",
+      "Do count the measure in the browser over real text when the column changes, and keep the first line inside 45–75 characters.",
+      "Do escape anything an operator sets that is not meant to be markup; APP_NAME runs through | html in both places it appears."
     ],
     "donts": [
       "Don't add a box-shadow, a border-radius, a gradient, a transition or an animation. The sheet is flat and still.",
@@ -290,10 +566,12 @@
       "Don't add a fifth heading size. Below h3, step back in tone and then in weight.",
       "Don't draw the 2px rule above a block that carries no uppercase label; use the hairline.",
       "Don't set body prose, headings or emphasis in the monospace face.",
-      "Don't let any element exceed the 40rem column or force horizontal page scroll; wrap, break, or scroll inside the block.",
+      "Don't let any element exceed the 34rem column or force horizontal page scroll; wrap, break, or scroll inside the block.",
       "Don't nest a tinted surface inside a tinted surface.",
       "Don't use a page-adjacent tint for a transient highlight such as selection; that needs a measured accent, not a wash.",
-      "Don't add a logo, wordmark or decorative image — the product has none by commitment, and the page's only mark is the ruled section label."
+      "Don't add a logo, wordmark or decorative image — the product has none by commitment, and the page's only mark is the ruled section label.",
+      "Don't read a ch value as a character count when judging the measure.",
+      "Don't build a second surface for the error case, and don't dress the default surface up with marks the operator did not ask for."
     ]
   }
 }

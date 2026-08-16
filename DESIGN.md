@@ -181,8 +181,11 @@ an environment variable gets the ruled section label with nothing mounted at
 all. What separates the two surfaces is now only where the text comes from, not
 what it can be. The one thing held back from the renderer is `APP_NAME`: it is
 set as a literal `h1`, because a name is a name — composed into the same
-markdown document it would come back as `<h1><em>star</em> site</h1>`, measured,
-and a page title must not be reformatted by its own value.
+markdown document it would come back as `<h1><em>star</em> site</h1>`, measured, and a page title must not be reformatted by its own value. The
+principle now runs both ways: `APP_NAME` is emitted through `| html` in both
+`<title>` and `<h1>`, so markup written into the name is shown as characters
+instead of breaking out of the element it names. `APP_TEXT_LEAD` stays
+unescaped, because markdown there is the promise.
 
 Every value lives in `app/tokens.css` and is authored in OKLCH, light as the
 default and dark applied from `prefers-color-scheme`. Contrast is not a review
@@ -200,6 +203,7 @@ page renders complete with the machine offline.
 - One warm accent; four code tones; everything else neutral at hue 250.
 - Styled by element selector — the renderer emits no classes to hook.
 - Light and dark are peers, both measured to AA, with the same tone relations.
+- One surface only — the failed page is the placeholder page, not an error design.
 
 ## Colors
 
@@ -318,12 +322,14 @@ one the operator's words carry.
   boundary rather than mid-word at 44px. The break points are correct rather
   than arbitrary because the page language is set from `APP_LANG`.
 - **Lead** (400, 1.125rem / 1.0625rem below 34rem, 1.5, Muted Ink): the first
-  paragraph after the title, clamped to 48ch so it sits on a shorter measure
+  paragraph after the title, clamped to 40ch so it sits on a shorter measure
   than the body column and registers as an opening rather than as the first
   paragraph. It is not meant to stack: at 34ch the sentence fell into four lines
-  under the 44px display and read as a wrapping accident, where 48ch (481px in a
-  640px column at 1280px) holds three lines and still stays visibly short of the
-  body below it. Below 34rem the clamp is inert — the sentence takes the full
+  under the 44px display and read as a wrapping accident. The clamp moved with
+  the column — at 48ch in the narrowed 34rem column the lead filled 88% of it
+  and stopped reading as a shorter measure at all; 40ch is 400px, 74% of the
+  column, and still three lines, so the line count is unchanged and the
+  distinction is visible again. Below 34rem the clamp is inert — the sentence takes the full
   column at either value — so this is a desktop decision. The rule is `h1 + p`
   and it is deliberately literal: a plain sentence in `APP_TEXT_LEAD` still renders as exactly one `<p>`
   after the `<h1>` and still gets the treatment, but text that opens with a
@@ -338,8 +344,9 @@ one the operator's words carry.
 - **Title Quiet** (700 then 500, 0.96875rem, Muted Ink): `h5` is bold muted,
   `h6` is medium muted. Below `h4` the levels separate by tone and then by
   weight, because there is no size left.
-- **Body** (400, 0.96875rem, 1.62): everything else, in a 40rem column with
-  `text-wrap: pretty`.
+- **Body** (400, 0.96875rem, 1.62): everything else, in a 34rem column with
+  `text-wrap: pretty` — 75 characters on the first line, counted in the browser
+  over the paragraph's own text nodes.
 - **Label Mono** (500, 0.6875rem, 0.12em / 0.08em, uppercase): table heads and
   figure captions.
 - **Code** (400, 0.8125rem, 1.7): inline and block code, and footnote text at
@@ -363,9 +370,18 @@ future level does the same or does not exist.
 **The Mono-Means-Machine Rule.** The monospace face marks code, table heads and
 captions. It is never used for body prose, a heading, or emphasis.
 
+**The Counted Measure Rule.** A claim about line length is worth exactly what
+the counting method is worth. `ch` is the width of the digit zero, not a
+character count, and in a proportional face it understates the real count — an
+earlier pass read the column as "74ch" and shipped a line of 82 characters on
+that reading. The measure is counted in the browser over the paragraph's actual
+text nodes and held inside 45–75: at 40rem the first line ran 82 characters, at
+34rem it runs 75, at 30rem it would run 63. Change the column, count again;
+never convert.
+
 ## Layout
 
-A single centred column, `max-width: 40rem`, on a `min-height: 100vh` flex body
+A single centred column, `max-width: 34rem`, on a `min-height: 100vh` flex body
 that centres its content vertically. That one declaration serves both surfaces:
 the two-line environment-variable page sits mid-viewport, a long markdown
 document starts at the top and grows. Page padding is 3.5rem top / 1.5rem
@@ -449,7 +465,11 @@ same markdown renderer, so a table, a code block or a ruled section head can
 come from either. The remaining branch in `app/index.html` chooses the *source*
 of the text, not what the text may become. `APP_NAME` is the deliberate
 exception and is emitted as a literal `h1` — the renderer never sees it, so a
-name containing markdown characters stays the name.
+name containing markdown characters stays the name — and it passes through
+`| html` on the way out, so markup in the name is rendered as characters rather
+than executed in the `<title>` and the `<h1>`. One principle, both directions:
+the name never reaches the markdown renderer, and markup never reaches the
+name.
 
 ### Section Head
 
@@ -539,6 +559,35 @@ structural rule weight, reused as a focus ring. Selection paints Ember Ink with
 Paper as the text colour (6.2:1 light, 10.3:1 dark), so a dragged range is
 plainly stronger than the browser default it replaces.
 
+### Failed Template
+
+The page answers with itself when it cannot render. A broken `{{` in a mounted
+file fails the template; `docker/caddy/Caddyfile` catches that in
+`handle_errors` and re-serves `/index.html`, and the branch in `app/index.html`
+is guarded with `(eq (placeholder "http.error.status_code") "")` so the error
+route takes the environment-variable path instead of re-rendering the file that
+just failed. The guard is load-bearing and was proven so: without it the error
+route renders the broken file again, fails again, and the visitor gets a
+zero-byte body. Measured after: a real page on `/` and on any other path, with
+the status still 500 so the operator sees the failure.
+
+### Named Rules
+
+**The One Surface Rule.** The system has exactly one error surface, and it is
+the environment-variable page. There is no separate error design, no apology
+copy, no status number set in type, no warning glyph — the failed page *is* the
+placeholder page. That is the only rendition consistent with never looking like
+a maintenance screen, and it is why the guard on the branch, not a new
+template, is where the work went.
+
+**The Silent Default Rule.** The default surface carries none of the system's
+marks — no rule, no uppercase label, no mono face, no accent — and that is
+settled, not an oversight. A placeholder is allowed to look like almost
+nothing; the restraint is the statement. Measured: that page loads three files
+and not one of them is a font. Every mark is available on it the moment an
+operator writes markdown into `APP_TEXT_LEAD`, and nothing is to be added to
+make the empty state look designed.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -565,6 +614,10 @@ plainly stronger than the browser default it replaces.
   colours would strip what carries its state.
 - **Do** ship any new font file inside the image and declare it with
   `@font-face` locally.
+- **Do** count the measure in the browser over real text when the column
+  changes, and keep the first line inside 45–75 characters.
+- **Do** escape anything an operator sets that is not meant to be markup;
+  `APP_NAME` runs through `| html` in both places it appears.
 - **Do** express new depth with a tone step or one of the two line weights.
 - **Do** delete a token nothing consumes. `--space-1`, `--tracking-wide` and
   `--weight-regular` were removed for exactly that reason.
@@ -582,8 +635,11 @@ plainly stronger than the browser default it replaces.
 - **Don't** draw the 2px rule above a block that carries no uppercase label; use
   the hairline.
 - **Don't** set body prose, headings or emphasis in the monospace face.
-- **Don't** let any element exceed the 40rem column or force horizontal page
+- **Don't** let any element exceed the 34rem column or force horizontal page
   scroll; wrap, break, or scroll inside the block.
+- **Don't** read a `ch` value as a character count when judging the measure.
+- **Don't** build a second surface for the error case, and don't dress the
+  default surface up with marks the operator did not ask for.
 - **Don't** nest a tinted surface inside a tinted surface.
 - **Don't** use a page-adjacent tint for a transient highlight such as
   selection; that needs a measured accent, not a wash.
