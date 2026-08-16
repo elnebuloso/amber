@@ -37,7 +37,7 @@ check_absent() {
 start() {
   docker rm -f "$NAME" >/dev/null 2>&1 || true
   docker run -d --name "$NAME" -p 127.0.0.1::80 \
-    -e APP_NAME=smoke-name \
+    -e APP_NAME='smoke-name<script>smoke-injected</script>' \
     -e APP_TEXT_LEAD='smoke-lead **smoke-strong** {{smoke-brace}}' \
     -e APP_LANG=smoke-lang \
     "$@" "$IMAGE" >/dev/null
@@ -55,6 +55,8 @@ echo "-- without a content directory"
 BASE="$(start)"
 root="$(curl -s "$BASE/")" || true
 check "page shows APP_NAME" "$root" "smoke-name"
+# A name is a name: markup in it is escaped, never executed.
+check_absent "html in APP_NAME does not reach the page" "$root" "<script>smoke-injected</script>"
 check "page shows APP_TEXT_LEAD" "$root" "smoke-lead"
 check "markdown in APP_TEXT_LEAD is rendered" "$root" "<strong>smoke-strong</strong>"
 # The value is inserted, not evaluated — unlike a mounted file, which include() templates.
@@ -76,7 +78,7 @@ root="$(curl -s "$BASE/")" || true
 check "markdown is rendered to html" "$root" "<table>"
 check "markdown headings survive" "$root" "<h2"
 check "code is highlighted" "$root" 'class="chroma"'
-check "title still comes from APP_NAME" "$root" "<title>smoke-name</title>"
+check "title still comes from APP_NAME" "$root" "<title>smoke-name"
 check_absent "the lead text gives way to the markdown" "$root" "smoke-lead"
 # Ask for the URL the page actually requests, not one we assume. Empty on no match, which the
 # check below then reports as a failure rather than aborting the script.

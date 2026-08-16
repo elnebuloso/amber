@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{env "APP_NAME"}}</title>
+	<title>{{env "APP_NAME" | html}}</title>
 	<link rel="stylesheet" href="/tokens.css">
 	<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <main>
-	{{if fileExists "/content/index.md"}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME"}}</h1>
+	{{if fileExists "/content/index.md"}}{{markdown (include "/content/index.md")}}{{else}}<h1>{{env "APP_NAME" | html}}</h1>
 	{{markdown (env "APP_TEXT_LEAD")}}{{end}}
 </main>
 </body>
