@@ -1,85 +1,96 @@
-# Übergabe — Stand 15.08.2026
+# Übergabe — Stand 16.08.2026
 
 ## Wo wir stehen
 
-`amber` läuft nicht mehr auf PHP 7.3 mit Apache, sondern auf `caddy:2-alpine`, und die Seite kann
-jetzt aus einer eingehängten Markdown-Datei entstehen. Beides ist fertig, geprüft und committet —
-**aber nichts davon ist veröffentlicht.**
+**`1.2.0` ist veröffentlicht.** Der Release-Workflow lief in 52 Sekunden durch, Tag `v1.2.0` steht,
+die Release-Notizen sind gefüllt, das Image liegt auf Docker Hub. Nachgeprüft, nicht nur gemeldet:
+frisch gezogen und gestartet, die Seite rendert, der Robots-Header sitzt, `latest` existiert
+weiterhin nicht.
 
-Zwei Releases sind heute schon rausgegangen: `1.1.0` (der Caddy-Umbau) und `1.1.1` (ein Fix an der
-Release-Pipeline). Alles danach liegt lokal.
+Arbeitsverzeichnis sauber, nichts ungepusht. Zwei Container aus `make up` laufen noch auf 8080 und
+8081 — `make down` beendet sie.
 
-## Der letzte Stand
+## Was in dieser Sitzung passiert ist
 
-- **24 Commits lokal, nichts gepusht.** Arbeitsverzeichnis sauber, `make test` grün (13 Prüfungen),
-  Design-Detektor ohne Befund.
-- Alle vier Backlog-Aufgaben stehen auf Done: Pipeline auf Semantic Versioning, Caddy-Umbau,
-  Markdown-Seite, Markdown-Abdeckung.
-- Neu im Repository: `PRODUCT.md`, `DESIGN.md`, `.impeccable/`, `demo/`, `Makefile`,
-  `scripts/smoke.sh`.
+Kurz, weil es an anderer Stelle vollständig steht: die Seite läuft jetzt auf einem gelieferten
+Design-System, `APP_TEXT_LEAD` wird als Markdown gerendert, `APP_LANG` ist konfigurierbar,
+`APP_NAME` wird escaped, und ein kaputtes `{{` liefert die Variablen-Seite statt eines leeren 500.
+Dazu drei Kritik-Runden mit ihren Korrekturen.
 
-## Das Nächste: der Push ist ein Release
+Die Belege liegen dort, wo sie hingehören und nicht hier:
 
-`git push` ist hier **keine harmlose Handlung**. Die Pipeline errechnet aus den Commits die nächste
-Version, baut das Image, lässt den Rauchtest dagegen laufen, schiebt es nach Docker Hub und setzt
-erst danach Tag und GitHub-Release. Unter den 24 Commits sind mehrere `feat`, also entsteht
-**1.2.0**.
+- `DESIGN.md` — die gebaute Welt, vierzehn benannte Regeln mit Begründung, die verworfenen
+  Alternativen mit ihrem Preis, die bekannten Grenzen. In dieser Sitzung von ~4900 auf ~3500 Wörter
+  verdichtet, nach einem Test: *könnte das Stylesheet diesen Satz auch sagen?*
+- `PRODUCT.md` — Produktwahrheit, einschliesslich der scharfen Kanten.
+- `.impeccable/critique/` — drei Kritik-Schnappschüsse, der jüngste ist der aktuelle.
+- Backlog `TASK-1` bis `TASK-6` — erledigt, mit Umsetzungsnotizen.
 
-Der Ablauf, wenn es soweit ist:
+## Was als Nächstes ansteht
 
-```
-git pull --rebase && git push
-gh run watch          # oder: gh run list --limit 1
-```
+Im Backlog, alle auf To Do:
 
-Danach prüfen: Release-Notizen auf GitHub gefüllt, Tag `v1.2.0` gesetzt, Image auf Docker Hub da.
+- **`TASK-7`** — Image zusätzlich für `linux/arm64`. Der Knackpunkt steht in der Aufgabe: der
+  Workflow testet heute genau das Artefakt, das er veröffentlicht, und das darf ein Umbau nicht
+  verlieren.
+- **`TASK-8`** — ADR zur Wahl von Caddy. `docs/decisions/` gibt es noch nicht, der ADR bekommt
+  `0001`.
+- **`TASK-9`** — Zugriffslogs ansehen und **entscheiden**. Fertig ist die Aufgabe erst mit einer
+  Entscheidung in `PRODUCT.md`, nicht mit einem Blick in den Log.
 
 ## Offene Entscheidungen
 
-Vier Dinge habe ich vorgelegt und nicht entschieden bekommen. Keines blockiert den Push.
+**1. Spaltenbreite auf 36rem?** Zweimal vorgelegt, nie entschieden. Gemessen am ersten Absatz von
+`demo/index.md` bei 1280px Fensterbreite:
 
-1. **Commit-Betreff `fix(test): mount a temporary copy of demo content in the smoke test`.** Er
-   erscheint in den Notizen zu 1.2.0 unter „Bug Fixes", obwohl er nur den Test betrifft, nicht das
-   Produkt. Solange nichts gepusht ist, wäre ein Umschreiben zu `test:` möglich — Preis ist ein
-   Rebase über 24 Commits. Meine Empfehlung war: stehenlassen, der Bereich `test` steht sichtbar
-   davor.
-2. **Der ältere Entwurf** `docs/superpowers/specs/2026-08-15-2051-caddy-umbau-design.md` nennt noch
-   `app/style.css`, das inzwischen `app/index.css` heisst. Abgeschlossenes Dokument einer
-   erledigten Aufgabe — nachziehen oder als Zeitdokument stehenlassen?
-3. **Die Design-Hook-Ausnahme** (`side-tab` für `app/index.css`) liegt in `.impeccable/config.json`
-   und gilt damit für alle im Repository. Auf Wunsch nach `.impeccable/config.local.json` als
-   private Ausnahme verschiebbar.
-4. **Impeccable 4.1.1** ist verfügbar, installiert ist 4.0.2. Du hattest „später" gesagt; der
-   Befehl wäre `npx impeccable update` und wirkt erst in der nächsten Sitzung.
+| Maß | Breite | Zeichen |
+| --- | --- | --- |
+| 34rem (jetzt) | 544px | 75 |
+| 36rem | 576px | 75 |
+| 38rem | 608px | 82 |
+
+36rem kostet nichts — gleiche Zeilenlänge, 32px mehr Breite. Eine Zeile in `app/tokens.css`.
+
+**2. Regressionsfall in `demo/index.md`?** Die dortige Tabelle füllt die Spalte zufällig genau aus
+und hat den Rasterdefekt drei Kritiken lang maskiert. Eine zweite, absichtlich schmale Tabelle
+würde das dauerhaft verhindern. Die Datei existiert genau dafür, dass sich die Gestaltung an ihr
+beurteilen lässt statt behaupten.
 
 ## Bananenschalen
 
-- **Kein `latest` mehr auf Docker Hub.** `latest`, `1` und `1.0` sind gelöscht, weil sie auf das
-  PHP-Image von 2020 zeigten. `docker pull elnebuloso/amber` **ohne Tag schlägt jetzt fehl** — das
-  ist gewollt (nur volle Versionen sind deterministisch), überrascht aber jeden, der die kurze Form
-  gewohnt war. Steht auch in der README.
-- **Aufgabenlisten hängen an `:has()`.** Browser ohne Unterstützung zeigen Aufzählungspunkt *und*
-  Checkbox. Kein Fehler, nur unschön, und ohne Alternativpfad.
-- **`PRODUCT.md` und `DESIGN.md` binden künftige Arbeit** — Farben, Typo, die benannten Regeln, was
-  bewusst dem Browser überlassen bleibt. Die README verweist nicht darauf; wer die Dateien nicht
-  kennt, arbeitet an ihnen vorbei.
-- **`1.2.0` steht als Beispielversion** in README und `demo/index.md`. Nach dem Release stimmt es,
-  ab 1.3.0 ist es veraltet.
-- **Das Markdown des Betreibers läuft durch die Template-Engine.** Ein `{{` im Inhalt wird
-  ausgeführt, ein kaputtes beantwortet **jede** URL mit 500. Ausserdem wird alles im eingehängten
-  Ordner ausgeliefert, nicht nur die Markdown-Datei. Beides steht in der README, ist aber die Art
-  Falle, die man einmal selbst erlebt.
-- **`make test` lässt `amber:dev` stehen.** Musste in dieser Sitzung mehrfach von Hand entfernt
-  werden.
+- **Die Detektor-Unterdrückung ist pfadrelativ.** `detect.mjs --json app` ist sauber,
+  `detect.mjs --json /workspace/.../app` meldet einen `design-system-color`-Befund auf
+  `app/index.html`. Der absolute Pfad umgeht die Ausnahme in `.impeccable/config.json` still. Der
+  Befund ist ein Artefakt davon, dass der Detektor die Caddy-Vorlage ohne Stylesheet liest — die
+  ausgelieferte Seite misst dort 17,66:1. **Immer den relativen Pfad benutzen.**
 
-## Womit die Arbeit weitergehen könnte
+- **Die 75 Zeichen sind an einem einzigen Absatz gemessen.** `DESIGN.md` führt „82 bei 40rem, 75 bei
+  34rem, 63 bei 30rem" als Zahlen des Systems; sie stammen aus dem ersten Absatz von
+  `demo/index.md`. Ein anderer Text bricht anders um. Wer die Zahl als Eigenschaft der Gestaltung
+  liest statt als Messung an einem Text, zieht falsche Schlüsse.
 
-Nichts davon ist beschlossen — es sind die Fäden, die offen liegen:
+- **Die vier Parser-Module des Detektors liegen im Plugin-Cache**, nicht im Projekt:
+  `htmlparser2`, `css-select`, `css-tree`, `domutils` unter
+  `/root/.claude/plugins/cache/impeccable/impeccable/4.1.1/node_modules`. Ohne sie läuft der
+  Detektor **eingeschränkt** und prüft weder Custom Properties noch berechneten Kontrast — er sagt
+  das zwar in einem Banner, aber die Befundliste sieht trotzdem plausibel aus. Beim nächsten
+  Plugin-Update sind sie weg und müssen neu installiert werden.
 
-- Multi-Arch (`linux/arm64`). Der jetzige Ablauf mit `load: true` schliesst es aus: buildx kann ein
-  Mehrplattform-Image nicht in den lokalen Daemon laden. Wer das will, muss den Rauchtest anders
-  aufhängen — etwa gegen das gepushte Image per Digest.
-- Ein ADR zur Wahl von Caddy. `docs/decisions/` existiert noch nicht; die Begründung steht bislang
-  nur im Entwurf, und „warum nicht nginx?" kommt erfahrungsgemäss wieder.
-- Zugriffslogs sind seit dem Umbau eingeschaltet (`log` in der Caddyfile), aber nie im Betrieb
-  angesehen worden.
+- **`APP_TEXT_LEAD` führt rohes HTML aus, `APP_NAME` nicht.** Gleiche Vertrauensstufe,
+  unterschiedlich behandelt — und das ist Absicht: bei `APP_TEXT_LEAD` ist Markdown die Zusage, und
+  `demo/index.md` beruht selbst darauf (`<details>`, `<figure>`). Wer das für einen Fehler hält und
+  „repariert", bricht die Demo-Seite.
+
+- **`th:last-child { width: 100% }` gibt allen Rest an die letzte Spalte.** Eine Tabelle, die auf
+  einen kurzen Wert endet, bekommt dort eine breite, fast leere Spalte. Das ist der bekannte Preis
+  dafür, dass das Raster die Spalte füllt; die Alternative `table-layout: fixed` kostet die
+  inhaltsgesteuerten Spaltenbreiten und wurde deshalb verworfen. Steht auch in `DESIGN.md`.
+
+- **`make test` lässt `amber:dev` stehen.** Unverändert seit gestern.
+
+## Start-Prompt für morgen
+
+> Moin. `1.2.0` ist draußen, Arbeitsverzeichnis sauber. Im Backlog stehen `TASK-7` (arm64),
+> `TASK-8` (ADR zu Caddy) und `TASK-9` (Zugriffslogs). Dazu zwei kleine offene Entscheidungen aus
+> der Übergabe: Spaltenbreite auf 36rem, und ein schmaler Tabellen-Regressionsfall in
+> `demo/index.md`. Lies `docs/HANDOFF.md` und schlag vor, womit wir anfangen.
